@@ -7,12 +7,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Knee Rebuild Hub">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#06080f">
+<meta name="theme-color" content="#141c2e">
 <title>Knee Rebuild &amp; GOATA Hub</title>
 <style>
-  html, body { margin:0; padding:0; background:#06080f; overscroll-behavior:none; }
+  html, body { margin:0; padding:0; background:#141c2e; overscroll-behavior:none; }
   #root { min-height:100vh; }
-  #loading { position:fixed; inset:0; background:#06080f; color:#4ade80; display:flex;
+  #loading { position:fixed; inset:0; background:#141c2e; color:#4ade80; display:flex;
     align-items:center; justify-content:center; font-family:monospace; font-size:13px;
     letter-spacing:2px; z-index:9999; }
 </style>
@@ -333,9 +333,9 @@ const {
    DESIGN TOKENS
    ════════════════════════════════════════════════════════════════════════ */
 const C = {
-  bg: "#06080f",
-  surf: "#0c0f1a",
-  border: "#151b2e",
+  bg: "#141c2e",
+  surf: "#1c2740",
+  border: "#2a3752",
   foot: "#4ade80",
   shin: "#facc15",
   knee: "#f97316",
@@ -344,8 +344,12 @@ const C = {
   hip: "#c084fc",
   hsr: "#ff5d73",
   text: "#ffffff",
-  muted: "#d0d8e8",
-  label: "#e0e6f0"
+  muted: "#c3cbdc",
+  label: "#e0e6f0",
+  cardBg: "#ffffff",
+  cardText: "#1a2332",
+  cardSub: "#6b7480",
+  cardBorder: "#eef0f4"
 };
 const ZONES = {
   foot: {
@@ -1315,7 +1319,7 @@ const S = {
     background: C.bg,
     color: C.text,
     fontFamily: "'DM Mono','Space Mono',monospace",
-    paddingBottom: 80
+    paddingBottom: 92
   },
   body: {
     padding: "18px 16px"
@@ -1446,7 +1450,7 @@ function HomeScreen({
     icon: "⚡",
     title: "GOATA Protocol",
     sub: "3-phase movement restoration",
-    color: "#00E87A",
+    color: "#00c46a",
     desc: "Foundation → Loading → Mastery. Recode movement system with routines 1.1 through 3.3."
   }, {
     id: "animalflow",
@@ -1467,50 +1471,77 @@ function HomeScreen({
     className: "fa"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "30px 18px 8px"
+      padding: "34px 20px 10px",
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between"
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: S.sLabel
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      letterSpacing: 3,
+      color: C.muted,
+      textTransform: "uppercase",
+      opacity: 0.7,
+      marginBottom: 6
+    }
   }, "Knee Rebuild System"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: 34,
-      letterSpacing: 2,
+      fontSize: 36,
+      letterSpacing: 1.5,
       color: "#fff",
       lineHeight: 1
     }
-  }, "THE HUB"), /*#__PURE__*/React.createElement("div", {
+  }, "THE HUB")), /*#__PURE__*/React.createElement("div", {
     style: {
+      width: 40,
+      height: 40,
+      borderRadius: "50%",
+      background: C.surf,
+      border: `1px solid ${C.border}`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexShrink: 0,
+      marginTop: 2
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 16
+    }
+  }, "🔔"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "0 20px",
       fontSize: 12,
       color: C.muted,
-      marginTop: 8,
-      lineHeight: 1.7
+      lineHeight: 1.7,
+      marginBottom: 22
     }
-  }, "Everything in one place — pick a module below.")), /*#__PURE__*/React.createElement("div", {
+  }, "Everything in one place — pick a module below."), /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "20px 16px"
+      padding: "0 16px"
     }
   }, modules.map(m => /*#__PURE__*/React.createElement("div", {
     key: m.id,
     onClick: () => onNavigate(m.id),
     className: "fa",
     style: {
-      border: `1px solid ${m.color}28`,
-      borderRadius: 8,
-      padding: "16px 16px",
-      marginBottom: 12,
-      background: `${m.color}08`,
+      background: C.cardBg,
+      borderRadius: 16,
+      padding: "14px 16px",
+      marginBottom: 10,
       display: "flex",
       alignItems: "center",
       gap: 14,
       cursor: "pointer",
-      transition: "all .2s"
+      boxShadow: "0 4px 14px rgba(0,0,0,0.18)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 44,
-      height: 44,
-      borderRadius: 8,
+      width: 46,
+      height: 46,
+      borderRadius: 12,
       background: `${m.color}18`,
       display: "flex",
       alignItems: "center",
@@ -1520,43 +1551,63 @@ function HomeScreen({
     }
   }, m.icon), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: 1
+      flex: 1,
+      minWidth: 0
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: 17,
-      letterSpacing: 1,
-      color: "#e8e6e0"
+      fontSize: 16,
+      letterSpacing: 0.5,
+      color: C.cardText
     }
   }, m.title), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
+      fontSize: 10.5,
       color: m.color,
       marginTop: 2,
-      marginBottom: 4
+      marginBottom: 3,
+      fontWeight: 600
     }
   }, m.sub), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
-      color: C.muted,
-      lineHeight: 1.6
+      fontSize: 10.5,
+      color: C.cardSub,
+      lineHeight: 1.55
     }
-  }, m.desc)), /*#__PURE__*/React.createElement("span", {
+  }, m.desc)), /*#__PURE__*/React.createElement("div", {
     style: {
-      color: m.color,
-      fontSize: 18,
+      width: 26,
+      height: 26,
+      borderRadius: "50%",
+      background: "#f3f4f7",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       flexShrink: 0
     }
-  }, "→"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
-      ...S.warmBox,
-      marginTop: 6
+      color: C.cardText,
+      fontSize: 13
+    }
+  }, "›")))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      border: `1px solid ${C.border}`,
+      borderRadius: 12,
+      padding: 14,
+      marginTop: 10,
+      marginBottom: 10,
+      background: C.surf
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      ...S.sLabel,
-      marginBottom: 6
+      fontSize: 8,
+      letterSpacing: 3,
+      color: C.muted,
+      textTransform: "uppercase",
+      marginBottom: 6,
+      opacity: 0.8
     }
   }, "⚠️ Medical Note"), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -13813,68 +13864,94 @@ function App() {
     style: {
       display: "flex",
       alignItems: "center",
-      gap: 10,
-      padding: "16px 16px 14px",
-      borderBottom: `1px solid ${C.border}`,
-      background: `linear-gradient(180deg,#0a0c16,${C.bg})`
+      justifyContent: "space-between",
+      padding: "18px 18px 14px",
+      background: C.bg
     }
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => setScreen("home"),
     style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
       background: "none",
-      border: `1px solid ${C.border}`,
+      border: "none",
       color: C.muted,
-      borderRadius: 5,
-      padding: "6px 10px",
-      fontSize: 14
+      fontSize: 13,
+      padding: 0
     }
-  }, "←"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 15
+    }
+  }, "←"), " Hub"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: 18,
+      fontSize: 16,
       letterSpacing: 1.5,
       color: "#fff"
     }
-  }, titles[screen])), screen === "home" && /*#__PURE__*/React.createElement(HomeScreen, {
+  }, titles[screen]), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 32
+    }
+  })), screen === "home" && /*#__PURE__*/React.createElement(HomeScreen, {
     onNavigate: setScreen
   }), screen !== "home" && /*#__PURE__*/React.createElement("div", {
     style: S.body
   }, screen === "atg" && /*#__PURE__*/React.createElement(ATGScreen, null), screen === "tendon" && /*#__PURE__*/React.createElement(TendonScreen, null), screen === "goata" && /*#__PURE__*/React.createElement(GoataScreen, null), screen === "stride" && /*#__PURE__*/React.createElement(GoataStrideScreen, null), screen === "protocol" && /*#__PURE__*/React.createElement(GoataProtocolScreen, null), screen === "recovery" && /*#__PURE__*/React.createElement(RecoveryHubScreen, null), screen === "animalflow" && /*#__PURE__*/React.createElement(AnimalFlowScreen, null), screen === "dailys" && /*#__PURE__*/React.createElement(DailysScreen, null)), /*#__PURE__*/React.createElement("div", {
     style: {
       position: "fixed",
-      bottom: 0,
-      left: 0,
-      right: 0,
+      bottom: 10,
+      left: 10,
+      right: 10,
       display: "flex",
-      borderTop: `1px solid ${C.border}`,
-      background: "#070910ee",
-      backdropFilter: "blur(8px)",
-      zIndex: 30
+      background: "#0e1626ee",
+      backdropFilter: "blur(10px)",
+      borderRadius: 20,
+      border: `1px solid ${C.border}`,
+      zIndex: 30,
+      boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
+      overflowX: "auto"
     }
   }, NAV.map(n => /*#__PURE__*/React.createElement("button", {
     key: n.id,
     onClick: () => setScreen(n.id),
     style: {
-      flex: 1,
+      flex: "1 0 auto",
+      minWidth: 52,
       background: "none",
       border: "none",
-      padding: "10px 0 8px",
+      padding: "10px 4px 9px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: 3
+      gap: 4
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 30,
+      height: 22,
+      borderRadius: 11,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: screen === n.id ? "#ffffff" : "transparent",
+      transition: "all .2s"
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 16,
-      opacity: screen === n.id ? 1 : 0.4
+      fontSize: 14,
+      filter: screen === n.id ? "none" : "grayscale(0.4)",
+      opacity: screen === n.id ? 1 : 0.55
     }
-  }, n.icon), /*#__PURE__*/React.createElement("span", {
+  }, n.icon)), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 8,
-      letterSpacing: 1,
+      fontSize: 7.5,
+      letterSpacing: 0.5,
       textTransform: "uppercase",
-      color: screen === n.id ? "#fff" : C.muted
+      color: screen === n.id ? "#fff" : C.muted,
+      opacity: screen === n.id ? 1 : 0.6
     }
   }, n.label)))));
 }
