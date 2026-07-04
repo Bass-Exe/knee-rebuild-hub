@@ -9625,11 +9625,11 @@ function RecoveryHubScreen() {
 
   // shared card style
   const card = active => ({
-    border: `1px solid ${active ? "#059669" : "#1e293b"}`,
+    border: `1px solid ${active ? "#eab308" : "#1e293b"}`,
     borderRadius: 6,
     overflow: "hidden",
     marginBottom: 8,
-    background: active ? "#0a1a10" : "#0c111a"
+    background: active ? "#2e2708" : "#0c111a"
   });
   const pill = c => ({
     background: `${c}22`,
@@ -9650,13 +9650,13 @@ function RecoveryHubScreen() {
     style: {
       padding: "16px 16px 10px",
       borderBottom: "1px solid #0f1f14",
-      background: "linear-gradient(180deg,#050f08,#000)"
+      background: "linear-gradient(180deg,#100d04,#000)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 8,
       letterSpacing: 4,
-      color: "#1a4020",
+      color: "#4a3d10",
       fontFamily: "'DM Mono',monospace",
       textTransform: "uppercase",
       marginBottom: 4
@@ -9672,36 +9672,20 @@ function RecoveryHubScreen() {
   }, "RECOVERY HUB"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#2a5030",
+      color: "#8a7020",
       marginTop: 4,
       fontFamily: "'DM Mono',monospace"
     }
   }, "Glute · Foot · Knee Tracking · 7-Day Protocol")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      borderBottom: "1px solid #0f1f14",
-      background: "#000",
-      position: "sticky",
-      top: 44,
-      zIndex: 15
+      gap: 6,
+      padding: "12px 14px 0"
     }
   }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
     key: t.id,
     onClick: () => setRhTab(t.id),
-    style: {
-      flex: 1,
-      background: "none",
-      border: "none",
-      fontSize: 9,
-      letterSpacing: 0.8,
-      textTransform: "uppercase",
-      padding: "10px 2px",
-      color: rhTab === t.id ? "#fff" : "#2a5030",
-      borderBottom: rhTab === t.id ? "2px solid #10b981" : "2px solid transparent",
-      fontFamily: "'DM Mono',monospace",
-      transition: "all .2s",
-      cursor: "pointer"
-    }
+    style: S.pill(rhTab === t.id, C.shin)
   }, t.label))), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "14px 14px"
@@ -9719,7 +9703,7 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 9,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'DM Mono',monospace",
       letterSpacing: 2,
       textTransform: "uppercase"
@@ -9727,27 +9711,27 @@ function RecoveryHubScreen() {
   }, "Daily Essentials"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 9,
-      color: "#2a5030",
+      color: "#8a7020",
       fontFamily: "'DM Mono',monospace"
     }
   }, doneCount, "/", RH_DAILIES.length)), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 4,
-      background: "#0a1208",
+      background: "#141005",
       borderRadius: 2
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       height: "100%",
       borderRadius: 2,
-      background: "#10b981",
+      background: "#facc15",
       width: `${doneCount / RH_DAILIES.length * 100}%`,
       transition: "width .3s"
     }
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#1a3020",
+      color: "#3d3410",
       marginTop: 5,
       fontFamily: "'DM Mono',monospace"
     }
@@ -9760,7 +9744,7 @@ function RecoveryHubScreen() {
     style: {
       fontSize: 8,
       letterSpacing: 3,
-      color: "#10b981",
+      color: "#facc15",
       textTransform: "uppercase",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 8
@@ -9790,8 +9774,8 @@ function RecoveryHubScreen() {
         height: 20,
         borderRadius: 4,
         flexShrink: 0,
-        border: `2px solid ${done ? "#10b981" : "#1e3a20"}`,
-        background: done ? "#05300f" : "transparent",
+        border: `2px solid ${done ? "#facc15" : "#4a3f10"}`,
+        background: done ? "#3d3106" : "transparent",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -9799,7 +9783,7 @@ function RecoveryHubScreen() {
       }
     }, done && /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#10b981",
+        color: "#facc15",
         fontSize: 12
       }
     }, "✓")), /*#__PURE__*/React.createElement("div", {
@@ -9809,7 +9793,7 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
-        color: done ? "#2a5030" : "#e0ffe8",
+        color: done ? "#8a7020" : "#fffbe0",
         fontFamily: "'DM Mono',monospace",
         textDecoration: done ? "line-through" : "none",
         marginBottom: 2
@@ -9817,7 +9801,7 @@ function RecoveryHubScreen() {
     }, ex.name), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#d0e8d0",
+        color: "#e8ddc0",
         marginBottom: 4,
         lineHeight: 1.6
       }
@@ -9826,7 +9810,7 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 8,
         fontSize: 9,
-        color: "#2a5030"
+        color: "#8a7020"
       }
     }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "🔄 ", ex.reps))), /*#__PURE__*/React.createElement("button", {
       onClick: e => {
@@ -9836,7 +9820,7 @@ function RecoveryHubScreen() {
       style: {
         background: "none",
         border: "none",
-        color: "#10b981",
+        color: "#facc15",
         fontSize: 16,
         cursor: "pointer",
         padding: "0 4px"
@@ -9851,7 +9835,7 @@ function RecoveryHubScreen() {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#10b981",
+        color: "#facc15",
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 6,
@@ -9867,7 +9851,7 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 9,
-        color: "#10b981",
+        color: "#facc15",
         flexShrink: 0,
         fontFamily: "'DM Mono',monospace",
         width: 14
@@ -9875,13 +9859,13 @@ function RecoveryHubScreen() {
     }, i + 1, "."), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 12,
-        color: "#c8e8d0",
+        color: "#e8dcc0",
         lineHeight: 1.7
       }
     }, s))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 8,
-        background: "#0a1a08",
+        background: "#171205",
         borderLeft: "2px solid #ca8a04",
         padding: "7px 10px",
         borderRadius: "0 3px 3px 0"
@@ -9904,8 +9888,8 @@ function RecoveryHubScreen() {
     }, ex.cue))));
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      background: "#050f06",
-      border: "1px solid #0f2010",
+      background: "#100d05",
+      border: "1px solid #332b0c",
       borderRadius: 5,
       padding: "10px 12px",
       marginTop: 4
@@ -9914,7 +9898,7 @@ function RecoveryHubScreen() {
     style: {
       fontSize: 8,
       letterSpacing: 2,
-      color: "#10b981",
+      color: "#facc15",
       textTransform: "uppercase",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 7
@@ -9929,7 +9913,7 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 9,
-      color: "#10b981",
+      color: "#facc15",
       flexShrink: 0,
       fontFamily: "'DM Mono',monospace",
       width: 80
@@ -9937,19 +9921,19 @@ function RecoveryHubScreen() {
   }, t), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
-      color: "#c8e8d0"
+      color: "#e8dcc0"
     }
   }, d))))), rhTab === "knee" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#93c5fd",
+      color: "#fde68a",
       fontFamily: "'DM Mono',monospace",
       lineHeight: 1.8,
       marginBottom: 14,
       padding: "8px 10px",
-      background: "#050a18",
+      background: "#100d04",
       borderRadius: 4,
-      border: "1px solid #0f1830"
+      border: "1px solid #332b0c"
     }
   }, "Knee tracking is a learned skill. Do one drill daily — focus on the real-time cues. By Day 5–6, good tracking should feel automatic."), RH_KNEE.map(ex => {
     const open = expanded === ex.id;
@@ -9976,14 +9960,14 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 13,
-        color: "#e0e8ff",
+        color: "#fffbe0",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 3
       }
     }, ex.name), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0c8e0",
+        color: "#e0d8b8",
         marginBottom: 5,
         lineHeight: 1.6
       }
@@ -9992,29 +9976,29 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 8,
         fontSize: 9,
-        color: "#3a4060"
+        color: "#8a7020"
       }
     }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "📦 ", ex.equip), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#60a5fa"
+        color: "#facc15"
       }
     }, ex.diff))), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#60a5fa",
+        color: "#facc15",
         fontSize: 18,
         flexShrink: 0
       }
     }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
       style: {
         padding: "0 12px 14px",
-        borderTop: "1px solid #0f1830"
+        borderTop: "1px solid #332b0c"
       },
       className: "fa"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#60a5fa",
+        color: "#facc15",
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8,
@@ -10026,10 +10010,10 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 10,
         marginBottom: 8,
-        background: "#080c14",
+        background: "#100d05",
         borderRadius: 4,
         padding: "8px 10px",
-        border: "1px solid #0f1830"
+        border: "1px solid #332b0c"
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -10037,8 +10021,8 @@ function RecoveryHubScreen() {
         height: 22,
         borderRadius: "50%",
         flexShrink: 0,
-        background: "#0f1f40",
-        border: "1px solid #3b82f6",
+        background: "#332b10",
+        border: "1px solid #eab308",
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
@@ -10046,27 +10030,27 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 9,
-        color: "#60a5fa",
+        color: "#facc15",
         fontFamily: "'Bebas Neue',sans-serif"
       }
     }, s.n)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
-        color: "#e0e8ff",
+        color: "#fffbe0",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, s.t), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0c8e0",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, s.d)))), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#60a5fa",
+        color: "#facc15",
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 6,
@@ -10081,21 +10065,21 @@ function RecoveryHubScreen() {
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#60a5fa",
+        color: "#facc15",
         fontSize: 12,
         flexShrink: 0
       }
     }, "✓"), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 11,
-        color: "#c0c8e0",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, f))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
         background: "#050a14",
-        border: "1px solid #1e3a60",
+        border: "1px solid #4a3f10",
         borderRadius: 4,
         padding: "10px 12px"
       }
@@ -10111,7 +10095,7 @@ function RecoveryHubScreen() {
     }, "Common Errors & Fixes"), ex.errors.map((er, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        background: "#0a0e08",
+        background: "#141105",
         border: "1px solid #78350f44",
         borderRadius: 4,
         padding: "9px 10px",
@@ -10127,42 +10111,42 @@ function RecoveryHubScreen() {
     }, "❌ ", er.e), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 9,
-        color: "#3a4060",
+        color: "#8a7020",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, "Why"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0c8e0",
+        color: "#e0d8b8",
         lineHeight: 1.7,
         marginBottom: 6
       }
     }, er.w), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 9,
-        color: "#3a4060",
+        color: "#8a7020",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, "Fix"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0c8e0",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, er.f))))));
   })), rhTab === "foot" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'DM Mono',monospace",
       lineHeight: 1.8,
       marginBottom: 14,
       padding: "8px 10px",
-      background: "#050f08",
+      background: "#100d04",
       borderRadius: 4,
-      border: "1px solid #0f2010"
+      border: "1px solid #332b0c"
     }
   }, "All standing — no seated drills. Every exercise here loads the foot the way it's actually loaded when you walk. This is where \"the foot dome\" and the GOATA push-off pattern get built."), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -10184,7 +10168,7 @@ function RecoveryHubScreen() {
     style: {
       fontSize: 8,
       letterSpacing: 2,
-      color: "#10b981",
+      color: "#facc15",
       textTransform: "uppercase",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 7
@@ -10207,7 +10191,7 @@ function RecoveryHubScreen() {
     }, ex.name), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 9,
-        color: "#10b981"
+        color: "#facc15"
       }
     }, "daily")) : null;
   }), /*#__PURE__*/React.createElement("div", {
@@ -10273,14 +10257,14 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 13,
-        color: "#e0ffe8",
+        color: "#fffbe0",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 3
       }
     }, ex.name), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c8e8d0",
+        color: "#e8dcc0",
         marginBottom: 5,
         lineHeight: 1.6
       }
@@ -10289,12 +10273,12 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 8,
         fontSize: 9,
-        color: "#2a5030",
+        color: "#8a7020",
         flexWrap: "wrap"
       }
     }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "📦 ", ex.equip), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#10b981"
+        color: "#facc15"
       }
     }, ex.diff)), ex.freq && /*#__PURE__*/React.createElement("div", {
       style: {
@@ -10302,8 +10286,8 @@ function RecoveryHubScreen() {
         display: "inline-flex",
         alignItems: "center",
         gap: 5,
-        background: "#0a1a10",
-        border: "1px solid #10b98133",
+        background: "#2e2708",
+        border: "1px solid #facc1533",
         borderRadius: 3,
         padding: "3px 8px"
       }
@@ -10314,26 +10298,26 @@ function RecoveryHubScreen() {
     }, "🔁"), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 9.5,
-        color: "#4ade80"
+        color: "#facc15"
       }
     }, ex.freq.split(".")[0]))), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#10b981",
+        color: "#facc15",
         fontSize: 18,
         flexShrink: 0
       }
     }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
       style: {
         padding: "0 12px 14px",
-        borderTop: "1px solid #0f2010"
+        borderTop: "1px solid #332b0c"
       },
       className: "fa"
     }, ex.freq && /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
         marginBottom: 10,
-        background: "#0a1a10",
-        borderLeft: "2px solid #10b981",
+        background: "#2e2708",
+        borderLeft: "2px solid #facc15",
         borderRadius: "0 4px 4px 0",
         padding: "8px 10px"
       }
@@ -10341,21 +10325,21 @@ function RecoveryHubScreen() {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#10b981",
+        color: "#facc15",
         textTransform: "uppercase",
         marginBottom: 3
       }
     }, "How Often"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 10.5,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, ex.freq)), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#10b981",
+        color: "#facc15",
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8,
@@ -10367,10 +10351,10 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 10,
         marginBottom: 8,
-        background: "#080c0a",
+        background: "#0e0c07",
         borderRadius: 4,
         padding: "8px 10px",
-        border: "1px solid #0f2010"
+        border: "1px solid #332b0c"
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -10378,8 +10362,8 @@ function RecoveryHubScreen() {
         height: 22,
         borderRadius: "50%",
         flexShrink: 0,
-        background: "#05200f",
-        border: "1px solid #10b981",
+        background: "#332705",
+        border: "1px solid #facc15",
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
@@ -10387,27 +10371,27 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 9,
-        color: "#10b981",
+        color: "#facc15",
         fontFamily: "'Bebas Neue',sans-serif"
       }
     }, s.n)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
-        color: "#e0ffe8",
+        color: "#fffbe0",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, s.t), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, s.d)))), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#10b981",
+        color: "#facc15",
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 6,
@@ -10422,14 +10406,14 @@ function RecoveryHubScreen() {
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#10b981",
+        color: "#facc15",
         fontSize: 12,
         flexShrink: 0
       }
     }, "✓"), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 11,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, f))), /*#__PURE__*/React.createElement("div", {
@@ -10467,13 +10451,13 @@ function RecoveryHubScreen() {
     }, cu.t), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, cu.d)))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
-        background: "#0a0e08",
+        background: "#141105",
         border: "1px solid #3a2a0f",
         borderRadius: 4,
         padding: "10px 12px"
@@ -10490,7 +10474,7 @@ function RecoveryHubScreen() {
     }, "Common Errors & Fixes"), ex.errors.map((er, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        background: "#0a0a06",
+        background: "#100e05",
         border: "1px solid #78350f44",
         borderRadius: 4,
         padding: "9px 10px",
@@ -10513,7 +10497,7 @@ function RecoveryHubScreen() {
     }, "Why"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7,
         marginBottom: 6
       }
@@ -10527,14 +10511,14 @@ function RecoveryHubScreen() {
     }, "Fix"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, er.f)))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
-        background: "#050f08",
-        border: "1px solid #0f2010",
+        background: "#100d04",
+        border: "1px solid #332b0c",
         borderRadius: 4,
         padding: "10px 12px"
       }
@@ -10542,7 +10526,7 @@ function RecoveryHubScreen() {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#10b981",
+        color: "#facc15",
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8
@@ -10556,21 +10540,21 @@ function RecoveryHubScreen() {
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#10b981",
+        color: "#facc15",
         fontSize: 11,
         flexShrink: 0
       }
     }, "›"), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 11,
-        color: "#c0d8c8",
+        color: "#e0d8b8",
         lineHeight: 1.7
       }
     }, pr))))));
   })), rhTab === "protocol" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#d0e8d0",
+      color: "#e8ddc0",
       fontFamily: "'DM Mono',monospace",
       lineHeight: 1.8,
       marginBottom: 12
@@ -10582,7 +10566,7 @@ function RecoveryHubScreen() {
       key: d.day,
       style: {
         ...card(done),
-        border: `1px solid ${done ? "#059669" : d.day === curDay ? "#10b981" : "#0f1f14"}`
+        border: `1px solid ${done ? "#eab308" : d.day === curDay ? "#facc15" : "#0f1f14"}`
       }
     }, /*#__PURE__*/React.createElement("button", {
       onClick: () => toggle(`rp${d.day}`),
@@ -10603,8 +10587,8 @@ function RecoveryHubScreen() {
         height: 28,
         borderRadius: "50%",
         flexShrink: 0,
-        background: done ? "#059669" : d.day === curDay ? "#10b98130" : "#0a1208",
-        border: `2px solid ${done ? "#10b981" : d.day === curDay ? "#10b981" : "#1e3a20"}`,
+        background: done ? "#eab308" : d.day === curDay ? "#facc1530" : "#141005",
+        border: `2px solid ${done ? "#facc15" : d.day === curDay ? "#facc15" : "#4a3f10"}`,
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
@@ -10613,7 +10597,7 @@ function RecoveryHubScreen() {
       style: {
         fontSize: 12,
         fontFamily: "'Bebas Neue',sans-serif",
-        color: done ? "#fff" : d.day === curDay ? "#10b981" : "#2a5030"
+        color: done ? "#fff" : d.day === curDay ? "#facc15" : "#8a7020"
       }
     }, done ? "✓" : d.day)), /*#__PURE__*/React.createElement("div", {
       style: {
@@ -10622,18 +10606,18 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
-        color: "#e0ffe8",
+        color: "#fffbe0",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, "Day ", d.day), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#2a5030"
+        color: "#8a7020"
       }
     }, d.focus)), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#10b981",
+        color: "#facc15",
         fontSize: 16,
         flexShrink: 0
       }
@@ -10646,7 +10630,7 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#c8e8d0",
+        color: "#e8dcc0",
         lineHeight: 1.8,
         marginTop: 10,
         marginBottom: 12
@@ -10664,9 +10648,9 @@ function RecoveryHubScreen() {
       style: {
         flex: 1,
         padding: "8px",
-        background: done ? "#05200c" : "#0a1208",
-        border: `1px solid ${done ? "#10b981" : "#1e3a20"}`,
-        color: done ? "#10b981" : "#2a5030",
+        background: done ? "#332905" : "#141005",
+        border: `1px solid ${done ? "#facc15" : "#4a3f10"}`,
+        color: done ? "#facc15" : "#8a7020",
         fontSize: 11,
         fontFamily: "'DM Mono',monospace",
         borderRadius: 3,
@@ -10677,9 +10661,9 @@ function RecoveryHubScreen() {
       style: {
         flex: 1,
         padding: "8px",
-        background: "#05200c",
-        border: "1px solid #10b981",
-        color: "#10b981",
+        background: "#332905",
+        border: "1px solid #facc15",
+        color: "#facc15",
         fontSize: 11,
         fontFamily: "'DM Mono',monospace",
         borderRadius: 3,
@@ -10732,15 +10716,15 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
-      color: "#e0ffe8",
+      color: "#fffbe0",
       fontFamily: "'DM Mono',monospace"
     }
   }, "Day ", curDay, " of 7"), /*#__PURE__*/React.createElement("button", {
     onClick: () => setLogOpen(l => !l),
     style: {
-      background: "#05200c",
-      border: "1px solid #10b981",
-      color: "#10b981",
+      background: "#332905",
+      border: "1px solid #facc15",
+      color: "#facc15",
       fontSize: 11,
       letterSpacing: 1,
       padding: "7px 14px",
@@ -10751,8 +10735,8 @@ function RecoveryHubScreen() {
   }, logOpen ? "− Collapse" : "+ Log Today")), logOpen && /*#__PURE__*/React.createElement("div", {
     className: "fa",
     style: {
-      background: "#050f08",
-      border: "1px solid #0f2010",
+      background: "#100d04",
+      border: "1px solid #332b0c",
       borderRadius: 5,
       padding: "12px 12px",
       marginBottom: 14
@@ -10791,7 +10775,7 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 9,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'DM Mono',monospace",
       letterSpacing: 1,
       textTransform: "uppercase"
@@ -10799,7 +10783,7 @@ function RecoveryHubScreen() {
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'Bebas Neue',sans-serif"
     }
   }, tempMetric[k])), /*#__PURE__*/React.createElement("input", {
@@ -10813,14 +10797,14 @@ function RecoveryHubScreen() {
     })),
     style: {
       width: "100%",
-      accentColor: "#10b981"
+      accentColor: "#facc15"
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       justifyContent: "space-between",
       fontSize: 8,
-      color: "#2a5030",
+      color: "#8a7020",
       fontFamily: "'DM Mono',monospace"
     }
   }, /*#__PURE__*/React.createElement("span", null, lo), /*#__PURE__*/React.createElement("span", null, hi)))), /*#__PURE__*/React.createElement("div", {
@@ -10830,7 +10814,7 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'DM Mono',monospace",
       letterSpacing: 1,
       textTransform: "uppercase",
@@ -10850,9 +10834,9 @@ function RecoveryHubScreen() {
     style: {
       flex: 1,
       padding: "6px",
-      background: tempMetric.track === opt ? "#05200c" : "transparent",
-      border: `1px solid ${tempMetric.track === opt ? "#10b981" : "#1e3a20"}`,
-      color: tempMetric.track === opt ? "#10b981" : "#2a5030",
+      background: tempMetric.track === opt ? "#332905" : "transparent",
+      border: `1px solid ${tempMetric.track === opt ? "#facc15" : "#4a3f10"}`,
+      color: tempMetric.track === opt ? "#facc15" : "#8a7020",
       fontSize: 9,
       fontFamily: "'DM Mono',monospace",
       textTransform: "uppercase",
@@ -10866,7 +10850,7 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'DM Mono',monospace",
       letterSpacing: 1,
       textTransform: "uppercase",
@@ -10881,11 +10865,11 @@ function RecoveryHubScreen() {
     placeholder: "Observations? Foot feel? Knee alignment?",
     style: {
       width: "100%",
-      background: "#080c0a",
-      border: "1px solid #1e3a20",
+      background: "#0e0c07",
+      border: "1px solid #4a3f10",
       borderRadius: 3,
       padding: "8px",
-      color: "#c8e8d0",
+      color: "#e8dcc0",
       fontSize: 11,
       fontFamily: "'DM Mono',monospace",
       height: 64,
@@ -10896,7 +10880,7 @@ function RecoveryHubScreen() {
     style: {
       width: "100%",
       padding: "9px",
-      background: "#059669",
+      background: "#eab308",
       border: "none",
       color: "#fff",
       fontSize: 12,
@@ -10909,7 +10893,7 @@ function RecoveryHubScreen() {
     style: {
       fontSize: 8,
       letterSpacing: 2,
-      color: "#10b981",
+      color: "#facc15",
       textTransform: "uppercase",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 8
@@ -10919,14 +10903,14 @@ function RecoveryHubScreen() {
       textAlign: "center",
       padding: "24px",
       fontSize: 11,
-      color: "#1a4020",
+      color: "#4a3d10",
       fontFamily: "'DM Mono',monospace"
     }
   }, "No logs yet — start tracking today") : Object.entries(metrics).sort((a, b) => +b[0] - +a[0]).map(([day, m]) => /*#__PURE__*/React.createElement("div", {
     key: day,
     style: {
-      background: "#050f08",
-      border: "1px solid #0f2010",
+      background: "#100d04",
+      border: "1px solid #332b0c",
       borderRadius: 5,
       padding: "10px 12px",
       marginBottom: 8
@@ -10940,7 +10924,7 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'DM Mono',monospace"
     }
   }, "Day ", day), /*#__PURE__*/React.createElement("button", {
@@ -10976,41 +10960,41 @@ function RecoveryHubScreen() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 7,
-      color: "#2a5030",
+      color: "#8a7020",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 2
     }
   }, l), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 18,
-      color: "#10b981",
+      color: "#facc15",
       fontFamily: "'Bebas Neue',sans-serif"
     }
   }, v || "—")))), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 8,
-      color: "#2a5030",
+      color: "#8a7020",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 2
     }
   }, "Tracking"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
-      color: "#c8e8d0",
+      color: "#e8dcc0",
       textTransform: "capitalize",
       marginBottom: m.notes ? 8 : 0
     }
   }, m.track || "—"), m.notes && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 8,
-      color: "#2a5030",
+      color: "#8a7020",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 2
     }
   }, "Notes"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
-      color: "#c8e8d0",
+      color: "#e8dcc0",
       lineHeight: 1.7
     }
   }, m.notes)))))));
