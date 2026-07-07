@@ -9079,6 +9079,84 @@ const RH_PROTOCOL = [{
   focus: "Integration ready",
   notes: "If activations felt consistent all week — you're ready to return to GOATA walking."
 }];
+
+/* ─── WHOLE WORKOUTS — complete Toe/Arch training program (run as a full session) ─── */
+const RH_WORKOUT_INTRO = {
+  overview: "A complete arch and toe training program, meant to be followed as a full session rather than picked apart into single drills. Building real strength and flexibility in the arch improves balance, lowers injury risk, and helps athletic performance overall.",
+  correctionPhase: "Think of this as a correction phase — a focused block of time, not a forever routine. It can take anywhere from 4 weeks to around a year depending on the person and how compensated the feet currently are, especially with existing structural issues. Once real strength is built, daily maintenance is much lighter: barefoot or wide-toe-box shoes, and barefoot walking whenever it's reasonable — at home, on grass, on the beach. Skipping straight to 'just wear different shoes' without the correction phase usually won't create lasting change, since the body has already learned to compensate around the weakness.",
+  equipment: [{
+    name: "Cloth Toe Spreaders",
+    desc: "A sock-style spreader with an adjustable hook, providing a constant, gentle pulling force rather than just holding a static position.",
+    use: "Slide it on so the big toe and pinky toe are fully covered, without letting the sock bunch up. Connect the hook at whatever tension is comfortable — even hooking it right at the tip of the big toe for a stronger pull if that's tolerated. If the big toe currently sits at a severe inward angle, the spreader will only pull it so far at first — that's expected. As the foot changes over weeks, it gradually pulls further."
+  }, {
+    name: "Silicone Toe Spreaders",
+    desc: "A firmer, static spacer that holds toe position without any active pulling force.",
+    use: "Best for getting started, or for activities where thinking about toe position isn't practical — yoga is a good example. Good option when the dynamic pull of the cloth version feels like too much too soon."
+  }]
+};
+const RH_WORKOUT_STRENGTH = [{
+  id: "wo-towel-scrunch",
+  name: "Towel Scrunches",
+  dose: "3 sets · 10-15 reps/foot",
+  execution: "Sit with feet flat on the floor, a towel laid out in front of you. Use the toes to scrunch the towel toward you, then release and reset. Strengthens the toe flexors and supports the arch.",
+  note: "A standing version of this same movement — with an added balance challenge — is also in the Foot tab if a standing option is preferred."
+}, {
+  id: "wo-calf-raise",
+  name: "Calf Raises",
+  dose: "3 sets · 20-30 reps",
+  execution: "Stand feet hip-width apart. Slowly raise the heels off the ground, balancing on the balls of the feet, hold a moment at the top, then lower with control. Strengthens the calf, which directly supports the arch.",
+  note: "Progression: stand with the heels hanging off the edge of a step for a deeper stretch at the bottom of each rep."
+}, {
+  id: "wo-arch-raise",
+  name: "Arch Raises",
+  dose: "3 sets · 10-15 reps",
+  execution: "Stand barefoot, feet parallel. Keeping the heel and all toes on the ground, lift the arch by contracting the foot muscles — a doming action, not a toe curl. Hold a couple of seconds at the top before releasing.",
+  note: "Genuinely hard for a lot of people at first. Try gently pressing the toe tips into the ground, or resting a hand under the arch for feedback while learning the contraction."
+}, {
+  id: "wo-toe-yoga",
+  name: "Toe Yoga — Butterfly Spreads",
+  dose: "30 reps",
+  execution: "Seated or standing, spread the toes as wide apart as possible. Then lift the big toe while keeping the other four down, and reverse — lift the other four while keeping the big toe down and angled slightly outward, in line with the outside edge of the foot.",
+  note: "This is supposed to be difficult at first — don't expect much range in the beginning. Using a hand to assist lightly is fine early on; the goal is needing that help less over time, eventually managing it without a toe spreader at all."
+}, {
+  id: "wo-heel-walk",
+  name: "Heel Walking",
+  dose: "1-2 minutes",
+  execution: "Walk around on the heels only for 1-2 minutes, keeping the forefoot lifted the whole time. Strengthens the tibialis anterior and the smaller stabilizing muscles of the arch.",
+  note: "The Foot tab has a more detailed breakdown of this same movement, including common form errors."
+}, {
+  id: "wo-foot-dome",
+  name: "Foot Domes",
+  dose: "10-15 reps",
+  execution: "Stand barefoot, feet shoulder-width apart. Without lifting the toes, create a dome shape by contracting the arch muscles, hold briefly, then relax.",
+  note: "This is essentially the same movement as Arch Raises just above, and the same idea as the Foot Dome drill in the Foot tab. If it's hard to feel, place a hand on the arch and press up slightly for extra feedback."
+}];
+const RH_WORKOUT_FLEX = [{
+  id: "wo-calf-stretch",
+  name: "Calf Stretch",
+  dose: "20-30 sec each side",
+  execution: "Face a wall, hands pressed against it, one leg extended behind with the heel flat on the ground. Hold, then switch legs."
+}, {
+  id: "wo-toe-flexor-stretch",
+  name: "Toe Flexor Stretch",
+  dose: "15-20 sec each foot",
+  execution: "Seated, cross one leg over the other. Gently pull the toes — especially the big toe — back toward the chest to stretch the toe flexors."
+}, {
+  id: "wo-seated-foot-stretch",
+  name: "Seated Foot Stretch",
+  dose: "10 reps each foot",
+  execution: "Seated with the leg extended, point the toes, then flex them back toward you. When pointing, angle the whole foot inward rather than just the toes — keep the big toe itself pointing straight down."
+}, {
+  id: "wo-foot-massage",
+  name: "Foot Massage",
+  dose: "1-2 min per foot",
+  execution: "Finish with a hands-on massage of the foot, focused on the arch — fingers or a tennis ball both work well. Dig into the inner arch, along the side, and under the big toe. Some crunchiness or tightness there is normal; work through it gently."
+}, {
+  id: "wo-fold-overs",
+  name: "Fold Overs",
+  dose: "A few reps per foot",
+  execution: "Standing, press the big toe into the ground, then push the foot forward while trying to keep the tip of the big toe anchored in place — letting the big toe fold under itself as far as comfortable, without pain. If that feels easy, add gentle downward pressure on the folded toe for more stretch."
+}];
 const RH_KNEE = [{
   id: "wall-align",
   name: "Wall Knee Alignment",
@@ -9766,6 +9844,9 @@ function RecoveryHubScreen() {
   }, {
     id: "foot",
     label: "🦶 Foot"
+  }, {
+    id: "workouts",
+    label: "🗂️ Workouts"
   }, {
     id: "protocol",
     label: "📅 Protocol"
@@ -10703,6 +10784,256 @@ function RecoveryHubScreen() {
         lineHeight: 1.7
       }
     }, pr))))));
+  })), rhTab === "workouts" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#facc15",
+      fontFamily: "'Bebas Neue',sans-serif",
+      letterSpacing: 1,
+      marginBottom: 8
+    }
+  }, "Toe & Arch Workout Program"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: "#e0d8b8",
+      lineHeight: 1.8,
+      marginBottom: 12
+    }
+  }, RH_WORKOUT_INTRO.overview), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#332b0c",
+      border: "1px solid #4a3f10",
+      borderRadius: 6,
+      padding: "11px 12px",
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 8,
+      letterSpacing: 2,
+      color: "#fbbf24",
+      textTransform: "uppercase",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 6
+    }
+  }, "The Correction Phase"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: "#e0d8b8",
+      lineHeight: 1.8
+    }
+  }, RH_WORKOUT_INTRO.correctionPhase)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 8,
+      letterSpacing: 2,
+      color: "#8a7020",
+      textTransform: "uppercase",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 8
+    }
+  }, "Toe Spreaders (Equipment)"), RH_WORKOUT_INTRO.equipment.map((eq, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      background: "#100d04",
+      border: "1px solid #332b0c",
+      borderRadius: 6,
+      padding: "10px 12px",
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#fffbe0",
+      marginBottom: 4
+    }
+  }, eq.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: "#e0d8b8",
+      lineHeight: 1.7,
+      marginBottom: 6
+    }
+  }, eq.desc), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: "#8a7020",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 3
+    }
+  }, "HOW TO USE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: "#e8dcc0",
+      lineHeight: 1.7
+    }
+  }, eq.use))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: "#facc15",
+      fontFamily: "'DM Mono',monospace",
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      marginTop: 16,
+      marginBottom: 6
+    }
+  }, "Strength — 3x/week"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: "#8a7020",
+      lineHeight: 1.7,
+      marginBottom: 10
+    }
+  }, "Rest at least a day between strength sessions. Run all 6 exercises in order, then move into the flexibility block below in the same session."), RH_WORKOUT_STRENGTH.map(ex => {
+    const open = expanded === ex.id;
+    return /*#__PURE__*/React.createElement("div", {
+      key: ex.id,
+      style: card(false)
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggle(ex.id),
+      style: {
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "12px 12px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        cursor: "pointer",
+        textAlign: "left"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#fffbe0",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 3
+      }
+    }, ex.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9.5,
+        color: "#facc15"
+      }
+    }, "🔄 ", ex.dose)), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#facc15",
+        fontSize: 18,
+        flexShrink: 0
+      }
+    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: "0 12px 14px",
+        borderTop: "1px solid #332b0c"
+      },
+      className: "fa"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        letterSpacing: 2,
+        color: "#facc15",
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 6,
+        marginTop: 10
+      }
+    }, "Execution"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: "#e0d8b8",
+        lineHeight: 1.8,
+        marginBottom: 10
+      }
+    }, ex.execution), ex.note && /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "#100d04",
+        borderLeft: "2px solid #facc15",
+        borderRadius: "0 4px 4px 0",
+        padding: "8px 10px"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: "#c8bc90",
+        lineHeight: 1.7,
+        fontStyle: "italic"
+      }
+    }, ex.note))));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: "#facc15",
+      fontFamily: "'DM Mono',monospace",
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      marginTop: 18,
+      marginBottom: 6
+    }
+  }, "Flexibility — Same Session, After Strength"), RH_WORKOUT_FLEX.map(ex => {
+    const open = expanded === ex.id;
+    return /*#__PURE__*/React.createElement("div", {
+      key: ex.id,
+      style: card(false)
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggle(ex.id),
+      style: {
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "12px 12px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        cursor: "pointer",
+        textAlign: "left"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#fffbe0",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 3
+      }
+    }, ex.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9.5,
+        color: "#facc15"
+      }
+    }, "🔄 ", ex.dose)), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#facc15",
+        fontSize: 18,
+        flexShrink: 0
+      }
+    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: "0 12px 14px",
+        borderTop: "1px solid #332b0c"
+      },
+      className: "fa"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        letterSpacing: 2,
+        color: "#facc15",
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 6,
+        marginTop: 10
+      }
+    }, "Execution"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: "#e0d8b8",
+        lineHeight: 1.8
+      }
+    }, ex.execution)));
   })), rhTab === "protocol" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
