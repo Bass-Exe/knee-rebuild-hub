@@ -1460,12 +1460,12 @@ function HomeScreen({
     color: "#d97706",
     desc: "Ground-based bodyweight flow. Forms, switches, drills, and 6 full sample workouts."
   }, {
-    id: "dailys",
-    icon: "🌅",
-    title: "Daily Habits",
-    sub: "10-15 min, every single day",
-    color: C.shin,
-    desc: "The 4 non-negotiables for knee health, with equipment options."
+    id: "calisthenics",
+    icon: "💪",
+    title: "Calisthenics",
+    sub: "Rings + bar · skills, warm-up, maintenance",
+    color: "#38bdf8",
+    desc: "Upper body training for non-Animal-Flow days. Scapula-focused warm-up, skill goal progressions, and a daily maintenance session."
   }];
   return /*#__PURE__*/React.createElement("div", {
     className: "fa"
@@ -11491,17 +11491,20 @@ const GP_DB = {
   "Hip Rocker": {
     desc: "Seated on the floor, actively rock your hips side to side. Movement initiates from the pelvis — not the lumbar spine.",
     cues: ["Pelvis leads the movement", "Keep chest tall throughout", "Full range every direction"],
-    yt: "hip+rocker+recode+movement"
+    yt: "hip+rocker+recode+movement",
+    ytUrl: "https://www.youtube.com/watch?v=yn4qiqSlUgY"
   },
   "Hip Stretch": {
     desc: "Deep stretch targeting hip flexors and rotators. Hold and breathe, letting tissues release with each exhale.",
     cues: ["Breathe fully into the stretch", "Don't force — relax in", "Feel the hip capsule open"],
-    yt: "hip+stretch+recode+mobility"
+    yt: "hip+stretch+recode+mobility",
+    ytUrl: "https://www.youtube.com/watch?v=Q4Ko275cluo"
   },
   "Child Rocker": {
     desc: "From child's pose, rock forward and back rhythmically. Decompresses the lumbar spine and mobilizes hips, knees, and ankles.",
     cues: ["Arms reach long overhead", "Sit back toward heels on each rock", "Fluid, rhythmic motion"],
-    yt: "child+rocker+recode+movement"
+    yt: "child+rocker+recode+movement",
+    ytUrl: "https://www.youtube.com/watch?v=0WpzRG1_lRo"
   },
   "Toe Tuck Rocker": {
     desc: "Child's pose with toes tucked under. Rock forward and back to progressively stretch the plantar fascia and ankles.",
@@ -12102,7 +12105,7 @@ function GpExCard({
       lineHeight: 1.5
     }
   }, cue)))), /*#__PURE__*/React.createElement("button", {
-    onClick: () => window.open(`https://www.youtube.com/results?search_query=${info.yt}`, "_blank"),
+    onClick: () => window.open(info.ytUrl || `https://www.youtube.com/results?search_query=${info.yt}`, "_blank"),
     style: {
       background: "transparent",
       border: `1px solid ${color}40`,
@@ -14123,159 +14126,889 @@ function AnimalFlowScreen() {
     }, "used in ", w.title))));
   }))));
 }
-function DailysScreen() {
-  const [dailyEx, setDailyEx] = useState(null);
-  const zl = z => ZONES[z]?.label ?? z;
+
+/* ════════════════════════════════════════════════════════════════════════
+   CALISTHENICS — Rings + Bar upper body training
+   Warm-up, skill goals, and daily maintenance for non-Animal-Flow upper days
+   ════════════════════════════════════════════════════════════════════════ */
+
+const CALI_COLOR = "#38bdf8"; // sky blue — distinct from every other module
+
+const CALI_WARMUP = [{
+  id: "cw-bloodflow",
+  name: "Blood Flow (General Cardio)",
+  dose: "1-2 min continuous",
+  execution: "A short burst of full-body movement — jumping jacks, easy burpees, or just jogging in place — enough to raise your heart rate and warm the whole body before getting specific with the shoulders and wrists. Nothing intense, just enough to feel warm."
+}, {
+  id: "cw-locomotion",
+  name: "Locomotion (Crawling)",
+  dose: "30-45 sec",
+  execution: "Bear crawl or crab walk across the floor and back. Adds coordination and gets the shoulders and hips moving together before isolated mobility work."
+}, {
+  id: "cw-scap-pulls",
+  name: "Scapular Pulls (Dead Hang)",
+  dose: "3 sets · 8-10 reps",
+  execution: "Hang from the bar with straight arms. Without bending the elbows at all, pull your shoulder blades down and together, then let them rise back up into a full stretch. This is a shoulder-blade movement only — the arms never bend."
+}, {
+  id: "cw-scap-pushup",
+  name: "Scapular Push-Ups",
+  dose: "2-3 sets · 10-12 reps",
+  execution: "In a plank (or supported on rings just above the ground), keep the arms straight and let the shoulder blades squeeze together, lowering the chest slightly, then push the floor away and let the blades spread wide. Small range, big carryover to overhead control."
+}, {
+  id: "cw-ring-support",
+  name: "Ring Support Hold",
+  dose: "3 sets · 15-20 sec",
+  execution: "Support yourself on the rings, arms straight, shoulders actively pulled down and back rather than shrugged up. Keep the rings turned slightly out. This wakes up the same stabilizers that every ring skill depends on."
+}, {
+  id: "cw-band-pullapart",
+  name: "Band Pull-Aparts",
+  dose: "2 sets · 15 reps",
+  execution: "Hold a light band at chest height, arms extended. Pull it apart until it touches the chest, squeezing the shoulder blades, then return with control."
+}, {
+  id: "cw-arm-circles",
+  name: "Arm Circles",
+  dose: "20 sec forward · 20 sec back",
+  execution: "Full, slow arm circles, gradually increasing the size. Warms up the whole shoulder girdle before any hanging or pressing work."
+}, {
+  id: "cw-wrist-prep",
+  name: "Wrist Prep",
+  dose: "1-2 min total",
+  execution: "On hands and knees, rock weight through the wrists in flexion and extension, then circle them both directions. Essential before any ring support or handstand work."
+}, {
+  id: "cw-cat-cow",
+  name: "Cat-Cow / Thoracic Rotation",
+  dose: "10 slow reps",
+  execution: "On hands and knees, alternate rounding and arching the spine, then add a rotation reaching one arm through and up toward the ceiling each side. Opens the thoracic spine that overhead work depends on."
+}];
+const CALI_SKILLS = [{
+  id: "muscle-up",
+  name: "Muscle-Up",
+  icon: "💪",
+  equip: "Rings or bar",
+  overview: "The move that bridges pulling and pressing — a pull-up that transitions straight into a dip. Built from strict pulling power, an explosive pull, and a controlled transition over the bar or rings.",
+  stages: [{
+    n: 1,
+    name: "Strict Pull-Up Strength",
+    focus: "Base pulling strength",
+    dose: "3-4 sets of 6-8 strict reps"
+  }, {
+    n: 2,
+    name: "Explosive Chest-to-Bar Pulls",
+    focus: "Pulling high and fast enough to clear the transition",
+    dose: "4 sets of 3-5 reps, focus on speed"
+  }, {
+    n: 3,
+    name: "Transition Practice",
+    focus: "The technical part most people miss — rolling over the bar or rings, not just pulling higher",
+    dose: "5-8 slow, deliberate reps, low bar or bands assisting if needed"
+  }, {
+    n: 4,
+    name: "Negative Muscle-Ups",
+    focus: "Control on the way down through the whole range",
+    dose: "3-5 reps, 3-5 sec each"
+  }, {
+    n: 5,
+    name: "Full Muscle-Up",
+    focus: "Put it together",
+    dose: "Singles, focus on clean reps over quantity"
+  }],
+  workout: [{
+    ex: "Strict Pull-Ups",
+    dose: "4 sets x 6-8"
+  }, {
+    ex: "Explosive Pull-Ups",
+    dose: "4 sets x 3-5"
+  }, {
+    ex: "Transition Drills (low bar/rings)",
+    dose: "5 sets x 5"
+  }, {
+    ex: "Ring or Bar Dips",
+    dose: "3 sets x 6-10"
+  }, {
+    ex: "Scapular Pulls",
+    dose: "3 sets x 10"
+  }]
+}, {
+  id: "front-lever",
+  name: "Front Lever",
+  icon: "🎯",
+  equip: "Bar or rings",
+  overview: "A full-body hollow-body hold, horizontal under the bar, entirely built on core and lat strength. Trained through a well-known bent-to-straight progression.",
+  stages: [{
+    n: 1,
+    name: "Tuck Front Lever",
+    focus: "Knees tucked tight to chest, body horizontal",
+    dose: "4-5 sets of 10-15 sec"
+  }, {
+    n: 2,
+    name: "Advanced Tuck",
+    focus: "Hips open slightly, knees still bent",
+    dose: "4-5 sets of 8-12 sec"
+  }, {
+    n: 3,
+    name: "Single-Leg Front Lever",
+    focus: "One leg extended, one still tucked",
+    dose: "3-4 sets of 6-10 sec each side"
+  }, {
+    n: 4,
+    name: "Straddle Front Lever",
+    focus: "Both legs out, spread wide to shorten the lever arm",
+    dose: "3-4 sets of 6-10 sec"
+  }, {
+    n: 5,
+    name: "Full Front Lever",
+    focus: "Legs together, fully extended",
+    dose: "Singles, hold quality over duration"
+  }],
+  workout: [{
+    ex: "Front Lever Hold (current stage)",
+    dose: "5 sets x max quality hold"
+  }, {
+    ex: "Tuck Front Lever Rows",
+    dose: "3 sets x 6-8"
+  }, {
+    ex: "Hollow Body Hold",
+    dose: "3 sets x 20-30 sec"
+  }, {
+    ex: "Scapular Pulls",
+    dose: "3 sets x 10"
+  }]
+}, {
+  id: "planche",
+  icon: "🦅",
+  name: "Planche",
+  equip: "Rings or floor/parallettes",
+  overview: "A horizontal hold supported entirely on the hands, no legs touching anything. Demands serious shoulder, wrist, and core strength — trained through the same style of tuck-to-straddle-to-full progression as the front lever.",
+  stages: [{
+    n: 1,
+    name: "Planche Lean",
+    focus: "Weight shifted forward over the hands, shoulders protracted",
+    dose: "4 sets of 15-20 sec"
+  }, {
+    n: 2,
+    name: "Tuck Planche",
+    focus: "Knees tucked tight, feet off the ground",
+    dose: "4-5 sets of 8-12 sec"
+  }, {
+    n: 3,
+    name: "Advanced Tuck",
+    focus: "Hips extend slightly, knees still bent",
+    dose: "4 sets of 6-10 sec"
+  }, {
+    n: 4,
+    name: "Straddle Planche",
+    focus: "Legs spread wide to shorten the lever",
+    dose: "3-4 sets of 5-8 sec"
+  }, {
+    n: 5,
+    name: "Full Planche",
+    focus: "Legs together, fully extended",
+    dose: "Singles, quality over duration"
+  }],
+  workout: [{
+    ex: "Planche Hold (current stage)",
+    dose: "5 sets x max quality hold"
+  }, {
+    ex: "Pseudo Planche Push-Ups",
+    dose: "3 sets x 6-10"
+  }, {
+    ex: "Ring Support Hold",
+    dose: "3 sets x 20-30 sec"
+  }, {
+    ex: "Wrist Prep",
+    dose: "2 min"
+  }]
+}, {
+  id: "handstand-pushup",
+  icon: "🤸",
+  name: "Handstand Push-Up",
+  equip: "Wall + floor",
+  overview: "Vertical pressing strength, built from pike push-ups on the ground up to a fully freestanding handstand push-up against a wall for support.",
+  stages: [{
+    n: 1,
+    name: "Pike Push-Ups",
+    focus: "Hips high, hands and feet on the ground, pressing the head toward the floor",
+    dose: "4 sets of 8-12"
+  }, {
+    n: 2,
+    name: "Wall Handstand Hold",
+    focus: "Building comfort and shoulder stability upside down",
+    dose: "4-5 sets of 20-30 sec"
+  }, {
+    n: 3,
+    name: "Wall HSPU Negatives",
+    focus: "Slow controlled lowering from the top, walking back up if needed",
+    dose: "4 sets of 3-5 reps, 3-5 sec down"
+  }, {
+    n: 4,
+    name: "Wall HSPU (partial range)",
+    focus: "Pressing back up through a comfortable range against the wall",
+    dose: "3-4 sets of 3-6"
+  }, {
+    n: 5,
+    name: "Freestanding HSPU",
+    focus: "Full range, no wall",
+    dose: "Singles, focus on control"
+  }],
+  workout: [{
+    ex: "Wall HSPU or Negatives (current stage)",
+    dose: "4-5 sets x max quality"
+  }, {
+    ex: "Pike Push-Ups",
+    dose: "3 sets x 8-12"
+  }, {
+    ex: "Wall Handstand Hold",
+    dose: "3 sets x 20-30 sec"
+  }, {
+    ex: "Wrist Prep",
+    dose: "2 min"
+  }]
+}, {
+  id: "back-lever",
+  icon: "🔄",
+  name: "Back Lever",
+  equip: "Bar or rings",
+  overview: "The front lever's mirror image — a horizontal hold facing the floor instead of the ceiling. Demands shoulder flexibility as much as strength, so it's often trained alongside the front lever rather than after it.",
+  stages: [{
+    n: 1,
+    name: "Tuck Back Lever",
+    focus: "Knees tucked, body horizontal, facing down",
+    dose: "4-5 sets of 10-15 sec"
+  }, {
+    n: 2,
+    name: "Advanced Tuck",
+    focus: "Hips open slightly",
+    dose: "4 sets of 8-12 sec"
+  }, {
+    n: 3,
+    name: "Straddle Back Lever",
+    focus: "Legs spread wide",
+    dose: "3-4 sets of 6-10 sec"
+  }, {
+    n: 4,
+    name: "Full Back Lever",
+    focus: "Legs together, fully extended",
+    dose: "Singles, quality over duration"
+  }],
+  workout: [{
+    ex: "Back Lever Hold (current stage)",
+    dose: "5 sets x max quality hold"
+  }, {
+    ex: "German Hang (shoulder stretch)",
+    dose: "2-3 sets x 20-30 sec"
+  }, {
+    ex: "Skin the Cat",
+    dose: "3 sets x 3-5"
+  }, {
+    ex: "Hollow Body Hold",
+    dose: "3 sets x 20-30 sec"
+  }]
+}, {
+  id: "l-sit",
+  icon: "📐",
+  name: "Ring L-Sit",
+  equip: "Rings",
+  overview: "A compression-heavy core and hip-flexor hold, supported on the rings with the legs extended out in front. Deceptively demanding — most of the difficulty is core and hip flexors, not arms.",
+  stages: [{
+    n: 1,
+    name: "Tuck Support Hold",
+    focus: "Knees tucked to chest, supported on straight arms",
+    dose: "4 sets of 15-20 sec"
+  }, {
+    n: 2,
+    name: "Single-Leg L-Sit",
+    focus: "One leg extended, one tucked",
+    dose: "3-4 sets of 8-12 sec each side"
+  }, {
+    n: 3,
+    name: "Full L-Sit",
+    focus: "Both legs extended, parallel to the ground",
+    dose: "4-5 sets of 8-15 sec"
+  }],
+  workout: [{
+    ex: "L-Sit Hold (current stage)",
+    dose: "5 sets x max quality hold"
+  }, {
+    ex: "Hanging Knee Raises",
+    dose: "3 sets x 10-12"
+  }, {
+    ex: "Ring Support Hold",
+    dose: "3 sets x 20-30 sec"
+  }]
+}];
+const CALI_MAINTENANCE = [{
+  id: "m-pullups",
+  name: "Pull-Ups or Rows",
+  dose: "4 sets · 6-10 reps",
+  note: "The backbone of the whole session. Strict form, full range, control the descent."
+}, {
+  id: "m-dips",
+  name: "Ring or Bar Dips",
+  dose: "3 sets · 8-12 reps",
+  note: "Rings add an instability/stability demand bar dips don't have — keep the shoulders active, don't let them roll forward at the bottom."
+}, {
+  id: "m-pushup",
+  name: "Push-Ups (Ring or Floor)",
+  dose: "3 sets · 10-15 reps",
+  note: "Ring push-ups add a rotational stability challenge. Keep the body one straight line."
+}, {
+  id: "m-support",
+  name: "Ring Support Hold",
+  dose: "3 sets · 20-30 sec",
+  note: "Maintains the shoulder stability every other ring skill depends on."
+}, {
+  id: "m-hollow",
+  name: "Hollow Body Hold",
+  dose: "3 sets · 20-30 sec",
+  note: "Core tension that transfers directly to every lever and planche progression."
+}, {
+  id: "m-scap",
+  name: "Scapular Pulls",
+  dose: "3 sets · 8-10 reps",
+  note: "Same as the warm-up version, done here with a bit more intent as a finisher."
+}];
+const CALI_GOALS = [{
+  id: "g-handstand",
+  name: "Freestanding Handstand",
+  icon: "🤸",
+  target: "Hold for 30+ seconds, no wall",
+  achieved: false
+}, {
+  id: "g-muscleup",
+  name: "Strict Muscle-Up",
+  icon: "💪",
+  target: "3 clean reps, bar or rings",
+  achieved: false
+}, {
+  id: "g-planche",
+  name: "Full Planche",
+  icon: "🦅",
+  target: "Hold for 5+ seconds",
+  achieved: false
+}, {
+  id: "g-frontlever",
+  name: "Full Front Lever",
+  icon: "🎯",
+  target: "Hold for 10+ seconds",
+  achieved: false
+}, {
+  id: "g-pistol",
+  name: "Pistol Squat",
+  icon: "🦵",
+  target: "5 reps each leg, full depth",
+  achieved: false
+}, {
+  id: "g-lsit",
+  name: "L-Sit",
+  icon: "📐",
+  target: "Hold for 20+ seconds",
+  achieved: false
+}, {
+  id: "g-backlever",
+  name: "Back Lever",
+  icon: "🔄",
+  target: "Hold for 10+ seconds",
+  achieved: false
+}, {
+  id: "g-humanflag",
+  name: "Human Flag",
+  icon: "🚩",
+  target: "Hold for 5+ seconds",
+  achieved: false
+}];
+const CALI_COOLDOWN = [{
+  id: "cd-wrist",
+  name: "Wrist Care",
+  dose: "1-2 min",
+  execution: "Gentle wrist circles and a light stretch in both flexion and extension. After any session involving rings, bars, or handstand work, the wrists have earned this."
+}, {
+  id: "cd-shoulder-stretch",
+  name: "Shoulder / Lat Stretch",
+  dose: "20-30 sec each side",
+  execution: "Hang loosely from the bar for a passive stretch, or use a doorway stretch for the front of the shoulder. Undoes some of the tension built up during pulling and pressing work."
+}, {
+  id: "cd-hip-flexor",
+  name: "Hip Flexor Stretch",
+  dose: "20-30 sec each side",
+  execution: "A kneeling lunge stretch, pushing the hips forward gently. Skills like the front lever and planche pull the hips into positions that benefit from this afterward."
+}, {
+  id: "cd-breathing",
+  name: "Down-Regulation Breathing",
+  dose: "1 minute",
+  execution: "Slow breathing — in through the nose, out through the mouth, longer on the exhale than the inhale. Brings the nervous system back down after intense hold work."
+}];
+function CalisthenicsScreen() {
+  const [caliTab, setCaliTab] = useState("warmup");
+  const [expanded, setExpanded] = useState(null);
+  const [goalId, setGoalId] = useState(null);
+  const [achieved, setAchieved] = useState({});
+  const toggle = id => setExpanded(e => e === id ? null : id);
+  const goal = CALI_SKILLS.find(s => s.id === goalId);
+  const toggleAchieved = id => setAchieved(a => ({
+    ...a,
+    [id]: !a[id]
+  }));
+  const pickRandom = () => {
+    const others = CALI_SKILLS.filter(s => s.id !== goalId);
+    const pool = others.length ? others : CALI_SKILLS;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    setGoalId(pick.id);
+  };
+  const TABS = [{
+    id: "warmup",
+    label: "🔥 Warm-Up"
+  }, {
+    id: "skills",
+    label: "🎯 Skills"
+  }, {
+    id: "goals",
+    label: "🏆 Goals"
+  }, {
+    id: "maintenance",
+    label: "💪 Maintenance"
+  }];
+  const card = active => ({
+    border: `1px solid ${active ? CALI_COLOR : "#1e293b"}`,
+    borderRadius: 8,
+    overflow: "hidden",
+    marginBottom: 9,
+    background: active ? `${CALI_COLOR}0c` : "#0c111a"
+  });
   return /*#__PURE__*/React.createElement("div", {
     className: "fa"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Bebas Neue',sans-serif",
       fontSize: 22,
       letterSpacing: 2,
-      color: "#e0e0ec",
-      marginBottom: 6
+      color: "#e0e0ec"
     }
-  }, "DAILY KNEE HEALTH"), /*#__PURE__*/React.createElement("div", {
+  }, "CALISTHENICS"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: 11,
       color: C.muted,
-      lineHeight: 1.85,
-      marginBottom: 18,
-      borderLeft: `2px solid ${C.border}`,
-      paddingLeft: 10
+      marginTop: 6,
+      lineHeight: 1.8
     }
-  }, "Do these four movements every day — including rest days. Takes 10–15 minutes total. This is the foundation of the ATG system."), DAILYS.map((d, i) => {
-    const open = dailyEx === i;
+  }, "Rings + pull-up bar. Built for upper body days when you're not running Animal Flow — warm up the scapula, chip away at a skill goal, or run the daily maintenance session to stay strong across the board.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 16
+    }
+  }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    onClick: () => {
+      setCaliTab(t.id);
+      setExpanded(null);
+    },
+    style: {
+      flex: 1,
+      background: caliTab === t.id ? `${CALI_COLOR}18` : "transparent",
+      border: `1px solid ${caliTab === t.id ? CALI_COLOR : C.border}`,
+      color: caliTab === t.id ? CALI_COLOR : C.muted,
+      fontSize: 9,
+      letterSpacing: 1,
+      textTransform: "uppercase",
+      padding: "9px 4px",
+      borderRadius: 3,
+      cursor: "pointer",
+      fontFamily: "'DM Mono',monospace",
+      transition: "all .2s"
+    }
+  }, t.label))), caliTab === "warmup" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.8,
+      marginBottom: 14
+    }
+  }, "Run this before any pulling, pressing, or skill work — scapular control first, everything else builds on it."), CALI_WARMUP.map(ex => {
+    const open = expanded === ex.id;
     return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: S.exCard(open, d.color),
-      onClick: () => setDailyEx(open ? null : i)
-    }, /*#__PURE__*/React.createElement("div", {
-      style: S.exHdr
+      key: ex.id,
+      style: card(open)
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggle(ex.id),
+      style: {
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "12px 12px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        cursor: "pointer",
+        textAlign: "left"
+      }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         flex: 1
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        display: "flex",
-        gap: 7,
-        alignItems: "center",
-        flexWrap: "wrap",
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
         fontSize: 13,
-        color: "#e0ddd8"
+        color: "#e8f4ff",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 3
       }
-    }, d.name), /*#__PURE__*/React.createElement("span", {
-      style: S.tag(d.color)
-    }, d.time)), /*#__PURE__*/React.createElement("div", {
+    }, ex.name), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
-        color: C.muted,
-        fontStyle: "italic"
+        fontSize: 10,
+        color: CALI_COLOR
       }
-    }, zl(d.zone))), /*#__PURE__*/React.createElement("span", {
+    }, "🔄 ", ex.dose)), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: d.color,
+        color: CALI_COLOR,
         fontSize: 18,
-        fontWeight: 300
+        flexShrink: 0
       }
     }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
-      style: S.exBody,
+      style: {
+        padding: "0 12px 14px"
+      },
       className: "fa"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12,
+        fontSize: 11,
         color: C.muted,
-        lineHeight: 1.85,
-        marginBottom: 10
+        lineHeight: 1.8
       }
-    }, d.desc), /*#__PURE__*/React.createElement("div", {
-      style: {
-        background: `${d.color}10`,
-        borderLeft: `2px solid ${d.color}`,
-        borderRadius: "0 3px 3px 0",
-        padding: "9px 11px",
-        marginBottom: 10
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: d.color,
-        textTransform: "uppercase",
-        marginBottom: 4
-      }
-    }, "How To"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: "#aab0c0",
-        lineHeight: 1.85
-      }
-    }, d.how)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        flexDirection: "column",
-        gap: 5
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: S.block
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...S.sLabel,
-        marginBottom: 3
-      }
-    }, "🏠 No Equipment"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: C.muted
-      }
-    }, d.noEquip)), /*#__PURE__*/React.createElement("div", {
-      style: S.block
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...S.sLabel,
-        marginBottom: 3
-      }
-    }, "🏋️ With Equipment"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: C.muted
-      }
-    }, d.withEquip)))));
-  }), /*#__PURE__*/React.createElement("div", {
+    }, ex.execution)));
+  })), caliTab === "skills" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
-      ...S.warmBox,
-      marginTop: 10
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.8,
+      marginBottom: 12
+    }
+  }, "Pick a skill to chase, or let it choose for you. Each has a progression path and a session built around wherever you currently are in it."), /*#__PURE__*/React.createElement("button", {
+    onClick: pickRandom,
+    style: {
+      width: "100%",
+      background: `${CALI_COLOR}18`,
+      border: `1px solid ${CALI_COLOR}`,
+      color: CALI_COLOR,
+      fontSize: 12,
+      letterSpacing: 1,
+      padding: "12px",
+      borderRadius: 8,
+      cursor: "pointer",
+      marginBottom: 14,
+      fontFamily: "'DM Mono',monospace"
+    }
+  }, "🎲 Pick a Random Goal"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 7,
+      marginBottom: 16
+    }
+  }, CALI_SKILLS.map(s => /*#__PURE__*/React.createElement("button", {
+    key: s.id,
+    onClick: () => setGoalId(s.id),
+    style: {
+      background: goalId === s.id ? `${CALI_COLOR}22` : "#0c111a",
+      border: `1px solid ${goalId === s.id ? CALI_COLOR : C.border}`,
+      borderRadius: 20,
+      padding: "8px 14px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13
+    }
+  }, s.icon), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: goalId === s.id ? CALI_COLOR : C.muted,
+      fontFamily: "'DM Mono',monospace"
+    }
+  }, s.name)))), goal && /*#__PURE__*/React.createElement("div", {
+    className: "fa"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...S.card(CALI_COLOR),
+      marginBottom: 14
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      ...S.sLabel,
-      marginBottom: 6
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      marginBottom: 8
     }
-  }, "Ben Patrick's Core Law"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: 20
+    }
+  }, goal.icon), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "'Bebas Neue',sans-serif",
+      fontSize: 18,
+      letterSpacing: 1,
+      color: "#e0ddd8"
+    }
+  }, goal.name)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: CALI_COLOR,
+      marginBottom: 8
+    }
+  }, goal.equip), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
       color: C.muted,
-      lineHeight: 2,
+      lineHeight: 1.85
+    }
+  }, goal.overview)), /*#__PURE__*/React.createElement("div", {
+    style: S.sLabel
+  }, "Progression Path"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 7,
+      marginBottom: 16
+    }
+  }, goal.stages.map(st => /*#__PURE__*/React.createElement("div", {
+    key: st.n,
+    style: {
+      display: "flex",
+      gap: 10,
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 6,
+      padding: "10px 12px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 24,
+      height: 24,
+      borderRadius: "50%",
+      flexShrink: 0,
+      background: `${CALI_COLOR}18`,
+      border: `1px solid ${CALI_COLOR}`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: CALI_COLOR,
+      fontFamily: "'Bebas Neue',sans-serif"
+    }
+  }, st.n)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: "#e0ddd8",
+      marginBottom: 2
+    }
+  }, st.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: C.muted,
+      lineHeight: 1.6,
+      marginBottom: 3
+    }
+  }, st.focus), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9.5,
+      color: CALI_COLOR
+    }
+  }, st.dose))))), /*#__PURE__*/React.createElement("div", {
+    style: S.sLabel
+  }, "Session for This Goal"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "12px 14px"
+    }
+  }, goal.workout.map((w, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      padding: "7px 0",
+      borderBottom: i < goal.workout.length - 1 ? `1px solid ${C.border}` : "none"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: "#e0ddd8"
+    }
+  }, w.ex), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: CALI_COLOR
+    }
+  }, w.dose)))))), caliTab === "goals" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.8,
+      marginBottom: 14
+    }
+  }, "A set of standard calisthenics benchmarks to work toward. These numbers are just reasonable starting targets — adjust them to whatever makes sense for where you're at. Tap one off as you hit it."), CALI_GOALS.map(g => {
+    const done = !!achieved[g.id];
+    return /*#__PURE__*/React.createElement("button", {
+      key: g.id,
+      onClick: () => toggleAchieved(g.id),
+      style: {
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        background: done ? `${CALI_COLOR}14` : "#0c111a",
+        border: `1px solid ${done ? CALI_COLOR : C.border}`,
+        borderRadius: 8,
+        padding: "12px 14px",
+        marginBottom: 8,
+        cursor: "pointer",
+        textAlign: "left"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 26,
+        height: 26,
+        borderRadius: 6,
+        flexShrink: 0,
+        background: done ? CALI_COLOR : "transparent",
+        border: `2px solid ${done ? CALI_COLOR : C.border}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, done && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#06101c",
+        fontSize: 14
+      }
+    }, "✓")), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 18
+      }
+    }, g.icon), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: done ? CALI_COLOR : "#e8f4ff",
+        textDecoration: done ? "line-through" : "none",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, g.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        marginTop: 2
+      }
+    }, g.target)));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: C.muted,
+      lineHeight: 1.7,
+      marginTop: 10,
       fontStyle: "italic"
     }
-  }, "\"The body heals in the range it is trained.\"", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, Object.values(achieved).filter(Boolean).length, " of ", CALI_GOALS.length, " achieved.")), caliTab === "maintenance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.8,
+      marginBottom: 14
+    }
+  }, "Not chasing a specific skill today? This is the baseline session — keeps pulling, pressing, and core strength moving in the right direction across the board."), CALI_MAINTENANCE.map(ex => /*#__PURE__*/React.createElement("div", {
+    key: ex.id,
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "12px 14px",
+      marginBottom: 9
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 5
+    }
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      fontStyle: "normal",
-      color: C.muted
+      color: "#e8f4ff",
+      fontFamily: "'DM Mono',monospace"
     }
-  }, "Work pain-free range. Expand it 1% each session. Consistency at low intensity beats intensity at low consistency."))));
+  }, ex.name), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: CALI_COLOR
+    }
+  }, ex.dose)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.7
+    }
+  }, ex.note))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: CALI_COLOR,
+      fontFamily: "'DM Mono',monospace",
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      marginTop: 16,
+      marginBottom: 8
+    }
+  }, "Cool Down"), CALI_COOLDOWN.map(ex => /*#__PURE__*/React.createElement("div", {
+    key: ex.id,
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "12px 14px",
+      marginBottom: 9
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 5
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: "#e8f4ff",
+      fontFamily: "'DM Mono',monospace"
+    }
+  }, ex.name), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: CALI_COLOR
+    }
+  }, ex.dose)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.7
+    }
+  }, ex.execution)))));
 }
-
-/* ════════════════════════════════════════════════════════════════════════
-   APP SHELL — top nav + router
-   ════════════════════════════════════════════════════════════════════════ */
 function App() {
   const [screen, setScreen] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14312,9 +15045,9 @@ function App() {
     icon: "🐆",
     label: "Animal Flow"
   }, {
-    id: "dailys",
-    icon: "🌅",
-    label: "Daily Habits"
+    id: "calisthenics",
+    icon: "💪",
+    label: "Calisthenics"
   }];
   const titles = {
     atg: "ATG Program",
@@ -14324,7 +15057,7 @@ function App() {
     protocol: "GOATA Protocol",
     recovery: "Recovery Hub",
     animalflow: "Animal Flow",
-    dailys: "Daily Habits"
+    calisthenics: "Calisthenics"
   };
   const HEADER_H = "calc(env(safe-area-inset-top, 0px) + 64px)";
   return /*#__PURE__*/React.createElement("div", {
@@ -14459,7 +15192,7 @@ function App() {
     onNavigate: setScreen
   }), screen !== "home" && /*#__PURE__*/React.createElement("div", {
     style: S.body
-  }, screen === "atg" && /*#__PURE__*/React.createElement(ATGScreen, null), screen === "tendon" && /*#__PURE__*/React.createElement(TendonScreen, null), screen === "goata" && /*#__PURE__*/React.createElement(GoataScreen, null), screen === "stride" && /*#__PURE__*/React.createElement(GoataStrideScreen, null), screen === "protocol" && /*#__PURE__*/React.createElement(GoataProtocolScreen, null), screen === "recovery" && /*#__PURE__*/React.createElement(RecoveryHubScreen, null), screen === "animalflow" && /*#__PURE__*/React.createElement(AnimalFlowScreen, null), screen === "dailys" && /*#__PURE__*/React.createElement(DailysScreen, null)));
+  }, screen === "atg" && /*#__PURE__*/React.createElement(ATGScreen, null), screen === "tendon" && /*#__PURE__*/React.createElement(TendonScreen, null), screen === "goata" && /*#__PURE__*/React.createElement(GoataScreen, null), screen === "stride" && /*#__PURE__*/React.createElement(GoataStrideScreen, null), screen === "protocol" && /*#__PURE__*/React.createElement(GoataProtocolScreen, null), screen === "recovery" && /*#__PURE__*/React.createElement(RecoveryHubScreen, null), screen === "animalflow" && /*#__PURE__*/React.createElement(AnimalFlowScreen, null), screen === "calisthenics" && /*#__PURE__*/React.createElement(CalisthenicsScreen, null)));
 }
 
 
