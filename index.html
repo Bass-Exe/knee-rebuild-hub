@@ -11730,11 +11730,126 @@ const CALI_COOLDOWN = [{
   dose: "1 minute",
   execution: "Slow breathing — in through the nose, out through the mouth, longer on the exhale than the inhale. Brings the nervous system back down after intense hold work."
 }];
+
+/* ─── FULL WORKOUTS — 3-day rotating split, trained every other day ───────
+   Day 1 → rest → Day 2 → rest → Day 3 → rest → Day 1 again.
+   Each day pairs a strength block (built on the Skills progressions) with
+   an agility block (explosive, reactive, footwork-based bodyweight work). */
+const CALI_FULLWORKOUTS = [{
+  id: "day1",
+  num: 1,
+  name: "Push Power + Agility",
+  color: "#38bdf8",
+  focus: "Vertical and horizontal pressing strength, paired with lateral and reactive agility work.",
+  strength: [{
+    ex: "Wall HSPU or Negatives",
+    dose: "4 sets x 3-6",
+    note: "Use whichever stage you're currently on from the Handstand Push-Up progression."
+  }, {
+    ex: "Pseudo Planche Push-Ups",
+    dose: "4 sets x 6-10",
+    note: "Hands turned slightly in, lean weight forward over the hands."
+  }, {
+    ex: "Ring or Bar Dips",
+    dose: "4 sets x 8-12",
+    note: "Full range, control the bottom position."
+  }, {
+    ex: "Ring Support Hold",
+    dose: "3 sets x 20-30 sec",
+    note: "Shoulders pulled down and back, not shrugged."
+  }],
+  agility: [{
+    ex: "Lateral Bounds",
+    dose: "3 sets x 8 each side",
+    note: "Jump laterally from one leg to the other, sticking the landing softly before the next bound."
+  }, {
+    ex: "Explosive Push-Ups",
+    dose: "3 sets x 5-8",
+    note: "Push hard enough that the hands leave the ground briefly. Land soft, reset, repeat."
+  }, {
+    ex: "Quick Step Shuffles",
+    dose: "3 sets x 20 sec",
+    note: "Fast, small lateral steps staying low and light on the feet — think reacting to an opponent, not covering ground."
+  }]
+}, {
+  id: "day2",
+  num: 2,
+  name: "Pull Power + Agility",
+  color: "#facc15",
+  focus: "Explosive pulling strength and static hold power, paired with jumping and reactive grip work.",
+  strength: [{
+    ex: "Explosive Chest-to-Bar Pulls",
+    dose: "4 sets x 3-5",
+    note: "Speed on the way up is the point here, not just getting the chin over."
+  }, {
+    ex: "Front Lever Hold",
+    dose: "4 sets x max quality hold",
+    note: "Use whichever stage you're currently on from the Front Lever progression."
+  }, {
+    ex: "Back Lever Hold",
+    dose: "3 sets x max quality hold",
+    note: "Trained alongside the front lever since it demands shoulder flexibility more than raw strength."
+  }, {
+    ex: "Wide Ring Rows",
+    dose: "3 sets x 8-12",
+    note: "Body at an angle, rings turned out, squeeze the shoulder blades together at the top."
+  }],
+  agility: [{
+    ex: "Broad Jumps",
+    dose: "3 sets x 5",
+    note: "Jump forward for maximum distance, stick the landing, walk back and reset — quality over fatigue."
+  }, {
+    ex: "Skater Hops",
+    dose: "3 sets x 8 each side",
+    note: "Bound laterally from one leg to the other like a speed skater, controlling the landing each time."
+  }, {
+    ex: "Reactive Bar Grab",
+    dose: "3 sets x 5",
+    note: "Jump up, catch the bar, and control the drop back down. Trains grip speed and reactive strength together."
+  }]
+}, {
+  id: "day3",
+  num: 3,
+  name: "Core + Agility Circuit",
+  color: "#4ade80",
+  focus: "Compression and anti-extension core strength, paired with a fast-feet conditioning circuit.",
+  strength: [{
+    ex: "L-Sit Hold",
+    dose: "4 sets x max quality hold",
+    note: "Use whichever stage you're currently on from the Ring L-Sit progression."
+  }, {
+    ex: "Hollow Body Rocks",
+    dose: "3 sets x 10-12",
+    note: "Hold the hollow shape while gently rocking forward and back — keeps the position honest under motion."
+  }, {
+    ex: "Hanging Leg Raises",
+    dose: "3 sets x 8-12",
+    note: "Control the lowering phase just as much as the lift."
+  }, {
+    ex: "Muscle-Up Transition Drills",
+    dose: "3 sets x 5",
+    note: "Slow, deliberate reps through the transition — the technical piece most people skip."
+  }],
+  agility: [{
+    ex: "Burpee to Reset",
+    dose: "3 sets x 6-8",
+    note: "A full burpee, but focus on popping back up to a tall, ready position quickly rather than just finishing the rep."
+  }, {
+    ex: "Lateral Shuffle + Reach",
+    dose: "3 sets x 20 sec",
+    note: "Shuffle side to side, reaching a hand toward the ground on each direction change."
+  }, {
+    ex: "Quick Feet",
+    dose: "3 sets x 20 sec",
+    note: "Fast, light, small steps in place — like a boxer or agility ladder drill without needing the ladder."
+  }]
+}];
 function CalisthenicsScreen() {
   const [caliTab, setCaliTab] = useState("warmup");
   const [expanded, setExpanded] = useState(null);
   const [goalId, setGoalId] = useState(null);
   const [achieved, setAchieved] = useState({});
+  const [dayIdx, setDayIdx] = useState(0);
   const toggle = id => setExpanded(e => e === id ? null : id);
   const goal = CALI_SKILLS.find(s => s.id === goalId);
   const toggleAchieved = id => setAchieved(a => ({
@@ -11756,6 +11871,9 @@ function CalisthenicsScreen() {
   }, {
     id: "goals",
     label: "🏆 Goals"
+  }, {
+    id: "fullworkouts",
+    label: "📅 Full Workouts"
   }, {
     id: "maintenance",
     label: "💪 Maintenance"
@@ -12119,7 +12237,213 @@ function CalisthenicsScreen() {
       marginTop: 10,
       fontStyle: "italic"
     }
-  }, Object.values(achieved).filter(Boolean).length, " of ", CALI_GOALS.length, " achieved.")), caliTab === "maintenance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, Object.values(achieved).filter(Boolean).length, " of ", CALI_GOALS.length, " achieved.")), caliTab === "fullworkouts" && (() => {
+    const day = CALI_FULLWORKOUTS[dayIdx];
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: C.muted,
+        lineHeight: 1.85,
+        marginBottom: 14
+      }
+    }, "A 3-day rotation, trained every other day — Day 1, rest, Day 2, rest, Day 3, rest, back to Day 1. Each day pairs a strength block with an agility block so both get trained across the week, not just strength alone."), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 6,
+        marginBottom: 14
+      }
+    }, CALI_FULLWORKOUTS.map((d, i) => /*#__PURE__*/React.createElement("button", {
+      key: d.id,
+      onClick: () => setDayIdx(i),
+      style: {
+        flex: 1,
+        background: dayIdx === i ? `${d.color}20` : "transparent",
+        border: `1px solid ${dayIdx === i ? d.color : C.border}`,
+        color: dayIdx === i ? d.color : C.muted,
+        fontSize: 10,
+        letterSpacing: 0.5,
+        padding: "10px 4px",
+        borderRadius: 6,
+        cursor: "pointer",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, "Day ", d.num))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        ...S.card(day.color),
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Bebas Neue',sans-serif",
+        fontSize: 18,
+        letterSpacing: 1,
+        color: "#e0ddd8",
+        marginBottom: 6
+      }
+    }, day.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: C.muted,
+        lineHeight: 1.8
+      }
+    }, day.focus)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: day.color,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 8
+      }
+    }, "1 — Warm-Up"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "#0c111a",
+        border: `1px solid ${C.border}`,
+        borderRadius: 8,
+        padding: "11px 13px",
+        marginBottom: 16,
+        fontSize: 10.5,
+        color: C.muted,
+        lineHeight: 1.8
+      }
+    }, "Run the full Warm-Up tab first — scapular pulls, scapular push-ups, ring support, band pull-aparts, arm circles, wrist prep, and cat-cow. Every session starts here."), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: day.color,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 8
+      }
+    }, "2 — Strength"), day.strength.map((ex, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: "#0c111a",
+        border: `1px solid ${C.border}`,
+        borderRadius: 8,
+        padding: "11px 13px",
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 4
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11.5,
+        color: "#e0ddd8",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, ex.ex), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: day.color
+      }
+    }, ex.dose)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        lineHeight: 1.7
+      }
+    }, ex.note))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: day.color,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginTop: 8,
+        marginBottom: 8
+      }
+    }, "3 — Agility"), day.agility.map((ex, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: "#0c111a",
+        border: `1px solid ${C.border}`,
+        borderRadius: 8,
+        padding: "11px 13px",
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 4
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11.5,
+        color: "#e0ddd8",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, ex.ex), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: day.color
+      }
+    }, ex.dose)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        lineHeight: 1.7
+      }
+    }, ex.note))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: day.color,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginTop: 16,
+        marginBottom: 8
+      }
+    }, "4 — Cool Down"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "#0c111a",
+        border: `1px solid ${C.border}`,
+        borderRadius: 8,
+        padding: "11px 13px",
+        marginBottom: 8,
+        fontSize: 10.5,
+        color: C.muted,
+        lineHeight: 1.8
+      }
+    }, "Wrist care, a shoulder/lat stretch, a hip flexor stretch, and a minute of down-regulation breathing — the same Cool Down block from Maintenance."), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 8,
+        marginTop: 14
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => setDayIdx(i => i === 0 ? CALI_FULLWORKOUTS.length - 1 : i - 1),
+      style: {
+        flex: 1,
+        background: "transparent",
+        border: `1px solid ${C.border}`,
+        color: C.muted,
+        fontSize: 10,
+        padding: "10px",
+        borderRadius: 5,
+        cursor: "pointer",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, "← Previous Day"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => setDayIdx(i => (i + 1) % CALI_FULLWORKOUTS.length),
+      style: {
+        flex: 1,
+        background: `${day.color}18`,
+        border: `1px solid ${day.color}`,
+        color: day.color,
+        fontSize: 10,
+        padding: "10px",
+        borderRadius: 5,
+        cursor: "pointer",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, "Next Day →")));
+  })(), caliTab === "maintenance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: C.muted,
