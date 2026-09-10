@@ -11660,55 +11660,6 @@ const CALI_MAINTENANCE = [{
   dose: "3 sets · 8-10 reps",
   note: "Same as the warm-up version, done here with a bit more intent as a finisher."
 }];
-const CALI_GOALS = [{
-  id: "g-handstand",
-  name: "Freestanding Handstand",
-  icon: "🤸",
-  target: "Hold for 30+ seconds, no wall",
-  achieved: false
-}, {
-  id: "g-muscleup",
-  name: "Strict Muscle-Up",
-  icon: "💪",
-  target: "3 clean reps, bar or rings",
-  achieved: false
-}, {
-  id: "g-planche",
-  name: "Full Planche",
-  icon: "🦅",
-  target: "Hold for 5+ seconds",
-  achieved: false
-}, {
-  id: "g-frontlever",
-  name: "Full Front Lever",
-  icon: "🎯",
-  target: "Hold for 10+ seconds",
-  achieved: false
-}, {
-  id: "g-pistol",
-  name: "Pistol Squat",
-  icon: "🦵",
-  target: "5 reps each leg, full depth",
-  achieved: false
-}, {
-  id: "g-lsit",
-  name: "L-Sit",
-  icon: "📐",
-  target: "Hold for 20+ seconds",
-  achieved: false
-}, {
-  id: "g-backlever",
-  name: "Back Lever",
-  icon: "🔄",
-  target: "Hold for 10+ seconds",
-  achieved: false
-}, {
-  id: "g-humanflag",
-  name: "Human Flag",
-  icon: "🚩",
-  target: "Hold for 5+ seconds",
-  achieved: false
-}];
 const CALI_COOLDOWN = [{
   id: "cd-wrist",
   name: "Wrist Care",
@@ -11741,35 +11692,105 @@ const CALI_FULLWORKOUTS = [{
   name: "Push Power + Agility",
   color: "#38bdf8",
   focus: "Vertical and horizontal pressing strength, paired with lateral and reactive agility work.",
-  strength: [{
-    ex: "Wall HSPU or Negatives",
-    dose: "4 sets x 3-6",
-    note: "Use whichever stage you're currently on from the Handstand Push-Up progression."
+  variations: [{
+    id: "a",
+    label: "Variation A",
+    strength: [{
+      ex: "Wall HSPU or Negatives",
+      dose: "4 sets x 3-6",
+      note: "Use whichever stage you're currently on from the Handstand Push-Up progression."
+    }, {
+      ex: "Pseudo Planche Push-Ups",
+      dose: "4 sets x 6-10",
+      note: "Hands turned slightly in, lean weight forward over the hands."
+    }, {
+      ex: "Ring or Bar Dips",
+      dose: "4 sets x 8-12",
+      note: "Full range, control the bottom position."
+    }, {
+      ex: "Ring Support Hold",
+      dose: "3 sets x 20-30 sec",
+      note: "Shoulders pulled down and back, not shrugged."
+    }],
+    agility: [{
+      ex: "Lateral Bounds",
+      dose: "3 sets x 8 each side",
+      note: "Jump laterally from one leg to the other, sticking the landing softly before the next bound."
+    }, {
+      ex: "Explosive Push-Ups",
+      dose: "3 sets x 5-8",
+      note: "Push hard enough that the hands leave the ground briefly. Land soft, reset, repeat."
+    }, {
+      ex: "Quick Step Shuffles",
+      dose: "3 sets x 20 sec",
+      note: "Fast, small lateral steps staying low and light on the feet — think reacting to an opponent, not covering ground."
+    }]
   }, {
-    ex: "Pseudo Planche Push-Ups",
-    dose: "4 sets x 6-10",
-    note: "Hands turned slightly in, lean weight forward over the hands."
+    id: "b",
+    label: "Variation B",
+    strength: [{
+      ex: "Diamond Push-Ups",
+      dose: "4 sets x 8-12",
+      note: "Hands together under the chest, elbows tracking back — heavier triceps emphasis than a standard push-up."
+    }, {
+      ex: "Archer Push-Ups",
+      dose: "3 sets x 5-6 each side",
+      note: "One arm stays straight out to the side while the other does all the work bending — builds toward one-arm strength."
+    }, {
+      ex: "Straight Bar Dips",
+      dose: "4 sets x 8-10",
+      note: "On a straight bar instead of rings — less stabilization demand, lets you push heavier."
+    }, {
+      ex: "Planche Lean Hold",
+      dose: "3 sets x 15-20 sec",
+      note: "Weight shifted forward over the hands, shoulders actively protracted."
+    }],
+    agility: [{
+      ex: "Plyo Push-Ups",
+      dose: "3 sets x 5-6",
+      note: "Full clap variation if you have it — hands leave the ground with real height, not just a small hop."
+    }, {
+      ex: "Shuffle Steps Over a Line",
+      dose: "3 sets x 20 sec",
+      note: "Pick a line on the floor — quick lateral steps crossing back and forth over it, staying light on the feet."
+    }, {
+      ex: "Shadow Boxing",
+      dose: "3 sets x 30 sec",
+      note: "Fast, controlled punches in the air — builds upper body reaction speed and shoulder endurance."
+    }]
   }, {
-    ex: "Ring or Bar Dips",
-    dose: "4 sets x 8-12",
-    note: "Full range, control the bottom position."
-  }, {
-    ex: "Ring Support Hold",
-    dose: "3 sets x 20-30 sec",
-    note: "Shoulders pulled down and back, not shrugged."
-  }],
-  agility: [{
-    ex: "Lateral Bounds",
-    dose: "3 sets x 8 each side",
-    note: "Jump laterally from one leg to the other, sticking the landing softly before the next bound."
-  }, {
-    ex: "Explosive Push-Ups",
-    dose: "3 sets x 5-8",
-    note: "Push hard enough that the hands leave the ground briefly. Land soft, reset, repeat."
-  }, {
-    ex: "Quick Step Shuffles",
-    dose: "3 sets x 20 sec",
-    note: "Fast, small lateral steps staying low and light on the feet — think reacting to an opponent, not covering ground."
+    id: "c",
+    label: "Variation C",
+    strength: [{
+      ex: "Deep Pike Push-Ups",
+      dose: "4 sets x 8-10",
+      note: "Hips high, deep range, head aiming past the hands — closer to true vertical pressing than a standard pike."
+    }, {
+      ex: "Ring Dips with Turn-Out",
+      dose: "4 sets x 8-10",
+      note: "Turn the rings out slightly at the bottom of each rep for extra shoulder stability demand."
+    }, {
+      ex: "Wall Walk",
+      dose: "3 sets x 3-5",
+      note: "Feet on the wall, walk the hands in and feet up toward a handstand, then walk back down with control."
+    }, {
+      ex: "Y-T-W Raises",
+      dose: "3 sets x 8 each position",
+      note: "Light raises in a Y, T, then W shape — small movement, big payoff for shoulder health and overhead control."
+    }],
+    agility: [{
+      ex: "Bear Crawl Sprints",
+      dose: "3 sets x 20 sec",
+      note: "Move as fast as control allows on hands and feet, hips low, core tight."
+    }, {
+      ex: "Fast Mountain Climbers",
+      dose: "3 sets x 20 sec",
+      note: "Quick knee drives in a plank position, hips staying level throughout."
+    }, {
+      ex: "Star Jumps",
+      dose: "3 sets x 8-10",
+      note: "Explosive jump spreading arms and legs wide, land soft and reset."
+    }]
   }]
 }, {
   id: "day2",
@@ -11777,35 +11798,105 @@ const CALI_FULLWORKOUTS = [{
   name: "Pull Power + Agility",
   color: "#facc15",
   focus: "Explosive pulling strength and static hold power, paired with jumping and reactive grip work.",
-  strength: [{
-    ex: "Explosive Chest-to-Bar Pulls",
-    dose: "4 sets x 3-5",
-    note: "Speed on the way up is the point here, not just getting the chin over."
+  variations: [{
+    id: "a",
+    label: "Variation A",
+    strength: [{
+      ex: "Explosive Chest-to-Bar Pulls",
+      dose: "4 sets x 3-5",
+      note: "Speed on the way up is the point here, not just getting the chin over."
+    }, {
+      ex: "Front Lever Hold",
+      dose: "4 sets x max quality hold",
+      note: "Use whichever stage you're currently on from the Front Lever progression."
+    }, {
+      ex: "Back Lever Hold",
+      dose: "3 sets x max quality hold",
+      note: "Trained alongside the front lever since it demands shoulder flexibility more than raw strength."
+    }, {
+      ex: "Wide Ring Rows",
+      dose: "3 sets x 8-12",
+      note: "Body at an angle, rings turned out, squeeze the shoulder blades together at the top."
+    }],
+    agility: [{
+      ex: "Broad Jumps",
+      dose: "3 sets x 5",
+      note: "Jump forward for maximum distance, stick the landing, walk back and reset — quality over fatigue."
+    }, {
+      ex: "Skater Hops",
+      dose: "3 sets x 8 each side",
+      note: "Bound laterally from one leg to the other like a speed skater, controlling the landing each time."
+    }, {
+      ex: "Reactive Bar Grab",
+      dose: "3 sets x 5",
+      note: "Jump up, catch the bar, and control the drop back down. Trains grip speed and reactive strength together."
+    }]
   }, {
-    ex: "Front Lever Hold",
-    dose: "4 sets x max quality hold",
-    note: "Use whichever stage you're currently on from the Front Lever progression."
+    id: "b",
+    label: "Variation B",
+    strength: [{
+      ex: "Typewriter Pull-Ups",
+      dose: "3 sets x 4-6",
+      note: "At the top of a pull-up, shift side to side like a typewriter carriage — big lat and grip demand."
+    }, {
+      ex: "Archer Pull-Ups",
+      dose: "3 sets x 4-5 each side",
+      note: "One arm stays extended while the other pulls — a step toward one-arm pull-up strength."
+    }, {
+      ex: "Australian Rows",
+      dose: "4 sets x 10-15",
+      note: "Body underneath a low bar, feet on the ground, pull the chest to the bar — a horizontal pulling builder."
+    }, {
+      ex: "Dead Hang Holds",
+      dose: "3 sets x 30-45 sec",
+      note: "Simple but real — grip and shoulder stability under total body weight."
+    }],
+    agility: [{
+      ex: "Standing Triple Jump",
+      dose: "3 sets x 3",
+      note: "Three continuous broad jumps in a row, minimal pause between each landing and the next takeoff."
+    }, {
+      ex: "Lateral Bar Traverse",
+      dose: "3 sets x 4-5 reps each direction",
+      note: "Hand over hand sideways along the bar — grip endurance and shoulder coordination together."
+    }, {
+      ex: "Rapid Grip Switches",
+      dose: "3 sets x 10",
+      note: "Hanging from the bar, quickly alternate between overhand and underhand grip without dropping."
+    }]
   }, {
-    ex: "Back Lever Hold",
-    dose: "3 sets x max quality hold",
-    note: "Trained alongside the front lever since it demands shoulder flexibility more than raw strength."
-  }, {
-    ex: "Wide Ring Rows",
-    dose: "3 sets x 8-12",
-    note: "Body at an angle, rings turned out, squeeze the shoulder blades together at the top."
-  }],
-  agility: [{
-    ex: "Broad Jumps",
-    dose: "3 sets x 5",
-    note: "Jump forward for maximum distance, stick the landing, walk back and reset — quality over fatigue."
-  }, {
-    ex: "Skater Hops",
-    dose: "3 sets x 8 each side",
-    note: "Bound laterally from one leg to the other like a speed skater, controlling the landing each time."
-  }, {
-    ex: "Reactive Bar Grab",
-    dose: "3 sets x 5",
-    note: "Jump up, catch the bar, and control the drop back down. Trains grip speed and reactive strength together."
+    id: "c",
+    label: "Variation C",
+    strength: [{
+      ex: "Slow Tempo Pull-Ups",
+      dose: "4 sets x 5-6",
+      note: "3 seconds up, 3 seconds down — trades speed for time-under-tension."
+    }, {
+      ex: "Assisted One-Arm Pull-Up Work",
+      dose: "3 sets x 3-4 each side",
+      note: "Use the other hand lightly on a towel or the bar itself for assistance — the long-term goal behind the archer work."
+    }, {
+      ex: "Ring Rows to Chest",
+      dose: "4 sets x 10-12",
+      note: "Full range, squeeze at the top, control the lowering."
+    }, {
+      ex: "Scapular Pull-Ups",
+      dose: "3 sets x 8-10",
+      note: "Same shoulder-blade-only movement as the warm-up version, done here with more intent as working sets."
+    }],
+    agility: [{
+      ex: "Tuck Jumps",
+      dose: "3 sets x 6-8",
+      note: "Jump straight up, drive the knees to the chest, land soft."
+    }, {
+      ex: "Bounding in Place",
+      dose: "3 sets x 20 sec",
+      note: "Exaggerated running strides in place, driving the knees high and pushing off hard."
+    }, {
+      ex: "Reactive Catch Drops",
+      dose: "3 sets x 5",
+      note: "Drop from a low hang and land in a soft, controlled squat — trains the reactive landing strength that agility depends on."
+    }]
   }]
 }, {
   id: "day3",
@@ -11813,49 +11904,115 @@ const CALI_FULLWORKOUTS = [{
   name: "Core + Agility Circuit",
   color: "#4ade80",
   focus: "Compression and anti-extension core strength, paired with a fast-feet conditioning circuit.",
-  strength: [{
-    ex: "L-Sit Hold",
-    dose: "4 sets x max quality hold",
-    note: "Use whichever stage you're currently on from the Ring L-Sit progression."
+  variations: [{
+    id: "a",
+    label: "Variation A",
+    strength: [{
+      ex: "L-Sit Hold",
+      dose: "4 sets x max quality hold",
+      note: "Use whichever stage you're currently on from the Ring L-Sit progression."
+    }, {
+      ex: "Hollow Body Rocks",
+      dose: "3 sets x 10-12",
+      note: "Hold the hollow shape while gently rocking forward and back — keeps the position honest under motion."
+    }, {
+      ex: "Hanging Leg Raises",
+      dose: "3 sets x 8-12",
+      note: "Control the lowering phase just as much as the lift."
+    }, {
+      ex: "Muscle-Up Transition Drills",
+      dose: "3 sets x 5",
+      note: "Slow, deliberate reps through the transition — the technical piece most people skip."
+    }],
+    agility: [{
+      ex: "Burpee to Reset",
+      dose: "3 sets x 6-8",
+      note: "A full burpee, but focus on popping back up to a tall, ready position quickly rather than just finishing the rep."
+    }, {
+      ex: "Lateral Shuffle + Reach",
+      dose: "3 sets x 20 sec",
+      note: "Shuffle side to side, reaching a hand toward the ground on each direction change."
+    }, {
+      ex: "Quick Feet",
+      dose: "3 sets x 20 sec",
+      note: "Fast, light, small steps in place — like a boxer or agility ladder drill without needing the ladder."
+    }]
   }, {
-    ex: "Hollow Body Rocks",
-    dose: "3 sets x 10-12",
-    note: "Hold the hollow shape while gently rocking forward and back — keeps the position honest under motion."
+    id: "b",
+    label: "Variation B",
+    strength: [{
+      ex: "Dragon Flag Progression",
+      dose: "3 sets x 4-6",
+      note: "Shoulders anchored, body held rigid and straight, lowering with total control — go only as low as you can keep the line straight."
+    }, {
+      ex: "V-Ups",
+      dose: "3 sets x 10-15",
+      note: "Simultaneous lift of the torso and straight legs, reaching toward the toes at the top."
+    }, {
+      ex: "Hanging Windshield Wipers",
+      dose: "3 sets x 6-8 each side",
+      note: "Legs together, rotate side to side from the hip while hanging — heavy rotational core demand."
+    }, {
+      ex: "Ring Plank Hold",
+      dose: "3 sets x 20-30 sec",
+      note: "Feet or forearms on the rings for an unstable plank — the rings want to drift, your core keeps them still."
+    }],
+    agility: [{
+      ex: "High Knees",
+      dose: "3 sets x 20 sec",
+      note: "Fast, driving knees up to hip height, staying on the balls of the feet."
+    }, {
+      ex: "Speed Skaters",
+      dose: "3 sets x 8 each side",
+      note: "A quicker, lower-amplitude version of the skater hop — emphasis on tempo over distance."
+    }, {
+      ex: "Plank Jacks",
+      dose: "3 sets x 15-20",
+      note: "In a plank, jump the feet wide and back together — core stability under quick lower-body movement."
+    }]
   }, {
-    ex: "Hanging Leg Raises",
-    dose: "3 sets x 8-12",
-    note: "Control the lowering phase just as much as the lift."
-  }, {
-    ex: "Muscle-Up Transition Drills",
-    dose: "3 sets x 5",
-    note: "Slow, deliberate reps through the transition — the technical piece most people skip."
-  }],
-  agility: [{
-    ex: "Burpee to Reset",
-    dose: "3 sets x 6-8",
-    note: "A full burpee, but focus on popping back up to a tall, ready position quickly rather than just finishing the rep."
-  }, {
-    ex: "Lateral Shuffle + Reach",
-    dose: "3 sets x 20 sec",
-    note: "Shuffle side to side, reaching a hand toward the ground on each direction change."
-  }, {
-    ex: "Quick Feet",
-    dose: "3 sets x 20 sec",
-    note: "Fast, light, small steps in place — like a boxer or agility ladder drill without needing the ladder."
+    id: "c",
+    label: "Variation C",
+    strength: [{
+      ex: "Toes-to-Bar",
+      dose: "3 sets x 6-10",
+      note: "Full hanging leg raise all the way to touch the bar — the advanced end of the leg raise progression."
+    }, {
+      ex: "Side Plank Holds",
+      dose: "3 sets x 20-30 sec each side",
+      note: "Straight line from ankles to shoulders, hips lifted and held, not sagging."
+    }, {
+      ex: "Copenhagen Plank",
+      dose: "3 sets x 15-20 sec each side",
+      note: "Top leg on a bench or elevated surface, body held in a side plank — heavy inner-thigh and core demand."
+    }, {
+      ex: "Hanging Windshield Wipers",
+      dose: "3 sets x 6 each side",
+      note: "Same as Variation B's version — repeated here because this movement rewards consistent practice."
+    }],
+    agility: [{
+      ex: "Carioca Steps",
+      dose: "3 sets x 20 sec each direction",
+      note: "A lateral crossover footwork pattern — one foot crosses in front, then behind, moving sideways down an imaginary line."
+    }, {
+      ex: "Squat Jumps",
+      dose: "3 sets x 8-10",
+      note: "Drop into a squat, explode straight up, land soft and immediately reset."
+    }, {
+      ex: "Fast Feet in Place",
+      dose: "3 sets x 20 sec",
+      note: "As many quick, light ground contacts as possible without traveling — pure foot speed."
+    }]
   }]
 }];
 function CalisthenicsScreen() {
   const [caliTab, setCaliTab] = useState("warmup");
   const [expanded, setExpanded] = useState(null);
   const [goalId, setGoalId] = useState(null);
-  const [achieved, setAchieved] = useState({});
   const [dayIdx, setDayIdx] = useState(0);
+  const [varIdx, setVarIdx] = useState({});
   const toggle = id => setExpanded(e => e === id ? null : id);
   const goal = CALI_SKILLS.find(s => s.id === goalId);
-  const toggleAchieved = id => setAchieved(a => ({
-    ...a,
-    [id]: !a[id]
-  }));
   const pickRandom = () => {
     const others = CALI_SKILLS.filter(s => s.id !== goalId);
     const pool = others.length ? others : CALI_SKILLS;
@@ -11868,9 +12025,6 @@ function CalisthenicsScreen() {
   }, {
     id: "skills",
     label: "🎯 Skills"
-  }, {
-    id: "goals",
-    label: "🏆 Goals"
   }, {
     id: "fullworkouts",
     label: "📅 Full Workouts"
@@ -12165,80 +12319,14 @@ function CalisthenicsScreen() {
       fontSize: 10.5,
       color: CALI_COLOR
     }
-  }, w.dose)))))), caliTab === "goals" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 11,
-      color: C.muted,
-      lineHeight: 1.8,
-      marginBottom: 14
-    }
-  }, "A set of standard calisthenics benchmarks to work toward. These numbers are just reasonable starting targets — adjust them to whatever makes sense for where you're at. Tap one off as you hit it."), CALI_GOALS.map(g => {
-    const done = !!achieved[g.id];
-    return /*#__PURE__*/React.createElement("button", {
-      key: g.id,
-      onClick: () => toggleAchieved(g.id),
-      style: {
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        gap: 12,
-        background: done ? `${CALI_COLOR}14` : "#0c111a",
-        border: `1px solid ${done ? CALI_COLOR : C.border}`,
-        borderRadius: 8,
-        padding: "12px 14px",
-        marginBottom: 8,
-        cursor: "pointer",
-        textAlign: "left"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 26,
-        height: 26,
-        borderRadius: 6,
-        flexShrink: 0,
-        background: done ? CALI_COLOR : "transparent",
-        border: `2px solid ${done ? CALI_COLOR : C.border}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }
-    }, done && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#06101c",
-        fontSize: 14
-      }
-    }, "✓")), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 18
-      }
-    }, g.icon), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: done ? CALI_COLOR : "#e8f4ff",
-        textDecoration: done ? "line-through" : "none",
-        fontFamily: "'DM Mono',monospace"
-      }
-    }, g.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        marginTop: 2
-      }
-    }, g.target)));
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      color: C.muted,
-      lineHeight: 1.7,
-      marginTop: 10,
-      fontStyle: "italic"
-    }
-  }, Object.values(achieved).filter(Boolean).length, " of ", CALI_GOALS.length, " achieved.")), caliTab === "fullworkouts" && (() => {
+  }, w.dose)))))), caliTab === "fullworkouts" && (() => {
     const day = CALI_FULLWORKOUTS[dayIdx];
+    const vIdx = varIdx[day.id] ?? 0;
+    const setVIdx = i => setVarIdx(v => ({
+      ...v,
+      [day.id]: i
+    }));
+    const variation = day.variations[vIdx];
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
@@ -12270,7 +12358,7 @@ function CalisthenicsScreen() {
     }, "Day ", d.num))), /*#__PURE__*/React.createElement("div", {
       style: {
         ...S.card(day.color),
-        marginBottom: 16
+        marginBottom: 12
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -12287,6 +12375,43 @@ function CalisthenicsScreen() {
         lineHeight: 1.8
       }
     }, day.focus)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: day.color,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 7
+      }
+    }, "Choose a Variation"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 6,
+        marginBottom: 8
+      }
+    }, day.variations.map((v, i) => /*#__PURE__*/React.createElement("button", {
+      key: v.id,
+      onClick: () => setVIdx(i),
+      style: {
+        flex: 1,
+        background: vIdx === i ? `${day.color}20` : "transparent",
+        border: `1px solid ${vIdx === i ? day.color : C.border}`,
+        color: vIdx === i ? day.color : C.muted,
+        fontSize: 10,
+        padding: "9px 4px",
+        borderRadius: 6,
+        cursor: "pointer",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, v.label))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9.5,
+        color: C.muted,
+        lineHeight: 1.7,
+        marginBottom: 16,
+        fontStyle: "italic"
+      }
+    }, "Rotate through A → B → C for variety, or stay on one variation for several sessions in a row to master those specific movements before moving on — either approach works."), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 9,
         color: day.color,
@@ -12315,7 +12440,7 @@ function CalisthenicsScreen() {
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8
       }
-    }, "2 — Strength"), day.strength.map((ex, i) => /*#__PURE__*/React.createElement("div", {
+    }, "2 — Strength"), variation.strength.map((ex, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
         background: "#0c111a",
@@ -12357,7 +12482,7 @@ function CalisthenicsScreen() {
         marginTop: 8,
         marginBottom: 8
       }
-    }, "3 — Agility"), day.agility.map((ex, i) => /*#__PURE__*/React.createElement("div", {
+    }, "3 — Agility"), variation.agility.map((ex, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
         background: "#0c111a",
