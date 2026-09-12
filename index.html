@@ -1235,10 +1235,10 @@ function HomeScreen({
     desc: "Lab-style gait cycle atlas — pressure heat maps, force vectors, center of pressure, and a skeleton overlay across all 8 phases of the walking cycle."
   }, {
     id: "recovery",
-    icon: "🩺",
-    title: "Recovery Hub",
-    sub: "Glute · Foot · Knee · 7-Day Protocol",
-    color: "#10b981",
+    icon: "🦶",
+    title: "Foot Hub",
+    sub: "Dome · Big Toe · Calf · Beginner to Advanced",
+    color: "#4ade80",
     desc: "7-day activation system: glute med, foot arch, knee tracking, and daily progress logging."
   }, {
     id: "protocol",
@@ -7000,371 +7000,806 @@ function GoataStrideScreen() {
     }
   }, "Next →"))));
 }
-function RecoveryHubScreen() {
-  const [rhTab, setRhTab] = useState("dailies");
-  const [expanded, setExpanded] = useState(null);
-  const [checked, setChecked] = useState({});
-  const [dayDone, setDayDone] = useState({});
-  const [metrics, setMetrics] = useState({});
-  const [curDay, setCurDay] = useState(1);
-  const [logOpen, setLogOpen] = useState(false);
-  const [tempMetric, setTempMetric] = useState({
-    pain: 5,
-    glute: 5,
-    arch: 5,
-    track: "neutral",
-    notes: ""
-  });
-  const toggle = id => setExpanded(e => e === id ? null : id);
-  const check = id => setChecked(c => ({
-    ...c,
-    [id]: !c[id]
-  }));
-  const doneCount = Object.values(checked).filter(Boolean).length;
-  const saveLog = () => {
-    setMetrics(m => ({
-      ...m,
-      [curDay]: tempMetric
-    }));
-    setLogOpen(false);
-  };
-  const TABS = [{
-    id: "dailies",
-    label: "⭐ Dailies"
-  }, {
-    id: "knee",
-    label: "🦵 Knee"
-  }, {
-    id: "foot",
-    label: "🦶 Foot"
-  }, {
-    id: "workouts",
-    label: "🗂️ Workouts"
-  }, {
-    id: "protocol",
-    label: "📅 Protocol"
-  }, {
-    id: "track",
-    label: "📊 Track"
-  }];
 
-  // shared card style
-  const card = active => ({
-    border: `1px solid ${active ? "#eab308" : "#1e293b"}`,
-    borderRadius: 6,
-    overflow: "hidden",
-    marginBottom: 8,
-    background: active ? "#2e2708" : "#0c111a"
-  });
-  const pill = c => ({
-    background: `${c}22`,
-    color: c,
-    fontSize: 8,
-    letterSpacing: 1.5,
-    textTransform: "uppercase",
-    padding: "2px 8px",
-    borderRadius: 2,
-    fontFamily: "'DM Mono',monospace",
-    display: "inline-block"
-  });
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      paddingBottom: 20
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: "16px 16px 10px",
-      borderBottom: "1px solid #0f1f14",
-      background: "linear-gradient(180deg,#100d04,#000)"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      letterSpacing: 4,
-      color: "#4a3d10",
-      fontFamily: "'DM Mono',monospace",
-      textTransform: "uppercase",
-      marginBottom: 4
-    }
-  }, "Recovery System"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: 22,
-      letterSpacing: 2,
-      color: "#fff",
-      lineHeight: 1
-    }
-  }, "RECOVERY HUB"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#8a7020",
-      marginTop: 4,
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, "Glute · Foot · Knee Tracking · 7-Day Protocol")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      gap: 6,
-      padding: "12px 14px 0"
-    }
-  }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    onClick: () => setRhTab(t.id),
-    style: S.pill(rhTab === t.id, C.shin)
-  }, t.label))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: "14px 14px"
-    }
-  }, rhTab === "dailies" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: 5
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      letterSpacing: 2,
-      textTransform: "uppercase"
-    }
-  }, "Daily Essentials"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 9,
-      color: "#8a7020",
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, doneCount, "/", RH_DAILIES.length)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: 4,
-      background: "#141005",
-      borderRadius: 2
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: "100%",
-      borderRadius: 2,
-      background: "#facc15",
-      width: `${doneCount / RH_DAILIES.length * 100}%`,
-      transition: "width .3s"
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#3d3410",
-      marginTop: 5,
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, "Tap to mark complete. ~15 min total. Do every day.")), ["Glute", "Foot"].map(cat => /*#__PURE__*/React.createElement("div", {
-    key: cat,
-    style: {
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      letterSpacing: 3,
-      color: "#facc15",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 8
-    }
-  }, cat, " Exercises"), RH_DAILIES.filter(e => e.cat === cat).map(ex => {
-    const done = checked[ex.id];
+/* ════════════════════════════════════════════════════════════════════════
+   FOOT HUB — Beginner to Advanced foot & calf control system
+   Dome, big toe isolation, calf strength/flexibility, fascial integration
+   ════════════════════════════════════════════════════════════════════════ */
+
+const FH_COLOR = {
+  beginner: "#4ade80",
+  intermediate: "#facc15",
+  advanced: "#f97316",
+  day: "#60a5fa"
+};
+const FH_BEGINNER = [{
+  id: "fh-b1",
+  name: "Foot Dome (Standing)",
+  time: "1-2 min",
+  reps: "15 reps/foot",
+  freq: "Daily — even multiple times a day",
+  rest: "None needed. Low-load activation, not a strength exercise.",
+  equip: "None — barefoot best",
+  diff: "Beginner",
+  desc: "The foundation of everything else in this hub. Teaches your foot to create a dome shape under load, standing, with gravity working against you.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand with feet hip-width apart (~6 inches). Barefoot is best. Weight evenly distributed on both feet."
+  }, {
+    n: 2,
+    t: "Awareness Check",
+    d: "Feel your feet on the ground. Weight should be 50% heel, 50% forefoot. Most people's arches are collapsed standing normally — notice that."
+  }, {
+    n: 3,
+    t: "The Engagement",
+    d: "'Shorten' your foot by lifting the arch. Toes stay flat on the ground. No curling."
+  }, {
+    n: 4,
+    t: "Real-Time Feedback",
+    d: "Look down — can you see the arch lift? Toes stay planted. If toes curl, stop and reset."
+  }, {
+    n: 5,
+    t: "Hold and Release",
+    d: "Hold the lifted arch for 2 seconds, release, rest 1 second, repeat."
+  }],
+  feel: ["Inner arch visibly lifts, creates a dome you can see looking down", "Slight activation up the inside of the lower leg", "Foot feels more grounded, like pushing the floor away", "Knee feels MORE STABLE after the arch lifts"],
+  cues: [{
+    t: "Weight Distribution",
+    d: "Weight should be on the ENTIRE foot, not the outside edge. Inside and outside edges both feel grounded."
+  }, {
+    t: "The Dome Shape",
+    d: "Correct = visible dome. Toes curling = wrong technique. You want ARCH lifted, TOES flat."
+  }, {
+    t: "Knee Feedback",
+    d: "As the arch lifts, the knee should feel MORE STABLE. Strong foot → strong knee."
+  }],
+  errors: [{
+    e: "Toes curl instead of arch lifting",
+    w: "Toe flexion is the easier default pattern.",
+    f: "Place toes under a light book to pin them down, then lift the arch."
+  }, {
+    e: "Feel unbalanced",
+    w: "Stabilizer muscles are waking up.",
+    f: "Do this against a wall or holding something stable at first."
+  }],
+  progression: ["Week 1: 10 reps, hold a railing", "Week 2: 15 reps, reduce support", "Week 3+: 20 reps, no support, or add a 5-sec hold"]
+}, {
+  id: "fh-b2",
+  name: "Toe Splay (Standing)",
+  time: "1 min",
+  reps: "10 reps/foot",
+  freq: "Daily, multiple times a day",
+  rest: "None needed — one of the safest drills to overdo.",
+  equip: "None",
+  diff: "Beginner",
+  desc: "Actively spreading all five toes apart. Builds the small intrinsic muscles between the toes and reinforces the wide base the Foot Dome sits on top of.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand tall, feet hip-width apart, barefoot."
+  }, {
+    n: 2,
+    t: "The Splay",
+    d: "Spread all five toes apart as wide as you can, without curling them up or down."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold the spread for 3-5 seconds, feeling the space open between each toe."
+  }, {
+    n: 4,
+    t: "Release and Repeat",
+    d: "Relax back to neutral, repeat 10 times per foot."
+  }],
+  feel: ["Stretching, working sensation between the toes", "Forefoot feels wider and more stable once spread", "Genuinely difficult at first — rarely trained directly"],
+  cues: [{
+    t: "This Widens the Base",
+    d: "A spread forefoot creates a wider platform for the arch dome to sit on."
+  }, {
+    t: "Years of Shoes Work Against This",
+    d: "Narrow toe boxes train toes to stay pinched together. This undoes that."
+  }],
+  errors: [{
+    e: "Toes curl instead of spreading",
+    w: "Curling muscles are more dominant for almost everyone.",
+    f: "Go slower, look down for visual feedback."
+  }],
+  progression: ["Week 1: 10 reps/foot, once or twice a day", "Week 2: add a 5-sec hold at the widest point", "Week 3+: combine with Foot Dome — spread, then dome, holding both"]
+}, {
+  id: "fh-b3",
+  name: "Ankle Circles",
+  time: "1 min",
+  reps: "10 each direction, per foot",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "Basic rotational mobility for the ankle joint. A simple, low-demand way to keep the joint that connects the foot to everything above it moving well.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Sit or stand holding something for balance. Lift one foot slightly off the ground."
+  }, {
+    n: 2,
+    t: "Circle",
+    d: "Slowly circle the foot at the ankle, making as large and smooth a circle as you can."
+  }, {
+    n: 3,
+    t: "Both Directions",
+    d: "10 circles clockwise, then 10 counter-clockwise."
+  }, {
+    n: 4,
+    t: "Switch Feet",
+    d: "Repeat on the other side."
+  }],
+  feel: ["A smooth, mobile feeling through the ankle", "Possibly a catch or rough spot in one direction — normal to notice, worth tracking over time"],
+  cues: [{
+    t: "Full Range, Not Fast",
+    d: "Slow and complete circles matter more than speed. Rushing shrinks the range without you noticing."
+  }, {
+    t: "Move From the Ankle, Not the Hip",
+    d: "The rest of the leg should stay still — isolate the movement to the ankle joint itself."
+  }],
+  errors: [{
+    e: "Circle gets small and fast",
+    w: "Easy to drift into a lazy, tiny motion.",
+    f: "Slow down and consciously reach for the largest circle you can make."
+  }],
+  progression: ["Ongoing: part of a standard daily warm-up, no real progression needed — just consistency"]
+}, {
+  id: "fh-b4",
+  name: "Toe Extension Lift (Standing)",
+  time: "1 min",
+  reps: "10-12 reps",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "Lifting all the toes upward while the ball of the foot stays down — the opposite motion from a toe curl. Trains the top-of-foot muscles most programs skip entirely.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand tall, feet hip-width apart, barefoot."
+  }, {
+    n: 2,
+    t: "The Lift",
+    d: "Keeping the ball of the foot and heel planted, lift all ten toes straight up."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold 2-3 seconds, feeling the top of the foot and front of the shin working."
+  }, {
+    n: 4,
+    t: "Release",
+    d: "Lower with control, don't just let them drop. Repeat."
+  }],
+  feel: ["Top of the foot and front of the shin working", "A distinctly different sensation from toe-curl exercises"],
+  cues: [{
+    t: "Keep the Ball of the Foot Down",
+    d: "Only the toes lift. If the whole foot rocks back onto the heel, the ankle is compensating."
+  }, {
+    t: "The Missing Piece",
+    d: "Most foot programs only train the flexors. This drill balances that with the extensors."
+  }],
+  errors: [{
+    e: "Whole foot rocks back",
+    w: "Reaching for more lift than the extensors can currently produce.",
+    f: "Accept a smaller, controlled lift."
+  }, {
+    e: "Pinky toe barely moves",
+    w: "Very common — outer toes are usually weakest.",
+    f: "Keep practicing daily, it evens out with consistency."
+  }],
+  progression: ["Week 1: 10 reps, once daily", "Week 2: 12 reps, twice daily", "Week 3+: add a 3-5 sec hold at the top"]
+}, {
+  id: "fh-b5",
+  name: "Calf Stretch (Wall)",
+  time: "1-2 min",
+  reps: "20-30 sec hold x 2 each side",
+  freq: "Daily",
+  rest: "None needed — a stretch, not a loading exercise",
+  equip: "A wall",
+  diff: "Beginner",
+  desc: "A basic static stretch for the calf. Tight calves limit ankle mobility, which shows up everywhere from squat depth to how well the foot can load properly when walking.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Face a wall, hands pressed against it at shoulder height."
+  }, {
+    n: 2,
+    t: "Position",
+    d: "Step one leg back, keeping that back heel flat on the ground and the leg straight."
+  }, {
+    n: 3,
+    t: "The Stretch",
+    d: "Lean your hips toward the wall, keeping the back heel down, until you feel a stretch in the calf."
+  }, {
+    n: 4,
+    t: "Hold and Switch",
+    d: "Hold 20-30 seconds, then switch legs."
+  }],
+  feel: ["A steady stretch through the calf, not sharp or painful", "Some people feel it more in the upper calf, some lower — both are normal depending on knee bend"],
+  cues: [{
+    t: "Heel Stays Down",
+    d: "The moment the back heel lifts, you lose the stretch. Keep it planted the entire time."
+  }, {
+    t: "Straight vs. Slightly Bent Knee",
+    d: "A straight back knee stretches the upper calf (gastrocnemius); a slightly bent back knee shifts the stretch lower (soleus). Both are worth doing."
+  }],
+  errors: [{
+    e: "Heel lifts off the ground",
+    w: "Leaning too far forward for the current flexibility level.",
+    f: "Back off the lean until the heel can stay flat, then build range gradually."
+  }],
+  progression: ["Ongoing: hold longer (up to 45-60 sec) as flexibility improves, or add the bent-knee variation for the soleus"]
+}];
+const FH_INTERMEDIATE = [{
+  id: "fh-i1",
+  name: "Standing Big Toe Drive",
+  time: "1-2 min",
+  reps: "10 reps/foot",
+  freq: "Daily or every other day, 1-2x per day",
+  rest: "None needed — low load, motor-control focused",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "Standing, single-leg big toe isolation and drive. Builds the exact motor pattern the foot uses in the final push-off phase of every step.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand on one leg, barefoot. Other foot lightly touching down nearby for balance if needed."
+  }, {
+    n: 2,
+    t: "Foot Lock",
+    d: "Press all four corners of the standing foot into the ground — heel, big toe, pinky toe, outer edge."
+  }, {
+    n: 3,
+    t: "Shift Toward the Big Toe",
+    d: "Slowly shift weight forward and medially until it concentrates on the ball of the big toe, keeping the arch lifted the whole time."
+  }, {
+    n: 4,
+    t: "Press and Load",
+    d: "From this loaded position, press the big toe down, feeling the heel want to lift slightly."
+  }, {
+    n: 5,
+    t: "Return and Reset",
+    d: "Shift back to center, release, reset the foot flat. Repeat."
+  }],
+  feel: ["Big toe ball taking clear, isolated pressure", "Arch staying domed even as weight shifts forward — the hard part", "A loaded spring sensation right before push-off"],
+  cues: [{
+    t: "Arch Must Hold",
+    d: "As weight shifts to the big toe, most people's arch collapses inward. Watch for this and reset if it happens."
+  }, {
+    t: "This Is the Push-Off Zone",
+    d: "The spot loading here is exactly where the foot finishes every walking step."
+  }, {
+    t: "No Hip Compensation",
+    d: "Keep hips level and quiet — this is a foot drill, not a hip drill."
+  }],
+  errors: [{
+    e: "Arch collapses as you shift forward",
+    w: "Intrinsic foot muscles fatigue before the shift completes.",
+    f: "Shift only halfway at first, hold, then reset."
+  }, {
+    e: "Whole body leans forward",
+    w: "Using trunk lean to fake the weight shift.",
+    f: "Keep the ribcage stacked over the pelvis — only the pressure inside the foot should move."
+  }],
+  progression: ["Week 1: hold something light, 8 reps/side, slow", "Week 2: no support, 10 reps/side", "Week 3+: add a 2-second hold at full load"]
+}, {
+  id: "fh-i2",
+  name: "Standing Towel Scrunches",
+  time: "2-3 min",
+  reps: "10-15 reps/foot",
+  freq: "4-5x per week",
+  rest: "1-2 rest days — small intrinsic muscles fatigue fast and need real recovery",
+  equip: "Small towel, flat hard floor",
+  diff: "Intermediate",
+  desc: "A standing version of the classic towel scrunch. Builds toe-flexor and plantar fascia strength while adding a real balance challenge.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Lay a towel flat on a hard floor. Stand with one bare foot on it near the edge closest to you, other foot on stable ground."
+  }, {
+    n: 2,
+    t: "The Scrunch",
+    d: "Use your toes to grip and pull the towel toward you in small claw motions."
+  }, {
+    n: 3,
+    t: "Full Pull",
+    d: "Continue until you've pulled several inches. Heel stays planted the entire time."
+  }, {
+    n: 4,
+    t: "Release and Reset",
+    d: "Flatten the toes, slide the foot back to the start, repeat."
+  }, {
+    n: 5,
+    t: "Balance Challenge",
+    d: "Once easy on two feet, lift the other foot slightly for a combined strength and balance drill."
+  }],
+  feel: ["Plantar fascia working hard", "Toe flexors fatiguing after 8-10 scrunches", "A mini foot workout pump afterward"],
+  cues: [{
+    t: "Small Movements Count",
+    d: "Many small, controlled grips build more real strength than a few big sloppy pulls."
+  }, {
+    t: "Progress the Balance, Not Just Reps",
+    d: "The one-leg version is the real progression once the pattern feels automatic."
+  }],
+  errors: [{
+    e: "Toes curl without moving the towel",
+    w: "Floor may be too slippery, or grip strength is still building.",
+    f: "Confirm a hard floor, focus on smaller controlled grips."
+  }, {
+    e: "Whole foot slides",
+    w: "Trying to move too much towel at once.",
+    f: "Keep the heel glued down, only the toes should pull."
+  }],
+  progression: ["Week 1: two feet down, 8-10 scrunches/foot", "Week 2: 12-15 scrunches/foot", "Week 3+: single-leg balance version"]
+}, {
+  id: "fh-i3",
+  name: "Calf Raises on Stairs",
+  time: "2-3 min",
+  reps: "12-15 reps x 3 sets",
+  freq: "3-4x per week",
+  rest: "At least 1 rest day between sessions — real eccentric loading for the calf and Achilles",
+  equip: "Step or stair",
+  diff: "Intermediate",
+  desc: "Combines arch activation with calf strength through a full range of motion, using the extra stretch a step allows at the bottom.",
+  steps: [{
+    n: 1,
+    t: "Position",
+    d: "Stand on a step, heels hanging off the back edge, balls of the feet on the step."
+  }, {
+    n: 2,
+    t: "Start Low",
+    d: "Let the heels drop below step level, feeling a stretch in the calves."
+  }, {
+    n: 3,
+    t: "The Lift",
+    d: "Press through the balls of the feet, rising onto the toes — calf and arch lift together."
+  }, {
+    n: 4,
+    t: "Full Lift",
+    d: "Rise as high as possible, squeeze at the top for 1 second."
+  }, {
+    n: 5,
+    t: "Lower Slowly",
+    d: "Lower with control, not a drop — the eccentric phase builds most of the strength."
+  }],
+  feel: ["Calves working, obviously", "Arch lifting at the same time as the calf", "A calf stretch at the bottom of each rep"],
+  cues: [{
+    t: "Calf-Arch Synchronization",
+    d: "Rising: calf shortens AND arch lifts. Lowering: both lengthen together."
+  }, {
+    t: "Heel Position",
+    d: "Heels shouldn't roll inward or outward at any point — aligned with the hip."
+  }, {
+    t: "Tempo",
+    d: "2 seconds up, 2 seconds at the top, 2 seconds down. Rushing loses the benefit."
+  }],
+  errors: [{
+    e: "Heels don't drop below step level",
+    w: "Not using the full range of motion.",
+    f: "Let the heels hang lower — the stretch at the bottom is necessary."
+  }, {
+    e: "Heels tilt inward or outward",
+    w: "Ankle collapsing into valgus or varus.",
+    f: "Keep heels aligned with the hips throughout."
+  }],
+  progression: ["Week 1: 10 reps, hold railing", "Week 2: 12-15 reps, may release railing", "Week 3+: 15 reps x 3 sets, or add a pause at the top", "Advanced: single-leg version"]
+}, {
+  id: "fh-i4",
+  name: "Heel Walks",
+  time: "2 min",
+  reps: "20-30 steps x 2 sets",
+  freq: "Daily to start",
+  rest: "Back off to every other day if shins feel very fatigued — common in the first 1-2 weeks",
+  equip: "None — barefoot or minimal shoes",
+  diff: "Intermediate",
+  desc: "Engages the tibialis anterior and arch together, bridging directly into walking with better foot mechanics.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand barefoot, lift all toes off the ground, heels planted."
+  }, {
+    n: 2,
+    t: "The Engagement",
+    d: "Feel the front of the shin and the arch engage as the toes lift."
+  }, {
+    n: 3,
+    t: "Walk Forward",
+    d: "Walk on the heels only, toes staying lifted the whole time."
+  }, {
+    n: 4,
+    t: "Heel Strike First",
+    d: "Heel strikes first, roll through, toes come down consciously on the next step."
+  }, {
+    n: 5,
+    t: "Distance",
+    d: "20-30 steps, then rest. 2-3 sets."
+  }],
+  feel: ["Front of the shins firing", "The arch engaged and lifting", "A slight shin burn after 15-20 steps — normal"],
+  cues: [{
+    t: "Toes Stay Up",
+    d: "The hardest part. Toes up means arch engaged means shin working."
+  }, {
+    t: "Knee Connection",
+    d: "With dorsiflexed feet, knees should feel more stable and less likely to cave in."
+  }],
+  errors: [{
+    e: "Toes come down early",
+    w: "Falling back to normal walking mechanics.",
+    f: "Walk slower — control matters more than distance."
+  }, {
+    e: "Shins cramp or burn excessively",
+    w: "The tibialis anterior is weak — normal for anyone new to this.",
+    f: "Start with 10 steps instead of 20, build up gradually."
+  }],
+  progression: ["Week 1: 10-15 steps, 2 sets, soft surface", "Week 2: 20 steps, 3 sets, hard floor", "Week 3+: 30 steps, daily frequency"]
+}, {
+  id: "fh-i5",
+  name: "Single-Leg Foot Dome Hold",
+  time: "1-2 min",
+  reps: "20-30 sec hold x 2-3 per side",
+  freq: "Daily or every other day",
+  rest: "Minimal — low-moderate load",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "Combines the Foot Dome activation with single-leg balance. Removes the ability to lean on the other foot, so whatever the foot does here is exactly what it does mid-stride.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand on one leg, other leg lifted slightly, barefoot."
+  }, {
+    n: 2,
+    t: "Engage the Dome",
+    d: "Lift the arch of the standing foot into a dome, toes flat."
+  }, {
+    n: 3,
+    t: "Hold Through Balance",
+    d: "Hold the dome while balancing, resisting any wobble that flattens the arch back out."
+  }, {
+    n: 4,
+    t: "Timed Hold",
+    d: "20-30 seconds, then switch legs."
+  }],
+  feel: ["The dome working harder to maintain under single-leg load", "Genuine balance challenge layered on top of the foot activation"],
+  cues: [{
+    t: "The Foot Controls the Wobble",
+    d: "When balance gets shaky, the instinct is to grip with the toes — resist that and let the dome itself do the stabilizing."
+  }],
+  errors: [{
+    e: "Arch flattens the moment balance gets challenged",
+    w: "The dome hasn't become automatic yet under load.",
+    f: "Hold near a wall for light support while building this connection."
+  }],
+  progression: ["Week 1: near a wall, 15-20 sec", "Week 2: no support, 20-25 sec", "Week 3+: 30+ sec, or close the eyes briefly for an added challenge"]
+}];
+const FH_ADVANCED = [{
+  id: "fh-a1",
+  name: "Towel Crunch (Fascial Connection)",
+  time: "2-5 min per foot",
+  reps: "~2 curls/sec, continuous for the set",
+  freq: "5x per week to start, building toward daily",
+  rest: "Progress by adding TIME, not more sets — this is a fascia drill, not a strength-rep drill",
+  equip: "Small towel + a firm ball (tennis or lacrosse ball)",
+  diff: "Advanced",
+  desc: "A deeper, more demanding version of the towel scrunch. Trains the fascial line running from the sole of the foot up through the hamstring and glute.",
+  steps: [{
+    n: 1,
+    t: "Prep — Wake Up the Sole",
+    d: "Roll the entire sole of each foot with a firm ball for 2-5 minutes per foot, heel to toe, before starting."
+  }, {
+    n: 2,
+    t: "Starting Position",
+    d: "Lay a towel flat, stand over it feet shoulder-width apart, weight shifted onto one side so the head sits over that foot, heel lifted slightly, soft knee bend."
+  }, {
+    n: 3,
+    t: "Focus 1 — Curl Every Toe, Hard",
+    d: "Curl all five toes into the towel, pulling back forcefully, including the pinky, at roughly 2 curls per second."
+  }, {
+    n: 4,
+    t: "Focus 2 — Anchor the Ball of the Foot",
+    d: "The ball of the foot stays completely still, pressed into the floor like it's bolted down."
+  }, {
+    n: 5,
+    t: "Focus 3 — Shorten the Foot",
+    d: "At the same time, pull the heel toward the ball of the foot, shortening the whole foot — like squeezing into a too-small shoe."
+  }],
+  feel: ["All three focuses happening at once — takes real coordination at first", "An intense, oddly satisfying tenderness along the sole", "With consistent practice, the sensation travels — into the calf, then the hamstring, eventually the glute"],
+  cues: [{
+    t: "Three Things at Once",
+    d: "The curl, the anchor, and the shortening all happen simultaneously, not in sequence."
+  }, {
+    t: "The Ball of the Foot Never Moves",
+    d: "The moment it shifts, reset and re-anchor before continuing."
+  }, {
+    t: "This Is a Fascia Drill, Not a Strength Drill",
+    d: "Fascia adapts over weeks, not sessions. Be patient with it."
+  }],
+  errors: [{
+    e: "Only the toes seem to move",
+    w: "The anchor is shifting and the foot isn't actually shortening.",
+    f: "Slow down, lock in the anchor and shortening first, add curl speed once all three hold together."
+  }, {
+    e: "Skipping the foot-rolling prep",
+    w: "Without waking up the sole first, the cues are much harder to feel.",
+    f: "Treat the roll as part of the exercise, not an optional warm-up."
+  }],
+  progression: ["Week 1-2: 1-2 min per foot, 5x/week", "Week 3-4: 2-3 min per foot, toward daily", "Ongoing: 5+ min per foot daily once automatic"]
+}, {
+  id: "fh-a2",
+  name: "Single-Leg Calf Raise",
+  time: "2-3 min",
+  reps: "10-12 reps/leg x 3 sets",
+  freq: "3x per week",
+  rest: "1-2 rest days between sessions — unilateral loading is significantly more demanding than two-leg raises",
+  equip: "Step or stair (optional)",
+  diff: "Advanced",
+  desc: "The two-leg calf raise's unilateral progression. Doubles the load on each calf and adds a real balance/stability demand on top of the strength work.",
+  steps: [{
+    n: 1,
+    t: "Position",
+    d: "Stand on one leg, ball of the foot on a step edge if using one, other leg lifted behind or in front."
+  }, {
+    n: 2,
+    t: "Start Low",
+    d: "Let the heel drop below the step for a full stretch (skip this if on flat ground)."
+  }, {
+    n: 3,
+    t: "The Lift",
+    d: "Press up onto the toes of the standing leg, rising as high as possible."
+  }, {
+    n: 4,
+    t: "Hold and Lower",
+    d: "Brief squeeze at the top, then lower slowly with full control."
+  }, {
+    n: 5,
+    t: "Complete the Set",
+    d: "10-12 reps, then switch legs."
+  }],
+  feel: ["Significantly more calf demand than the two-leg version", "A real balance challenge stacked on top of the strength work"],
+  cues: [{
+    t: "Control Beats Height",
+    d: "A controlled, full-range rep matters more than squeezing out extra height with momentum."
+  }, {
+    t: "Watch the Ankle",
+    d: "Single-leg loading makes ankle wobble more likely — keep it tracking straight."
+  }],
+  errors: [{
+    e: "Using the other leg to assist",
+    w: "Defeats the purpose of the unilateral progression.",
+    f: "Keep the lifted leg relaxed and out of the movement entirely."
+  }, {
+    e: "Ankle wobbles side to side",
+    w: "Stabilizers are still adapting to single-leg load.",
+    f: "Reduce range of motion slightly until control improves, then build back up."
+  }],
+  progression: ["Week 1: near support, 8 reps/leg", "Week 2: no support, 10 reps/leg", "Week 3+: 12 reps x 3 sets, or add a pause at the top"]
+}, {
+  id: "fh-a3",
+  name: "Eccentric Calf Drop",
+  time: "3-4 min",
+  reps: "3 sets x 12-15 slow negatives",
+  freq: "3x per week",
+  rest: "1-2 rest days between sessions — tendon loading needs real recovery time",
+  equip: "Step or stair",
+  diff: "Advanced",
+  desc: "A slow-negative-only calf raise, specifically targeting the Achilles tendon rather than just the calf muscle. The same principle behind heavy-slow-resistance tendon rehab, applied to the calf.",
+  steps: [{
+    n: 1,
+    t: "Position",
+    d: "Stand on a step, balls of the feet on the edge, heels hanging off."
+  }, {
+    n: 2,
+    t: "Start at the Top",
+    d: "Rise up onto the toes first (using both legs is fine to get up there)."
+  }, {
+    n: 3,
+    t: "Shift to One Leg",
+    d: "Lift the other foot so all the weight is on one leg, still up on the toes."
+  }, {
+    n: 4,
+    t: "The Slow Negative",
+    d: "Lower down as slowly as possible — aim for a full 4-6 second descent, all the way to a stretch at the bottom."
+  }, {
+    n: 5,
+    t: "Reset",
+    d: "Use both legs to rise back up, then repeat the slow single-leg lowering."
+  }],
+  feel: ["A deep, building tension in the Achilles tendon during the descent, distinct from normal calf muscle burn", "Some tenderness the day after is common when first starting this — sharp pain is not"],
+  cues: [{
+    t: "Slow Is the Entire Point",
+    d: "A 4-6 second count down is not optional here — rushing the negative defeats the exercise."
+  }, {
+    t: "This Targets the Tendon, Not Just the Muscle",
+    d: "Same general principle as heavy-slow-resistance rehab work — controlled eccentric load builds tendon capacity specifically."
+  }],
+  errors: [{
+    e: "Lowering too fast",
+    w: "The whole benefit of this drill is in the slow eccentric phase.",
+    f: "Count out loud if needed — 'one-Mississippi, two-Mississippi' — to force the tempo."
+  }, {
+    e: "Sharp or worsening pain",
+    w: "This is different from normal tendon loading discomfort.",
+    f: "Stop and reduce range or switch back to the two-leg version until it settles."
+  }],
+  progression: ["Week 1-2: 2 sets x 10 negatives, using a small assist to get to the top", "Week 3-4: 3 sets x 12", "Ongoing: 3 sets x 15, or add light weight if tolerated well"]
+}, {
+  id: "fh-a4",
+  name: "Loaded Big Toe Press",
+  time: "2 min",
+  reps: "10 reps/foot x 2-3 sets",
+  freq: "Every other day",
+  rest: "1 rest day between sessions",
+  equip: "A step, cushion, or unstable surface",
+  diff: "Advanced",
+  desc: "The Standing Big Toe Drive, made harder by pressing from an elevated or unstable surface — the advanced end of big toe motor control.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Stand with the ball of one foot on the edge of a step, or on a folded towel/cushion for an unstable surface."
+  }, {
+    n: 2,
+    t: "Foot Lock",
+    d: "Press all four corners of the foot down first, exactly like the standing version."
+  }, {
+    n: 3,
+    t: "Shift and Load",
+    d: "Shift weight forward onto the big toe, keeping the arch domed despite the less stable surface."
+  }, {
+    n: 4,
+    t: "Press",
+    d: "Drive the big toe down against the added instability, hold 1-2 seconds."
+  }, {
+    n: 5,
+    t: "Reset",
+    d: "Return to center with control, repeat."
+  }],
+  feel: ["Everything from the standing version, amplified by the unstable surface", "More demand on the smaller stabilizing muscles around the big toe joint"],
+  cues: [{
+    t: "Master the Standing Version First",
+    d: "This should feel like a natural next step, not a struggle from day one — if it is, spend more time on Standing Big Toe Drive first."
+  }],
+  errors: [{
+    e: "Arch collapses immediately on the unstable surface",
+    w: "The added instability is exposing a control gap that wasn't visible on flat ground.",
+    f: "Drop back to a less unstable surface (a folded towel instead of a cushion) and rebuild from there."
+  }],
+  progression: ["Week 1: step edge only, 8 reps/foot", "Week 2: 10 reps/foot", "Week 3+: try the cushion/unstable surface version"]
+}, {
+  id: "fh-a5",
+  name: "Foot Dome Complex",
+  time: "2-3 min",
+  reps: "10 reps combining dome + splay + press",
+  freq: "3-4x per week",
+  rest: "Minimal — pair thoughtfully with other advanced work on the same day",
+  equip: "None",
+  diff: "Advanced",
+  desc: "Combines three separate control elements — the dome, the toe splay, and a big toe press — into one continuous sequence. The integration is what makes it advanced, not any single piece.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand tall, barefoot, feet hip-width apart."
+  }, {
+    n: 2,
+    t: "Splay First",
+    d: "Spread all five toes wide."
+  }, {
+    n: 3,
+    t: "Dome Second",
+    d: "While keeping the spread, lift the arch into a dome."
+  }, {
+    n: 4,
+    t: "Press Third",
+    d: "From the domed, spread position, press the big toe down slightly without losing the dome or the spread."
+  }, {
+    n: 5,
+    t: "Hold and Release",
+    d: "Hold the full combination for 2 seconds, release everything, reset, repeat."
+  }],
+  feel: ["Real coordination demand — each piece wants to interfere with the others at first", "A completed, whole-foot sense of control once it clicks"],
+  cues: [{
+    t: "Sequence Matters",
+    d: "Splay, then dome, then press — trying to do all three at once from a dead stop is much harder than layering them."
+  }, {
+    t: "This Is the Payoff Drill",
+    d: "Every other beginner and intermediate exercise in this hub feeds into being able to do this one well."
+  }],
+  errors: [{
+    e: "Losing the splay once the dome engages",
+    w: "The two patterns compete for the same small muscles at first.",
+    f: "Slow way down — hold each layer for a full second before adding the next."
+  }],
+  progression: ["Week 1: 5-6 reps, slow, expect it to fall apart sometimes", "Week 2: 8 reps, holding the full combination longer", "Week 3+: 10 reps, add a single-leg version once solid"]
+}];
+
+/* ─── FOOT & CALF DAY — standalone complete session, appropriately scoped ─── */
+const FH_DAY_SECTIONS = [{
+  label: "Prep",
+  items: [{
+    ex: "Ankle Circles",
+    dose: "10 each direction, per foot",
+    ref: "Beginner tier"
+  }]
+}, {
+  label: "Activation",
+  items: [{
+    ex: "Foot Dome (Standing)",
+    dose: "15 reps/foot",
+    ref: "Beginner tier"
+  }, {
+    ex: "Toe Splay (Standing)",
+    dose: "10 reps/foot",
+    ref: "Beginner tier"
+  }]
+}, {
+  label: "Strength",
+  items: [{
+    ex: "Standing Big Toe Drive",
+    dose: "10 reps/foot",
+    ref: "Intermediate tier"
+  }, {
+    ex: "Calf Raises on Stairs",
+    dose: "3 sets x 12-15",
+    ref: "Intermediate tier"
+  }, {
+    ex: "Heel Walks",
+    dose: "2 sets x 20-30 steps",
+    ref: "Intermediate tier"
+  }]
+}, {
+  label: "Advanced Finisher (optional)",
+  items: [{
+    ex: "Single-Leg Calf Raise",
+    dose: "2 sets x 10/leg",
+    ref: "Advanced tier — only add this if the strength block felt manageable, not maxed out"
+  }]
+}, {
+  label: "Cool Down",
+  items: [{
+    ex: "Calf Stretch (Wall)",
+    dose: "20-30 sec x 2 each side",
+    ref: "Beginner tier"
+  }]
+}];
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOOT HUB SCREEN
+   ═══════════════════════════════════════════════════════════════════════ */
+function RecoveryHubScreen() {
+  const [fhTab, setFhTab] = useState("beginner");
+  const [expanded, setExpanded] = useState(null);
+  const toggle = id => setExpanded(e => e === id ? null : id);
+  const TABS = [{
+    id: "beginner",
+    label: "🟢 Beginner"
+  }, {
+    id: "intermediate",
+    label: "🟡 Intermediate"
+  }, {
+    id: "advanced",
+    label: "🔴 Advanced"
+  }, {
+    id: "day",
+    label: "📅 Foot & Calf Day"
+  }];
+  const tierData = {
+    beginner: FH_BEGINNER,
+    intermediate: FH_INTERMEDIATE,
+    advanced: FH_ADVANCED
+  };
+  const tierColor = FH_COLOR[fhTab] || FH_COLOR.beginner;
+  const exCard = (ex, color) => {
     const open = expanded === ex.id;
     return /*#__PURE__*/React.createElement("div", {
       key: ex.id,
-      style: card(done)
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => check(ex.id),
       style: {
-        width: "100%",
-        background: "none",
-        border: "none",
-        padding: "11px 12px",
-        display: "flex",
-        gap: 10,
-        alignItems: "flex-start",
-        cursor: "pointer",
-        textAlign: "left"
+        border: `1px solid ${open ? color : "#1e293b"}`,
+        borderRadius: 8,
+        overflow: "hidden",
+        marginBottom: 9,
+        background: open ? `${color}0c` : "#0c111a"
       }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 20,
-        height: 20,
-        borderRadius: 4,
-        flexShrink: 0,
-        border: `2px solid ${done ? "#facc15" : "#4a3f10"}`,
-        background: done ? "#3d3106" : "transparent",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 2
-      }
-    }, done && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
-        fontSize: 12
-      }
-    }, "✓")), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: done ? "#8a7020" : "#fffbe0",
-        fontFamily: "'DM Mono',monospace",
-        textDecoration: done ? "line-through" : "none",
-        marginBottom: 2
-      }
-    }, ex.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#e8ddc0",
-        marginBottom: 4,
-        lineHeight: 1.6
-      }
-    }, ex.desc), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        gap: 8,
-        fontSize: 9,
-        color: "#8a7020"
-      }
-    }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "🔄 ", ex.reps))), /*#__PURE__*/React.createElement("button", {
-      onClick: e => {
-        e.stopPropagation();
-        toggle(ex.id);
-      },
-      style: {
-        background: "none",
-        border: "none",
-        color: "#facc15",
-        fontSize: 16,
-        cursor: "pointer",
-        padding: "0 4px"
-      }
-    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: "0 12px 12px",
-        borderTop: "1px solid #0f1f14"
-      },
-      className: "fa"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#facc15",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 6,
-        marginTop: 10
-      }
-    }, "Steps"), ex.steps.map((s, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "flex",
-        gap: 8,
-        marginBottom: 6
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        color: "#facc15",
-        flexShrink: 0,
-        fontFamily: "'DM Mono',monospace",
-        width: 14
-      }
-    }, i + 1, "."), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 12,
-        color: "#e8dcc0",
-        lineHeight: 1.7
-      }
-    }, s))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: 8,
-        background: "#171205",
-        borderLeft: "2px solid #ca8a04",
-        padding: "7px 10px",
-        borderRadius: "0 3px 3px 0"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#ca8a04",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 3
-      }
-    }, "Feel"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#fef3c7",
-        lineHeight: 1.7
-      }
-    }, ex.cue))));
-  }))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: "#100d05",
-      border: "1px solid #332b0c",
-      borderRadius: 5,
-      padding: "10px 12px",
-      marginTop: 4
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      letterSpacing: 2,
-      color: "#facc15",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 7
-    }
-  }, "Daily Schedule"), [["Morning", "All 3 glute + Arch Activation + Big Toe (~5 min)"], ["Every hour at work", "Short Foot Exercise standing (~1 min)"], ["Evening", "Heel Walks + log metrics (~3 min)"]].map(([t, d]) => /*#__PURE__*/React.createElement("div", {
-    key: t,
-    style: {
-      display: "flex",
-      gap: 8,
-      marginBottom: 5
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      flexShrink: 0,
-      fontFamily: "'DM Mono',monospace",
-      width: 80
-    }
-  }, t), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 11,
-      color: "#e8dcc0"
-    }
-  }, d))))), rhTab === "knee" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#fde68a",
-      fontFamily: "'DM Mono',monospace",
-      lineHeight: 1.8,
-      marginBottom: 14,
-      padding: "8px 10px",
-      background: "#100d04",
-      borderRadius: 4,
-      border: "1px solid #332b0c"
-    }
-  }, "Knee tracking is a learned skill. Do one drill daily — focus on the real-time cues. By Day 5–6, good tracking should feel automatic."), RH_KNEE.map(ex => {
-    const open = expanded === ex.id;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ex.id,
-      style: card(false)
     }, /*#__PURE__*/React.createElement("button", {
       onClick: () => toggle(ex.id),
       style: {
@@ -7385,14 +7820,14 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 13,
-        color: "#fffbe0",
+        color: "#e8f4ff",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 3
       }
     }, ex.name), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
-        color: "#e0d8b8",
+        color: C.muted,
         marginBottom: 5,
         lineHeight: 1.6
       }
@@ -7401,349 +7836,25 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 8,
         fontSize: 9,
-        color: "#8a7020",
+        color: "#8a8fa0",
         flexWrap: "wrap"
       }
-    }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "🔄 ", ex.reps), /*#__PURE__*/React.createElement("span", null, "📦 ", ex.equip), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "🔄 ", ex.reps), /*#__PURE__*/React.createElement("span", null, "📦 ", ex.equip))), /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#facc15"
-      }
-    }, ex.diff))), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
+        color,
         fontSize: 18,
         flexShrink: 0
       }
     }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
       style: {
-        padding: "0 12px 14px",
-        borderTop: "1px solid #332b0c"
+        padding: "0 12px 14px"
       },
       className: "fa"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#facc15",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 8,
-        marginTop: 10
-      }
-    }, "Movement Breakdown"), ex.steps.map(s => /*#__PURE__*/React.createElement("div", {
-      key: s.n,
-      style: {
-        display: "flex",
-        gap: 10,
-        marginBottom: 8,
-        background: "#100d05",
-        borderRadius: 4,
-        padding: "8px 10px",
-        border: "1px solid #332b0c"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 22,
-        height: 22,
-        borderRadius: "50%",
-        flexShrink: 0,
-        background: "#332b10",
-        border: "1px solid #eab308",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        color: "#facc15",
-        fontFamily: "'Bebas Neue',sans-serif"
-      }
-    }, s.n)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: "#fffbe0",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 2
-      }
-    }, s.t), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#e0d8b8",
-        lineHeight: 1.7
-      }
-    }, s.d)))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#facc15",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 6,
-        marginTop: 12
-      }
-    }, "What You Should Feel"), ex.feel.map((f, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "flex",
-        gap: 8,
-        marginBottom: 5
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
-        fontSize: 12,
-        flexShrink: 0
-      }
-    }, "✓"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 11,
-        color: "#e0d8b8",
-        lineHeight: 1.7
-      }
-    }, f))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: 10,
-        background: "#050a14",
-        border: "1px solid #4a3f10",
-        borderRadius: 4,
-        padding: "10px 12px"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#22d3ee",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 8
-      }
-    }, "Common Errors & Fixes"), ex.errors.map((er, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: "#141105",
-        border: "1px solid #78350f44",
-        borderRadius: 4,
-        padding: "9px 10px",
-        marginBottom: 7
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#fbbf24",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 5
-      }
-    }, "❌ ", er.e), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: "#8a7020",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 2
-      }
-    }, "Why"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#e0d8b8",
-        lineHeight: 1.7,
-        marginBottom: 6
-      }
-    }, er.w), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: "#8a7020",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 2
-      }
-    }, "Fix"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#e0d8b8",
-        lineHeight: 1.7
-      }
-    }, er.f))))));
-  })), rhTab === "foot" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      lineHeight: 1.8,
-      marginBottom: 14,
-      padding: "8px 10px",
-      background: "#100d04",
-      borderRadius: 4,
-      border: "1px solid #332b0c"
-    }
-  }, "All standing — no seated drills. Every exercise here loads the foot the way it's actually loaded when you walk. This is where \"the foot dome\" and the GOATA push-off pattern get built."), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: "#111",
-      borderRadius: 8,
-      border: "1px solid #1e1e1e",
-      padding: "12px 14px",
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 12,
-      color: "#fff",
-      fontFamily: "'Bebas Neue',sans-serif",
-      letterSpacing: 1,
-      marginBottom: 10
-    }
-  }, "Weekly Foot Training Guide"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      letterSpacing: 2,
-      color: "#facc15",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 7
-    }
-  }, "Daily / Multiple Times a Day"), ["foot-dome", "toe-splay-standing", "toe-extension-standing", "big-toe-standing", "heel-walks"].map(id => {
-    const ex = RH_FOOT.find(e => e.id === id);
-    return ex ? /*#__PURE__*/React.createElement("div", {
-      key: id,
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "5px 0",
-        borderBottom: "1px solid #181818"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10.5,
-        color: "#d8d8d8"
-      }
-    }, ex.name), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        color: "#facc15"
-      }
-    }, "daily")) : null;
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      letterSpacing: 2,
-      color: "#fbbf24",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 7,
-      marginTop: 12
-    }
-  }, "Needs Rest Days — Real Strength Loading"), ["calf-raise-stairs", "towel-scrunch-standing"].map(id => {
-    const ex = RH_FOOT.find(e => e.id === id);
-    return ex ? /*#__PURE__*/React.createElement("div", {
-      key: id,
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "5px 0",
-        borderBottom: "1px solid #181818"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10.5,
-        color: "#d8d8d8"
-      }
-    }, ex.name), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        color: "#fbbf24"
-      }
-    }, id === "calf-raise-stairs" ? "3-4x/wk" : "4-5x/wk")) : null;
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      color: "#8a8a8a",
-      lineHeight: 1.7,
-      marginTop: 10
-    }
-  }, "Tap any exercise below for the full breakdown — the exact reasoning for its frequency is in its \"Progression\" section.")), RH_FOOT.map(ex => {
-    const open = expanded === ex.id;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ex.id,
-      style: card(false)
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => toggle(ex.id),
-      style: {
-        width: "100%",
-        background: "none",
-        border: "none",
-        padding: "12px 12px",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: 10,
-        cursor: "pointer",
-        textAlign: "left"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 13,
-        color: "#fffbe0",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 3
-      }
-    }, ex.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#e8dcc0",
-        marginBottom: 5,
-        lineHeight: 1.6
-      }
-    }, ex.desc), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        gap: 8,
-        fontSize: 9,
-        color: "#8a7020",
-        flexWrap: "wrap"
-      }
-    }, /*#__PURE__*/React.createElement("span", null, "⏱ ", ex.time), /*#__PURE__*/React.createElement("span", null, "🔄 ", ex.reps), /*#__PURE__*/React.createElement("span", null, "📦 ", ex.equip), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15"
-      }
-    }, ex.diff)), ex.freq && /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: 6,
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 5,
-        background: "#2e2708",
-        border: "1px solid #facc1533",
-        borderRadius: 3,
-        padding: "3px 8px"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9
-      }
-    }, "🔁"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9.5,
-        color: "#facc15"
-      }
-    }, ex.freq.split(".")[0]))), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
-        fontSize: 18,
-        flexShrink: 0
-      }
-    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: "0 12px 14px",
-        borderTop: "1px solid #332b0c"
-      },
-      className: "fa"
-    }, ex.freq && /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: 10,
         marginBottom: 10,
-        background: "#2e2708",
-        borderLeft: "2px solid #facc15",
+        background: `${color}10`,
+        borderLeft: `2px solid ${color}`,
         borderRadius: "0 4px 4px 0",
         padding: "8px 10px"
       }
@@ -7751,21 +7862,36 @@ function RecoveryHubScreen() {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#facc15",
+        color,
         textTransform: "uppercase",
         marginBottom: 3
       }
     }, "How Often"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 10.5,
-        color: "#e0d8b8",
-        lineHeight: 1.7
+        color: "#c8d0e0",
+        lineHeight: 1.7,
+        marginBottom: 6
       }
-    }, ex.freq)), /*#__PURE__*/React.createElement("div", {
+    }, ex.freq), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#facc15",
+        color,
+        textTransform: "uppercase",
+        marginBottom: 3
+      }
+    }, "Rest"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: "#c8d0e0",
+        lineHeight: 1.7
+      }
+    }, ex.rest)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        letterSpacing: 2,
+        color,
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8,
@@ -7777,10 +7903,10 @@ function RecoveryHubScreen() {
         display: "flex",
         gap: 10,
         marginBottom: 8,
-        background: "#0e0c07",
+        background: "#080c14",
         borderRadius: 4,
         padding: "8px 10px",
-        border: "1px solid #332b0c"
+        border: "1px solid #1a2030"
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -7788,8 +7914,8 @@ function RecoveryHubScreen() {
         height: 22,
         borderRadius: "50%",
         flexShrink: 0,
-        background: "#332705",
-        border: "1px solid #facc15",
+        background: "#0a1420",
+        border: `1px solid ${color}`,
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
@@ -7797,27 +7923,27 @@ function RecoveryHubScreen() {
     }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 9,
-        color: "#facc15",
+        color,
         fontFamily: "'Bebas Neue',sans-serif"
       }
     }, s.n)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12,
-        color: "#fffbe0",
+        fontSize: 11,
+        color: "#e8f4ff",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, s.t), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
-        color: "#e0d8b8",
+        fontSize: 10,
+        color: C.muted,
         lineHeight: 1.7
       }
     }, s.d)))), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#facc15",
+        color,
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 6,
@@ -7832,21 +7958,21 @@ function RecoveryHubScreen() {
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#facc15",
-        fontSize: 12,
+        color,
+        fontSize: 11,
         flexShrink: 0
       }
     }, "✓"), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
-        color: "#e0d8b8",
+        fontSize: 10,
+        color: C.muted,
         lineHeight: 1.7
       }
     }, f))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 12,
-        background: "#04121a",
-        border: "1px solid #0e3a4a",
+        background: "#0a1420",
+        border: "1px solid #164a5a",
         borderRadius: 4,
         padding: "10px 12px"
       }
@@ -7859,32 +7985,32 @@ function RecoveryHubScreen() {
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8
       }
-    }, "⚡ Standing Engagement Cues"), ex.cues.map((cu, i) => /*#__PURE__*/React.createElement("div", {
+    }, "⚡ Cues"), ex.cues.map((cu, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        background: "#050f14",
+        background: "#081420",
         borderRadius: 4,
         padding: "8px 10px",
         marginBottom: 7
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
+        fontSize: 10,
         color: "#67e8f9",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 4
       }
     }, cu.t), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
-        color: "#e0d8b8",
+        fontSize: 10,
+        color: C.muted,
         lineHeight: 1.7
       }
     }, cu.d)))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
-        background: "#141105",
-        border: "1px solid #3a2a0f",
+        background: "#140e08",
+        border: "1px solid #4a3a10",
         borderRadius: 4,
         padding: "10px 12px"
       }
@@ -7900,7 +8026,7 @@ function RecoveryHubScreen() {
     }, "Common Errors & Fixes"), ex.errors.map((er, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        background: "#100e05",
+        background: "#0f0a05",
         border: "1px solid #78350f44",
         borderRadius: 4,
         padding: "9px 10px",
@@ -7908,7 +8034,7 @@ function RecoveryHubScreen() {
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
+        fontSize: 10,
         color: "#fbbf24",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 5
@@ -7916,35 +8042,35 @@ function RecoveryHubScreen() {
     }, "❌ ", er.e), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 9,
-        color: "#5a5030",
+        color: "#8a7550",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, "Why"), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
-        color: "#e0d8b8",
+        fontSize: 10,
+        color: C.muted,
         lineHeight: 1.7,
         marginBottom: 6
       }
     }, er.w), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 9,
-        color: "#5a5030",
+        color: "#8a7550",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 2
       }
     }, "Fix"), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
-        color: "#e0d8b8",
+        fontSize: 10,
+        color: C.muted,
         lineHeight: 1.7
       }
     }, er.f)))), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
-        background: "#100d04",
-        border: "1px solid #332b0c",
+        background: `${color}10`,
+        border: `1px solid ${color}44`,
         borderRadius: 4,
         padding: "10px 12px"
       }
@@ -7952,7 +8078,7 @@ function RecoveryHubScreen() {
       style: {
         fontSize: 8,
         letterSpacing: 2,
-        color: "#facc15",
+        color,
         textTransform: "uppercase",
         fontFamily: "'DM Mono',monospace",
         marginBottom: 8
@@ -7966,1218 +8092,142 @@ function RecoveryHubScreen() {
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        color: "#facc15",
-        fontSize: 11,
+        color,
+        fontSize: 10,
         flexShrink: 0
       }
     }, "›"), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
-        color: "#e0d8b8",
+        fontSize: 10,
+        color: C.muted,
         lineHeight: 1.7
       }
     }, pr))))));
-  })), rhTab === "workouts" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fa"
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
-      color: "#facc15",
-      fontFamily: "'Bebas Neue',sans-serif",
-      letterSpacing: 1,
-      marginBottom: 8
-    }
-  }, "Toe & Arch Workout Program"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10.5,
-      color: "#e0d8b8",
-      lineHeight: 1.8,
-      marginBottom: 12
-    }
-  }, RH_WORKOUT_INTRO.overview), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: "#332b0c",
-      border: "1px solid #4a3f10",
-      borderRadius: 6,
-      padding: "11px 12px",
       marginBottom: 14
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 8,
+      fontFamily: "'Bebas Neue',sans-serif",
+      fontSize: 22,
       letterSpacing: 2,
-      color: "#fbbf24",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 6
+      color: "#e0e0ec"
     }
-  }, "The Correction Phase"), /*#__PURE__*/React.createElement("div", {
+  }, "FOOT HUB"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10.5,
-      color: "#e0d8b8",
+      fontSize: 11,
+      color: C.muted,
+      marginTop: 6,
       lineHeight: 1.8
     }
-  }, RH_WORKOUT_INTRO.correctionPhase)), /*#__PURE__*/React.createElement("div", {
+  }, "Foot and calf control, beginner to advanced — the dome, big toe isolation, calf strength and flexibility, and full fascial integration. Tap any exercise for the full cue breakdown.")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 8,
-      letterSpacing: 2,
-      color: "#8a7020",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 8
+      display: "flex",
+      gap: 6,
+      marginBottom: 16,
+      overflowX: "auto"
     }
-  }, "Toe Spreaders (Equipment)"), RH_WORKOUT_INTRO.equipment.map((eq, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
+  }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    onClick: () => {
+      setFhTab(t.id);
+      setExpanded(null);
+    },
     style: {
-      background: "#100d04",
-      border: "1px solid #332b0c",
-      borderRadius: 6,
-      padding: "10px 12px",
-      marginBottom: 8
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 11,
-      color: "#fffbe0",
-      marginBottom: 4
-    }
-  }, eq.name), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      color: "#e0d8b8",
-      lineHeight: 1.7,
-      marginBottom: 6
-    }
-  }, eq.desc), /*#__PURE__*/React.createElement("div", {
-    style: {
+      flexShrink: 0,
+      background: fhTab === t.id ? `${FH_COLOR[t.id] || FH_COLOR.day}18` : "transparent",
+      border: `1px solid ${fhTab === t.id ? FH_COLOR[t.id] || FH_COLOR.day : C.border}`,
+      color: fhTab === t.id ? FH_COLOR[t.id] || FH_COLOR.day : C.muted,
       fontSize: 9,
-      color: "#8a7020",
+      letterSpacing: 0.5,
+      padding: "9px 10px",
+      borderRadius: 20,
+      cursor: "pointer",
       fontFamily: "'DM Mono',monospace",
-      marginBottom: 3
+      whiteSpace: "nowrap"
     }
-  }, "HOW TO USE"), /*#__PURE__*/React.createElement("div", {
+  }, t.label))), fhTab !== "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
-      color: "#e8dcc0",
-      lineHeight: 1.7
-    }
-  }, eq.use))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      letterSpacing: 2,
-      textTransform: "uppercase",
-      marginTop: 16,
-      marginBottom: 6
-    }
-  }, "Strength — 3x/week"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      color: "#8a7020",
-      lineHeight: 1.7,
-      marginBottom: 10
-    }
-  }, "Rest at least a day between strength sessions. Run all 6 exercises in order, then move into the flexibility block below in the same session."), RH_WORKOUT_STRENGTH.map(ex => {
-    const open = expanded === ex.id;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ex.id,
-      style: card(false)
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => toggle(ex.id),
-      style: {
-        width: "100%",
-        background: "none",
-        border: "none",
-        padding: "12px 12px",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: 10,
-        cursor: "pointer",
-        textAlign: "left"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 13,
-        color: "#fffbe0",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 3
-      }
-    }, ex.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9.5,
-        color: "#facc15"
-      }
-    }, "🔄 ", ex.dose)), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
-        fontSize: 18,
-        flexShrink: 0
-      }
-    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: "0 12px 14px",
-        borderTop: "1px solid #332b0c"
-      },
-      className: "fa"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#facc15",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 6,
-        marginTop: 10
-      }
-    }, "Execution"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10.5,
-        color: "#e0d8b8",
-        lineHeight: 1.8,
-        marginBottom: 10
-      }
-    }, ex.execution), ex.note && /*#__PURE__*/React.createElement("div", {
-      style: {
-        background: "#100d04",
-        borderLeft: "2px solid #facc15",
-        borderRadius: "0 4px 4px 0",
-        padding: "8px 10px"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: "#c8bc90",
-        lineHeight: 1.7,
-        fontStyle: "italic"
-      }
-    }, ex.note))));
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      letterSpacing: 2,
-      textTransform: "uppercase",
-      marginTop: 18,
-      marginBottom: 6
-    }
-  }, "Flexibility — Same Session, After Strength"), RH_WORKOUT_FLEX.map(ex => {
-    const open = expanded === ex.id;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ex.id,
-      style: card(false)
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => toggle(ex.id),
-      style: {
-        width: "100%",
-        background: "none",
-        border: "none",
-        padding: "12px 12px",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: 10,
-        cursor: "pointer",
-        textAlign: "left"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 13,
-        color: "#fffbe0",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 3
-      }
-    }, ex.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9.5,
-        color: "#facc15"
-      }
-    }, "🔄 ", ex.dose)), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
-        fontSize: 18,
-        flexShrink: 0
-      }
-    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: "0 12px 14px",
-        borderTop: "1px solid #332b0c"
-      },
-      className: "fa"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        letterSpacing: 2,
-        color: "#facc15",
-        textTransform: "uppercase",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 6,
-        marginTop: 10
-      }
-    }, "Execution"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10.5,
-        color: "#e0d8b8",
-        lineHeight: 1.8
-      }
-    }, ex.execution)));
-  })), rhTab === "protocol" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#e8ddc0",
-      fontFamily: "'DM Mono',monospace",
+      fontSize: 10.5,
+      color: C.muted,
       lineHeight: 1.8,
-      marginBottom: 12
+      marginBottom: 14,
+      padding: "9px 11px",
+      background: `${tierColor}10`,
+      border: `1px solid ${tierColor}33`,
+      borderRadius: 6
     }
-  }, "7-day activation protocol. Complete before returning to full GOATA training."), RH_PROTOCOL.map(d => {
-    const done = dayDone[d.day];
-    const open = expanded === `rp${d.day}`;
-    return /*#__PURE__*/React.createElement("div", {
-      key: d.day,
-      style: {
-        ...card(done),
-        border: `1px solid ${done ? "#eab308" : d.day === curDay ? "#facc15" : "#0f1f14"}`
-      }
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => toggle(`rp${d.day}`),
-      style: {
-        width: "100%",
-        background: "none",
-        border: "none",
-        padding: "11px 12px",
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-        cursor: "pointer",
-        textAlign: "left"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 28,
-        height: 28,
-        borderRadius: "50%",
-        flexShrink: 0,
-        background: done ? "#eab308" : d.day === curDay ? "#facc1530" : "#141005",
-        border: `2px solid ${done ? "#facc15" : d.day === curDay ? "#facc15" : "#4a3f10"}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 12,
-        fontFamily: "'Bebas Neue',sans-serif",
-        color: done ? "#fff" : d.day === curDay ? "#facc15" : "#8a7020"
-      }
-    }, done ? "✓" : d.day)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: "#fffbe0",
-        fontFamily: "'DM Mono',monospace",
-        marginBottom: 2
-      }
-    }, "Day ", d.day), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#8a7020"
-      }
-    }, d.focus)), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: "#facc15",
-        fontSize: 16,
-        flexShrink: 0
-      }
-    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: "0 12px 12px",
-        borderTop: "1px solid #0f1f14"
-      },
-      className: "fa"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: "#e8dcc0",
-        lineHeight: 1.8,
-        marginTop: 10,
-        marginBottom: 12
-      }
-    }, d.notes), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        gap: 8
-      }
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => setDayDone(dd => ({
-        ...dd,
-        [d.day]: !dd[d.day]
-      })),
-      style: {
-        flex: 1,
-        padding: "8px",
-        background: done ? "#332905" : "#141005",
-        border: `1px solid ${done ? "#facc15" : "#4a3f10"}`,
-        color: done ? "#facc15" : "#8a7020",
-        fontSize: 11,
-        fontFamily: "'DM Mono',monospace",
-        borderRadius: 3,
-        cursor: "pointer"
-      }
-    }, done ? "✓ Complete" : "Mark Complete"), d.day === curDay && d.day < 7 && /*#__PURE__*/React.createElement("button", {
-      onClick: () => setCurDay(c => c + 1),
-      style: {
-        flex: 1,
-        padding: "8px",
-        background: "#332905",
-        border: "1px solid #facc15",
-        color: "#facc15",
-        fontSize: 11,
-        fontFamily: "'DM Mono',monospace",
-        borderRadius: 3,
-        cursor: "pointer"
-      }
-    }, "Next Day →"))));
-  }), /*#__PURE__*/React.createElement("div", {
+  }, fhTab === "beginner" && "Foundational activation and basic mobility — safe to do daily, no real load.", fhTab === "intermediate" && "Building real strength and control — most of these need a rest day or two per week.", fhTab === "advanced" && "Fascial integration, unilateral loading, and combined-pattern control — these ask more of the tissue and need genuine recovery between sessions."), tierData[fhTab].map(ex => exCard(ex, tierColor))), fhTab === "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: 10,
-      background: "#0f0508",
-      border: "1px solid #3f0010",
-      borderRadius: 5,
-      padding: "10px 12px"
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.85,
+      marginBottom: 14,
+      padding: "10px 12px",
+      background: `${FH_COLOR.day}10`,
+      border: `1px solid ${FH_COLOR.day}33`,
+      borderRadius: 6
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      letterSpacing: 2,
-      color: "#f43f5e",
-      textTransform: "uppercase",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 7
-    }
-  }, "Critical Rules"), ["No GOATA walking until Day 7 is complete", "Ice knee 10–15 min after activation, 2–3x daily", "If joint line pain persists, pause and see a PT", "Goal: FEEL glute med AND engage arch while standing by Day 5–6"].map((r, i) => /*#__PURE__*/React.createElement("div", {
+  }, "A complete, appropriately-dosed foot and calf session — meant to stand alone as its own training day rather than being added on top of the tier exercises above. Doing every single exercise from all three tiers in one sitting would be too much; this is the sensibly-scoped version."), FH_DAY_SECTIONS.map((sec, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
-      display: "flex",
-      gap: 8,
-      marginBottom: 5
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: "#f43f5e",
-      fontSize: 9,
-      flexShrink: 0
-    }
-  }, "·"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 11,
-      color: "#fecdd3",
-      lineHeight: 1.6
-    }
-  }, r))))), rhTab === "track" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 12,
-      color: "#fffbe0",
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, "Day ", curDay, " of 7"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setLogOpen(l => !l),
-    style: {
-      background: "#332905",
-      border: "1px solid #facc15",
-      color: "#facc15",
-      fontSize: 11,
-      letterSpacing: 1,
-      padding: "7px 14px",
-      borderRadius: 3,
-      cursor: "pointer",
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, logOpen ? "− Collapse" : "+ Log Today")), logOpen && /*#__PURE__*/React.createElement("div", {
-    className: "fa",
-    style: {
-      background: "#100d04",
-      border: "1px solid #332b0c",
-      borderRadius: 5,
-      padding: "12px 12px",
-      marginBottom: 14
-    }
-  }, [{
-    k: "pain",
-    label: "Knee Pain (1–10)",
-    lo: "No pain",
-    hi: "Severe"
-  }, {
-    k: "glute",
-    label: "Glute Med Feel (1–10)",
-    lo: "Can't feel",
-    hi: "Clear"
-  }, {
-    k: "arch",
-    label: "Arch Engagement (1–10)",
-    lo: "Can't feel",
-    hi: "Clear"
-  }].map(({
-    k,
-    label,
-    lo,
-    hi
-  }) => /*#__PURE__*/React.createElement("div", {
-    key: k,
-    style: {
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: 4
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      letterSpacing: 1,
-      textTransform: "uppercase"
-    }
-  }, label), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 12,
-      color: "#facc15",
-      fontFamily: "'Bebas Neue',sans-serif"
-    }
-  }, tempMetric[k])), /*#__PURE__*/React.createElement("input", {
-    type: "range",
-    min: "1",
-    max: "10",
-    value: tempMetric[k],
-    onChange: e => setTempMetric(t => ({
-      ...t,
-      [k]: +e.target.value
-    })),
-    style: {
-      width: "100%",
-      accentColor: "#facc15"
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "space-between",
-      fontSize: 8,
-      color: "#8a7020",
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, /*#__PURE__*/React.createElement("span", null, lo), /*#__PURE__*/React.createElement("span", null, hi)))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 10
+      marginBottom: 16
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      letterSpacing: 1,
-      textTransform: "uppercase",
-      marginBottom: 5
-    }
-  }, "Knee Tracking Quality"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      gap: 6
-    }
-  }, ["poor", "neutral", "excellent"].map(opt => /*#__PURE__*/React.createElement("button", {
-    key: opt,
-    onClick: () => setTempMetric(t => ({
-      ...t,
-      track: opt
-    })),
-    style: {
-      flex: 1,
-      padding: "6px",
-      background: tempMetric.track === opt ? "#332905" : "transparent",
-      border: `1px solid ${tempMetric.track === opt ? "#facc15" : "#4a3f10"}`,
-      color: tempMetric.track === opt ? "#facc15" : "#8a7020",
-      fontSize: 9,
-      fontFamily: "'DM Mono',monospace",
-      textTransform: "uppercase",
-      borderRadius: 3,
-      cursor: "pointer"
-    }
-  }, opt)))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 10
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: "#facc15",
-      fontFamily: "'DM Mono',monospace",
-      letterSpacing: 1,
-      textTransform: "uppercase",
-      marginBottom: 4
-    }
-  }, "Notes"), /*#__PURE__*/React.createElement("textarea", {
-    value: tempMetric.notes,
-    onChange: e => setTempMetric(t => ({
-      ...t,
-      notes: e.target.value
-    })),
-    placeholder: "Observations? Foot feel? Knee alignment?",
-    style: {
-      width: "100%",
-      background: "#0e0c07",
-      border: "1px solid #4a3f10",
-      borderRadius: 3,
-      padding: "8px",
-      color: "#e8dcc0",
-      fontSize: 11,
-      fontFamily: "'DM Mono',monospace",
-      height: 64,
-      resize: "none"
-    }
-  })), /*#__PURE__*/React.createElement("button", {
-    onClick: saveLog,
-    style: {
-      width: "100%",
-      padding: "9px",
-      background: "#eab308",
-      border: "none",
-      color: "#fff",
-      fontSize: 12,
-      letterSpacing: 1,
-      fontFamily: "'DM Mono',monospace",
-      borderRadius: 3,
-      cursor: "pointer"
-    }
-  }, "SAVE LOG")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
+      color: FH_COLOR.day,
       letterSpacing: 2,
-      color: "#facc15",
       textTransform: "uppercase",
       fontFamily: "'DM Mono',monospace",
       marginBottom: 8
     }
-  }, "History"), Object.keys(metrics).length === 0 ? /*#__PURE__*/React.createElement("div", {
+  }, sec.label), sec.items.map((it, j) => /*#__PURE__*/React.createElement("div", {
+    key: j,
     style: {
-      textAlign: "center",
-      padding: "24px",
-      fontSize: 11,
-      color: "#4a3d10",
-      fontFamily: "'DM Mono',monospace"
-    }
-  }, "No logs yet — start tracking today") : Object.entries(metrics).sort((a, b) => +b[0] - +a[0]).map(([day, m]) => /*#__PURE__*/React.createElement("div", {
-    key: day,
-    style: {
-      background: "#100d04",
-      border: "1px solid #332b0c",
-      borderRadius: 5,
-      padding: "10px 12px",
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "11px 13px",
       marginBottom: 8
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       justifyContent: "space-between",
-      marginBottom: 8
+      marginBottom: 4
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
-      color: "#facc15",
+      fontSize: 11.5,
+      color: "#e0ddd8",
       fontFamily: "'DM Mono',monospace"
     }
-  }, "Day ", day), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setMetrics(mm => {
-      const n = {
-        ...mm
-      };
-      delete n[day];
-      return n;
-    }),
+  }, it.ex), /*#__PURE__*/React.createElement("span", {
     style: {
-      background: "none",
-      border: "1px solid #3f0010",
-      color: "#f43f5e",
-      fontSize: 8,
-      padding: "2px 8px",
-      borderRadius: 2,
-      cursor: "pointer",
-      fontFamily: "'DM Mono',monospace"
+      fontSize: 10,
+      color: FH_COLOR.day
     }
-  }, "Delete")), /*#__PURE__*/React.createElement("div", {
+  }, it.dose)), /*#__PURE__*/React.createElement("div", {
     style: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr 1fr",
-      gap: 8,
-      marginBottom: 6
+      fontSize: 9.5,
+      color: "#8a8fa0",
+      fontStyle: "italic"
     }
-  }, [["Pain", m.pain], ["Glute", m.glute], ["Arch", m.arch]].map(([l, v]) => /*#__PURE__*/React.createElement("div", {
-    key: l,
+  }, it.ref))))), /*#__PURE__*/React.createElement("div", {
     style: {
-      textAlign: "center"
+      fontSize: 10,
+      color: C.muted,
+      lineHeight: 1.8,
+      marginTop: 6,
+      fontStyle: "italic"
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 7,
-      color: "#8a7020",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 2
-    }
-  }, l), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 18,
-      color: "#facc15",
-      fontFamily: "'Bebas Neue',sans-serif"
-    }
-  }, v || "—")))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      color: "#8a7020",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 2
-    }
-  }, "Tracking"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 11,
-      color: "#e8dcc0",
-      textTransform: "capitalize",
-      marginBottom: m.notes ? 8 : 0
-    }
-  }, m.track || "—"), m.notes && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      color: "#8a7020",
-      fontFamily: "'DM Mono',monospace",
-      marginBottom: 2
-    }
-  }, "Notes"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 11,
-      color: "#e8dcc0",
-      lineHeight: 1.7
-    }
-  }, m.notes)))))));
+  }, "Run this 2-3x per week, with a rest day between sessions — it combines strength and advanced-tier work, so it needs real recovery like any complete training day.")));
 }
-
-/* ════════════════════════════════════════════════════════════════════════
-   GOATA PROTOCOL (Recode Movement System) — injected into hub
-   ════════════════════════════════════════════════════════════════════════ */
-
-const GP_DB = {
-  "Hip Rocker": {
-    desc: "Seated on the floor, actively rock your hips side to side. Movement initiates from the pelvis — not the lumbar spine.",
-    cues: ["Pelvis leads the movement", "Keep chest tall throughout", "Full range every direction"],
-    yt: "hip+rocker+recode+movement",
-    ytUrl: "https://www.youtube.com/watch?v=yn4qiqSlUgY"
-  },
-  "Hip Stretch": {
-    desc: "Deep stretch targeting hip flexors and rotators. Hold and breathe, letting tissues release with each exhale.",
-    cues: ["Breathe fully into the stretch", "Don't force — relax in", "Feel the hip capsule open"],
-    yt: "hip+stretch+recode+mobility",
-    ytUrl: "https://www.youtube.com/watch?v=Q4Ko275cluo"
-  },
-  "Child Rocker": {
-    desc: "From child's pose, rock forward and back rhythmically. Decompresses the lumbar spine and mobilizes hips, knees, and ankles.",
-    cues: ["Arms reach long overhead", "Sit back toward heels on each rock", "Fluid, rhythmic motion"],
-    yt: "child+rocker+recode+movement",
-    ytUrl: "https://www.youtube.com/watch?v=0WpzRG1_lRo"
-  },
-  "Toe Tuck Rocker": {
-    desc: "Child's pose with toes tucked under. Rock forward and back to progressively stretch the plantar fascia and ankles.",
-    cues: ["All toes fully tucked", "Rock slowly — feel the stretch", "Breathe through the tension"],
-    yt: "toe+tuck+rocker+recode"
-  },
-  "Good Morning Rocker": {
-    desc: "Hip-hinge based rocking. Trains the posterior chain loading mechanism through rhythmic, controlled motion.",
-    cues: ["Hinge from hips, not waist", "Soft bend in knees", "Back stays flat"],
-    yt: "good+morning+rocker+recode"
-  },
-  "Rocker Fly": {
-    desc: "Combines the rocking pattern with an upper body opening movement. Mobilizes thoracic spine and shoulders simultaneously.",
-    cues: ["Open chest on the fly", "Coordinate with your breath", "Don't collapse through thoracic"],
-    yt: "rocker+fly+recode+movement"
-  },
-  "Side to Side Rocker": {
-    desc: "Lateral rocking from a ground or kneeling position. Loads the hip abductors and lateral chain through active, rhythmic motion.",
-    cues: ["Drive from the hip, not shoulder", "Control the descent each side", "Full lateral reach"],
-    yt: "side+to+side+rocker+recode"
-  },
-  "Half Crawl": {
-    desc: "Cross-crawl pattern on hands and knees. Builds contralateral coordination while challenging hip and shoulder stability.",
-    cues: ["Opposite arm + leg extend", "Don't rotate pelvis or torso", "Light core brace each rep"],
-    yt: "half+crawl+recode+movement"
-  },
-  "Half Kneeling": {
-    desc: "Static hold in half-kneeling. Builds hip flexor length and deep single-leg stability over time.",
-    cues: ["Tall spine — no forward lean", "Squeeze the back glute", "Core on throughout"],
-    yt: "half+kneeling+recode+movement"
-  },
-  "Half Kneeling Stretch": {
-    desc: "Hip flexor stretch in half-kneeling with optional lateral or rotational component for deeper ranges.",
-    cues: ["Drive hips slowly forward", "Maintain pelvic control", "Breathe and hold"],
-    yt: "half+kneeling+stretch+recode"
-  },
-  "Elbow Curls": {
-    desc: "Hands at temples, rotate arms forward bringing elbows together — then fully open back. Warms up the rotator cuff and thoracic.",
-    cues: ["Hands stay at temples always", "Full forward and back range", "Slow and deliberate"],
-    yt: "elbow+curls+shoulder+mobility+exercise"
-  },
-  "Forward Circles": {
-    desc: "Full arm circles rotating forward. Warms up the entire shoulder girdle through circular range of motion.",
-    cues: ["Circles are smooth and fluid", "Gradually increase size", "Feel scapular motion"],
-    yt: "forward+arm+circles+shoulder+warmup"
-  },
-  "Reverse Circles": {
-    desc: "Full arm circles rotating backward. Targets posterior shoulder and thoracic extension with each rotation.",
-    cues: ["Fully reverse the direction", "Feel scapular retraction", "Control the speed"],
-    yt: "reverse+arm+circles+shoulder+mobility"
-  },
-  "Band Over and Back": {
-    desc: "Band held wide — pass overhead and behind the body, then return. Opens the anterior shoulder through full rotation.",
-    cues: ["Keep arms completely straight", "Wider grip = easier", "Full rotation every rep"],
-    yt: "band+over+and+back+shoulder"
-  },
-  "Band Front Pull Apart": {
-    desc: "Hold band at chest height, pull apart horizontally. Activates rear delts, rhomboids, and mid-traps.",
-    cues: ["Squeeze shoulder blades on pull", "Don't shrug the movement", "Control the return"],
-    yt: "band+front+pull+apart+shoulder"
-  },
-  "Band Back Pull Apart": {
-    desc: "Hold band behind the body and pull apart. Opens chest and strengthens the posterior shoulder chain.",
-    cues: ["Chest opens actively", "Elbows stay soft", "Full range each rep"],
-    yt: "band+back+pull+apart+shoulder"
-  },
-  "Wall Assisted Squat": {
-    desc: "Squat with hands lightly on wall for balance. Learns proper depth, alignment, and second-toe tracking.",
-    cues: ["Second toe tracks straight", "Narrow stance", "Heels firmly grounded"],
-    yt: "wall+assisted+squat+recode"
-  },
-  "Wall Assisted Hinge": {
-    desc: "Hip hinge with light wall contact for feedback. Grooves the posterior chain loading pattern safely.",
-    cues: ["Hips push directly back", "Back stays flat", "Soft knee bend throughout"],
-    yt: "wall+assisted+hip+hinge+recode"
-  },
-  "Wall Assisted Lunge": {
-    desc: "Lunge with wall support for balance. Trains single-leg loading and lunge mechanics with assistance.",
-    cues: ["Light touch — not lean", "Back knee toward floor controlled", "Front shin stays vertical"],
-    yt: "wall+assisted+lunge+recode"
-  },
-  "Unassisted Squat": {
-    desc: "Full bodyweight squat with no support. Apply all mechanics from wall-assisted work — depth, stance, alignment.",
-    cues: ["Arms extend for counterbalance", "Chest stays up", "Drive knees over toes"],
-    yt: "unassisted+bodyweight+squat+form"
-  },
-  "Unassisted Hinge": {
-    desc: "Freestanding hip hinge. Tests stability and posterior chain mechanics without wall support.",
-    cues: ["Hip crease drives back", "Weight shifts to heels", "Squeeze glutes hard at top"],
-    yt: "unassisted+hip+hinge+form"
-  },
-  "Unassisted Lunge": {
-    desc: "Freestanding lunge with controlled descent. Full single-leg loading without balance assistance.",
-    cues: ["Torso stays upright", "Control every inch down", "Push through front heel to rise"],
-    yt: "unassisted+lunge+form"
-  },
-  "Weighted Squat": {
-    desc: "Loaded squat maintaining all form cues from prior progressions. Add load only after mechanics are automatic.",
-    cues: ["Load shouldn't change form", "Brace before descending", "Full depth every rep"],
-    yt: "weighted+squat+recode+movement"
-  },
-  "Weighted Hinge": {
-    desc: "Loaded hip hinge building posterior chain strength. Deadlift or kettlebell variation with strict mechanics.",
-    cues: ["Weight tracks close to body", "This is a hinge — not a squat", "Lock hips fully at top"],
-    yt: "weighted+hip+hinge+recode"
-  },
-  "Weighted Lunge": {
-    desc: "Loaded lunge increasing single-leg strength and stability demands. All prior form cues apply under load.",
-    cues: ["Load shouldn't shift posture", "Controlled eccentric tempo", "Full range every rep"],
-    yt: "weighted+lunge+recode"
-  },
-  "Bolt Squat Iso Hold": {
-    desc: "Isometric hold at the bottom of the Bolt Squat position. Builds tendon resilience and joint capacity at end range.",
-    cues: ["Hold actively — not collapsed", "Breathe steadily throughout", "Maintain position with intent"],
-    yt: "bolt+squat+iso+hold+recode"
-  },
-  "Bolt Flow": {
-    desc: "Dynamic movement through the full Bolt Squat pattern. Combines deep mobility and strength in a fluid sequence.",
-    cues: ["Flow through positions smoothly", "Don't rush transitions", "Full expression each position"],
-    yt: "bolt+flow+recode+movement"
-  },
-  "Drop In Lunge": {
-    desc: "Deep extended lunge dropped from standing. Demands full hip, knee, and ankle mobility through a large range of motion.",
-    cues: ["Control the drop — no crashing", "Back knee makes soft contact", "Chest tall throughout"],
-    yt: "drop+in+lunge+recode"
-  },
-  "Drop In": {
-    desc: "Isometric hold in the deep drop-in lunge position. Loads hip flexors and knee at end range for tissue adaptation.",
-    cues: ["Active hold — not passive hang", "Full hip flexor length", "Even weight distribution"],
-    yt: "drop+in+hold+recode+movement"
-  },
-  "Drop In Taps": {
-    desc: "From drop-in position, small controlled foot taps. Builds proprioception and motor control at end range.",
-    cues: ["Small controlled taps only", "Maintain hip position throughout", "Don't collapse between taps"],
-    yt: "drop+in+taps+recode"
-  },
-  "Slides": {
-    desc: "Lateral sliding in squat position. Builds adductor and abductor strength with dynamic hip stability across directions.",
-    cues: ["Control the slide speed", "Maintain squat depth", "Push off planted foot to return"],
-    yt: "slides+squat+recode+movement"
-  }
-};
-const GP_ROUTINES = {
-  p1: [{
-    id: "ground",
-    label: "GROUND",
-    title: "Ground Rest",
-    type: "info",
-    goal: "Build capacity for ground sitting — the mobility foundation.",
-    progression: "Start with 5 min/day. Add 5 min per week until ~1 hour.",
-    notes: ["Switch positions before legs go numb", "Add support under butt or knees if too challenging", "Passive loading for hips, knees, and ankles accumulates over time"]
-  }, {
-    id: "walk",
-    label: "WALK",
-    title: "Walking & Standing",
-    type: "info",
-    goal: "Establish correct foot and gait mechanics in every step of daily life.",
-    progression: "Apply to all movement — walking, standing, and everything else.",
-    notes: ["Second toe points straight ahead", "Use a narrow stance width", "Majority of weight through 3 points: big toe, little toe, heel"]
-  }, {
-    id: "r11",
-    label: "1.1",
-    title: "Routine 1.1",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    exercises: [{
-      name: "Hip Rocker",
-      reps: "20 reps/side"
-    }, {
-      name: "Hip Stretch",
-      reps: "45 sec/side"
-    }, {
-      name: "Child Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Toe Tuck Rocker",
-      reps: "20 reps"
-    }]
-  }, {
-    id: "r12",
-    label: "1.2",
-    title: "Routine 1.2",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    exercises: [{
-      name: "Hip Rocker",
-      reps: "20 reps/side"
-    }, {
-      name: "Hip Stretch",
-      reps: "45 sec/side"
-    }, {
-      name: "Child Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Good Morning Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Rocker Fly",
-      reps: "20 reps"
-    }, {
-      name: "Side to Side Rocker",
-      reps: "20 reps/side"
-    }, {
-      name: "Half Crawl",
-      reps: "10 reps/side"
-    }, {
-      name: "Toe Tuck Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Half Kneeling",
-      reps: "45 sec/side"
-    }]
-  }, {
-    id: "r13",
-    label: "1.3",
-    title: "Routine 1.3",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    exercises: [{
-      name: "Hip Rocker",
-      reps: "20 reps/side"
-    }, {
-      name: "Hip Stretch",
-      reps: "45 sec/side"
-    }, {
-      name: "Child Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Toe Tuck Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Rocker Fly",
-      reps: "20 reps"
-    }, {
-      name: "Half Kneeling Stretch",
-      reps: "45 sec/side",
-      optional: true
-    }, {
-      name: "Elbow Curls",
-      reps: "20 reps",
-      section: "SHOULDER SERIES"
-    }, {
-      name: "Forward Circles",
-      reps: "20 reps"
-    }, {
-      name: "Reverse Circles",
-      reps: "20 reps"
-    }, {
-      name: "Band Over and Back",
-      reps: "20 reps",
-      section: "RESISTANCE BANDS"
-    }, {
-      name: "Band Front Pull Apart",
-      reps: "20 reps"
-    }, {
-      name: "Band Back Pull Apart",
-      reps: "20 reps"
-    }]
-  }],
-  p2: [{
-    id: "r20",
-    label: "2.0",
-    title: "Routine 2.0 — Warm-Up",
-    sets: "2–5 rounds/day",
-    progression: "Also do 1 round as warm-up before every Phase 2 routine.",
-    warmup: true,
-    exercises: [{
-      name: "Hip Rocker",
-      reps: "20 reps/side"
-    }, {
-      name: "Hip Stretch",
-      reps: "45 sec/side"
-    }, {
-      name: "Child Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Toe Tuck Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Rocker Fly",
-      reps: "20 reps"
-    }, {
-      name: "Side to Side Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Half Kneeling Stretch",
-      reps: "45 sec",
-      optional: true
-    }, {
-      name: "Elbow Curls",
-      reps: "20 reps",
-      section: "SHOULDER SERIES"
-    }, {
-      name: "Forward Circles",
-      reps: "20 reps"
-    }, {
-      name: "Reverse Circles",
-      reps: "20 reps"
-    }, {
-      name: "Band Over and Back",
-      reps: "20 reps",
-      section: "RESISTANCE BANDS"
-    }, {
-      name: "Band Front Pull Apart",
-      reps: "20 reps"
-    }, {
-      name: "Band Back Pull Apart",
-      reps: "20 reps"
-    }]
-  }, {
-    id: "r21",
-    label: "2.1",
-    title: "Routine 2.1",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    note: "Warm up with 2.0 first.",
-    exercises: [{
-      name: "Wall Assisted Squat",
-      reps: "20 reps"
-    }, {
-      name: "Wall Assisted Hinge",
-      reps: "20 reps"
-    }, {
-      name: "Wall Assisted Lunge",
-      reps: "20 reps/side"
-    }]
-  }, {
-    id: "r22",
-    label: "2.2",
-    title: "Routine 2.2",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    note: "Warm up with 2.0 first.",
-    exercises: [{
-      name: "Unassisted Squat",
-      reps: "20 reps"
-    }, {
-      name: "Unassisted Hinge",
-      reps: "20 reps"
-    }, {
-      name: "Unassisted Lunge",
-      reps: "20 reps/side"
-    }]
-  }, {
-    id: "r23",
-    label: "2.3",
-    title: "Routine 2.3",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    note: "Warm up with 2.0 first.",
-    exercises: [{
-      name: "Weighted Squat",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Hinge",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Lunge",
-      reps: "20 reps/side"
-    }]
-  }],
-  p3: [{
-    id: "r30",
-    label: "3.0",
-    title: "Routine 3.0 — Warm-Up",
-    sets: "1–3 rounds",
-    progression: "Do before each Phase 3 routine.",
-    warmup: true,
-    exercises: [{
-      name: "Hip Rocker",
-      reps: "20 reps/side"
-    }, {
-      name: "Hip Stretch",
-      reps: "45 sec/side"
-    }, {
-      name: "Child Rocker",
-      reps: "20 reps"
-    }, {
-      name: "Toe Tuck Rocker",
-      reps: "20 reps"
-    }]
-  }, {
-    id: "r31",
-    label: "3.1",
-    title: "Routine 3.1",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    note: "Warm up with 3.0 first.",
-    exercises: [{
-      name: "Weighted Squat",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Hinge",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Lunge",
-      reps: "10–20 reps/side"
-    }, {
-      name: "Bolt Squat Iso Hold",
-      reps: "45 sec"
-    }, {
-      name: "Bolt Flow",
-      reps: "20 reps"
-    }]
-  }, {
-    id: "r32",
-    label: "3.2",
-    title: "Routine 3.2",
-    sets: "3–5 rounds/day",
-    progression: "1–3 weeks. Move on when it feels easy.",
-    note: "Warm up with 3.0 first.",
-    exercises: [{
-      name: "Weighted Squat",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Hinge",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Lunge",
-      reps: "10–20 reps/side"
-    }, {
-      name: "Bolt Squat Iso Hold",
-      reps: "45 sec"
-    }, {
-      name: "Bolt Flow",
-      reps: "20 reps"
-    }, {
-      name: "Drop In Lunge",
-      reps: "10–20 reps/side"
-    }, {
-      name: "Drop In",
-      reps: "45 sec/side"
-    }]
-  }, {
-    id: "r33",
-    label: "3.3",
-    title: "Routine 3.3",
-    sets: "3–5 rounds/day",
-    progression: "Final stage. Master before adding more external load.",
-    note: "Warm up with 3.0 first.",
-    exercises: [{
-      name: "Weighted Squat",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Hinge",
-      reps: "20 reps"
-    }, {
-      name: "Weighted Lunge",
-      reps: "10–20 reps/side"
-    }, {
-      name: "Bolt Squat Iso Hold",
-      reps: "45 sec"
-    }, {
-      name: "Bolt Flow",
-      reps: "10–20 reps"
-    }, {
-      name: "Drop In Lunge",
-      reps: "10–20 reps/side"
-    }, {
-      name: "Drop In",
-      reps: "45 sec/side"
-    }, {
-      name: "Drop In Taps",
-      reps: "10–20 reps/side"
-    }, {
-      name: "Slides",
-      reps: "10–20 reps each direction"
-    }]
-  }]
-};
-const GP_COLORS = {
-  p1: "#00E87A",
-  p2: "#FF6B35",
-  p3: "#9B59FF"
-};
-const GP_LABELS = {
-  p1: "PHASE 1 — FOUNDATION",
-  p2: "PHASE 2 — LOADING",
-  p3: "PHASE 3 — MASTERY"
-};
 function GpExCard({
   ex,
   color,
@@ -12690,8 +11740,8 @@ function App() {
     label: "GOATA Protocol"
   }, {
     id: "recovery",
-    icon: "🩺",
-    label: "Recovery Hub"
+    icon: "🦶",
+    label: "Foot Hub"
   }, {
     id: "animalflow",
     icon: "🐆",
@@ -12706,7 +11756,7 @@ function App() {
     tendon: "Tendon Lab",
     stride: "GOATA Stride Map",
     protocol: "GOATA Protocol",
-    recovery: "Recovery Hub",
+    recovery: "Foot Hub",
     animalflow: "Animal Flow",
     calisthenics: "Calisthenics"
   };
