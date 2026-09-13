@@ -8228,6 +8228,527 @@ function RecoveryHubScreen() {
     }
   }, "Run this 2-3x per week, with a rest day between sessions — it combines strength and advanced-tier work, so it needs real recovery like any complete training day.")));
 }
+const GP_COLORS = {
+  p1: "#00E87A",
+  p2: "#FF6B35",
+  p3: "#9B59FF"
+};
+const GP_LABELS = {
+  p1: "PHASE 1 · FOUNDATION",
+  p2: "PHASE 2 · LOADING",
+  p3: "PHASE 3 · MASTERY"
+};
+const GP_DB = {
+  "Hip Rocker": {
+    desc: "Seated on the floor, actively rock your hips side to side. Movement initiates from the pelvis — not the lumbar spine.",
+    cues: ["Pelvis leads the movement", "Keep chest tall throughout", "Full range every direction"],
+    yt: "hip+rocker+recode+movement",
+    ytUrl: "https://youtu.be/p4atDtDkReA?si=UkQsT5gmLLIQO_9w"
+  },
+  "Hip Stretch": {
+    desc: "Deep stretch targeting hip flexors and rotators. Hold and breathe, letting tissues release with each exhale.",
+    cues: ["Breathe fully into the stretch", "Don't force — relax in", "Feel the hip capsule open"],
+    yt: "hip+stretch+recode+mobility",
+    ytUrl: "https://youtu.be/ZZ6AXrrYQAM?si=K53gphmqBP0qd4UD"
+  },
+  "Child Rocker": {
+    desc: "From child's pose, rock forward and back rhythmically. Decompresses the lumbar spine and mobilizes hips, knees, and ankles.",
+    cues: ["Arms reach long overhead", "Sit back toward heels on each rock", "Fluid, rhythmic motion"],
+    yt: "child+rocker+recode+movement",
+    ytUrl: "https://youtu.be/oKWbEqy6GF4?si=j6xUBgRQgTbzh1Ic"
+  },
+  "Toe Tuck Rocker": {
+    desc: "Toes tucked under, rock the hips back over the heels and forward again. Builds toe and ankle dorsiflexion tolerance alongside the same hip mobility as the other rockers.",
+    cues: ["Keep the toes tucked the whole time — don't let them flatten out mid-rep", "Rock through a full, controlled range", "Weight shifts back over the heels, not just down"],
+    yt: "toe+tuck+rocker+recode+movement",
+    ytUrl: "https://youtu.be/B5PucCKyWcg?si=G_H6309sbnYnAtHW"
+  },
+  "Good Morning Rocker": {
+    desc: "A hip-hinge pattern layered into the rocking sequence — hips push back while the torso lowers forward, then reverses. Builds the hinge pattern that later loaded work depends on.",
+    cues: ["Hinge from the hips, not the low back", "Keep a slight bend in the knees throughout", "Chest and hips move as a unit"],
+    yt: "good+morning+rocker+recode+movement",
+    ytUrl: "https://youtu.be/O8EFq6cXLio?si=b-LDRV2HYoyq9su9"
+  },
+  "Rocker Fly": {
+    desc: "A rocking pattern with the arms sweeping open like wings, adding thoracic and shoulder mobility on top of the hip movement.",
+    cues: ["Let the arms open fully at the top of the rock", "Keep the rock itself smooth, don't rush it for the arm movement", "Breathe out as the arms open"],
+    yt: "rocker+fly+recode+movement",
+    ytUrl: "https://www.youtube.com/shorts/pEYRte-uTeM"
+  },
+  "Side to Side Rocker": {
+    desc: "Rocking laterally from one hip to the other rather than forward-back, opening the inner thigh and lateral hip through a different plane of motion.",
+    cues: ["Keep both hands or feet grounded as the anchor points", "Full weight shift side to side, not just leaning", "Feel the inner thigh stretch on the extended side"],
+    yt: "side+to+side+rocker+recode+movement",
+    ytUrl: "https://www.youtube.com/shorts/0ZTy_pmEdm4"
+  },
+  "Half Crawl": {
+    desc: "A partial crawling pattern building cross-body coordination and shoulder/hip loading in a quadruped position.",
+    cues: ["Opposite hand and knee move together", "Keep the hips low and controlled", "Core stays braced throughout"],
+    yt: "half+crawl+recode+movement",
+    ytUrl: "https://youtu.be/5C17Sn-i9l0?si=FXd9i2MeyaHp1xjH"
+  },
+  "Half Kneeling": {
+    desc: "A static half-kneeling hold, building hip flexor length on the back leg and frontal-plane hip stability on the front leg.",
+    cues: ["Back knee directly under the hip, not behind it", "Front shin vertical", "Tuck the back hip slightly to feel the stretch"],
+    yt: "half+kneeling+recode+movement",
+    ytUrl: "https://youtu.be/ykxTPeGOi9c?si=Bx9tzmaEGv7Tmrwc"
+  },
+  "Half Kneeling Stretch": {
+    desc: "An optional deeper variation of the half-kneeling hold, held longer to target hip flexor and quad flexibility more directly.",
+    cues: ["Same setup as Half Kneeling, held longer", "Add a gentle posterior pelvic tilt to deepen the stretch", "Optional — include it if hip flexor tightness is limiting other movements"],
+    yt: "half+kneeling+stretch+recode+mobility"
+  },
+  "Elbow Curls": {
+    desc: "A shoulder-series drill circling the elbows to mobilize the shoulder girdle before band work.",
+    cues: ["Keep the movement at the shoulder, not the wrist", "Full circles, both directions if instructed", "Light and controlled — this is mobility prep, not a strength drill"],
+    yt: "elbow+curls+shoulder+mobility+recode",
+    ytUrl: "https://youtu.be/LIYCbPzdDNk?si=zBcvLNWcj82BURfG"
+  },
+  "Forward Circles": {
+    desc: "Arms circling forward through a full range to mobilize the shoulders in the sagittal plane.",
+    cues: ["Full range, arms as straight as comfortable", "Consistent tempo, not rushed", "Keep the ribcage stacked, don't lean back to compensate"],
+    yt: "forward+circles+shoulder+mobility+recode"
+  },
+  "Reverse Circles": {
+    desc: "The same circling pattern reversed, balancing the shoulder mobility work in both directions.",
+    cues: ["Same form as Forward Circles, opposite direction", "Keep shoulders down, not shrugged", "Full range each rep"],
+    yt: "reverse+circles+shoulder+mobility+recode"
+  },
+  "Band Over and Back": {
+    desc: "Holding a band overhead and pulling it back behind the head and down, opening the shoulders through flexion and extension.",
+    cues: ["Keep the band taut throughout, no slack", "Move slowly — this is a mobility drill, not momentum-based", "Stop short of any pinching sensation in the shoulder"],
+    yt: "band+pull+over+and+back+shoulder+mobility"
+  },
+  "Band Front Pull Apart": {
+    desc: "Pulling a band apart at chest height, targeting the muscles between the shoulder blades.",
+    cues: ["Squeeze the shoulder blades together at the end range", "Keep the arms roughly shoulder height", "Control the return, don't let the band snap back"],
+    yt: "band+pull+apart+shoulder+recode"
+  },
+  "Band Back Pull Apart": {
+    desc: "A pull-apart variation performed with the band behind the back, targeting the shoulders and upper back from a different angle.",
+    cues: ["Keep the torso upright, don't lean into the pull", "Control both the pull and the return", "Full range without shoulder pinching"],
+    yt: "band+back+pull+apart+shoulder+recode"
+  },
+  "Wall Assisted Squat": {
+    desc: "A squat performed with light hand support against a wall, building the pattern before removing assistance.",
+    cues: ["Use the wall for balance, not to pull yourself down", "Knees track over the toes", "Full depth as mobility allows"],
+    yt: "wall+assisted+squat+recode+movement",
+    ytUrl: "https://youtu.be/j5a7Sa3WmvA?si=YpN0Z8VP4Mx4jJ9e"
+  },
+  "Wall Assisted Hinge": {
+    desc: "A hip-hinge pattern with light wall support, reinforcing a flat back and hip-driven movement before loading it further.",
+    cues: ["Hips move back first, knees stay soft", "Flat back throughout the hinge", "Wall support is light contact only, not a crutch"],
+    yt: "wall+assisted+hinge+recode+movement",
+    ytUrl: "https://youtu.be/VFcIPdixNvQ"
+  },
+  "Wall Assisted Lunge": {
+    desc: "A lunge pattern with wall support, building single-leg control before removing the assist.",
+    cues: ["Front knee tracks over the foot, not caving in", "Back knee lowers with control", "Wall support only for balance"],
+    yt: "wall+assisted+lunge+recode+movement",
+    ytUrl: "https://youtu.be/_nbxh56_hRQ"
+  },
+  "Unassisted Squat": {
+    desc: "The same squat pattern from the Wall Assisted stage, now performed with no external support — the pattern should hold up on its own before adding load.",
+    cues: ["Same technique as the wall-assisted version, no support this time", "If control breaks down, that's the signal to spend more time at this stage", "Full depth as mobility allows"],
+    yt: "bodyweight+squat+recode+movement",
+    ytUrl: "https://youtu.be/j5a7Sa3WmvA?si=YpN0Z8VP4Mx4jJ9e"
+  },
+  "Unassisted Hinge": {
+    desc: "The hinge pattern performed without wall support, relying on the pattern built in the assisted stage.",
+    cues: ["Hips back, flat back, soft knees — same as before, no wall now", "If the back rounds, reduce range until it stays flat", "Control through the whole rep"],
+    yt: "bodyweight+hinge+recode+movement",
+    ytUrl: "https://youtu.be/VFcIPdixNvQ"
+  },
+  "Unassisted Lunge": {
+    desc: "The lunge pattern performed without wall support, testing single-leg balance and control on its own.",
+    cues: ["Same tracking cues as the assisted version", "Balance may wobble at first — that's expected while adapting", "Control the descent, don't drop into the bottom position"],
+    yt: "bodyweight+lunge+recode+movement",
+    ytUrl: "https://youtu.be/_nbxh56_hRQ"
+  },
+  "Weighted Squat": {
+    desc: "The same squat pattern, now loaded with external weight once the bodyweight version is solid.",
+    cues: ["Load only once the unassisted version is clean and controlled", "Same technique cues as before — the weight shouldn't change the pattern", "Full depth as mobility allows"],
+    yt: "weighted+squat+recode+movement",
+    ytUrl: "https://youtu.be/j5a7Sa3WmvA?si=YpN0Z8VP4Mx4jJ9e"
+  },
+  "Weighted Hinge": {
+    desc: "The hinge pattern loaded with external weight, building real posterior chain strength on top of the established movement pattern.",
+    cues: ["Flat back is non-negotiable once weight is added", "Hips drive the movement, not the low back", "Choose a weight that doesn't break the pattern"],
+    yt: "weighted+hinge+recode+movement",
+    ytUrl: "https://youtu.be/VFcIPdixNvQ"
+  },
+  "Weighted Lunge": {
+    desc: "The lunge pattern loaded with external weight, building single-leg strength on the foundation of the unassisted version.",
+    cues: ["Same tracking and control cues as before, now under load", "Keep the torso upright unless the variation calls for a lean", "Control both directions of the rep"],
+    yt: "weighted+lunge+recode+movement",
+    ytUrl: "https://youtu.be/_nbxh56_hRQ"
+  },
+  "Bolt Squat Iso Hold": {
+    desc: "A deep, ATG-style squat hold at end range, building tissue tolerance and strength in the most flexed knee and hip positions.",
+    cues: ["Sink to the deepest comfortable position and hold still", "Keep the heels down if possible", "Breathe steadily through the hold rather than bracing and holding your breath"],
+    yt: "bolt+squat+iso+hold+recode+movement",
+    ytUrl: "https://youtu.be/hQJ2WRCurng"
+  },
+  "Bolt Flow": {
+    desc: "A flowing movement through the deep squat position, building control and strength through the full range rather than just holding it statically.",
+    cues: ["Move slowly and with control through the range", "Keep the movement connected to the Bolt Squat Iso Hold position", "Quality of control matters more than speed"],
+    yt: "bolt+flow+recode+movement",
+    ytUrl: "https://youtu.be/cAJOk-mPr6Q"
+  },
+  "Drop In Lunge": {
+    desc: "A lunging variation that drops into a deeper, more dynamic single-leg position, bridging the lunge pattern toward the Drop In movement.",
+    cues: ["Control the drop — this isn't a fall into position", "Front knee stays tracking well even as depth increases", "Push back up with control, not momentum"],
+    yt: "drop+in+lunge+recode+movement"
+  },
+  "Drop In": {
+    desc: "A single-leg loaded drop into a deep position, building eccentric control and strength at end-range knee and hip flexion.",
+    cues: ["Control the descent — the eccentric phase is the point of this drill", "Keep the standing foot flat and stable", "Only go as deep as control allows"],
+    yt: "drop+in+recode+movement",
+    ytUrl: "https://youtu.be/rTjlUntP8Y4"
+  },
+  "Drop In Taps": {
+    desc: "A faster variation of the Drop In, tapping the deep position briefly rather than holding, building reactive control on top of the strength already built.",
+    cues: ["Light, quick taps at the bottom — don't linger", "Same tracking cues as the standard Drop In", "Reset fully between reps"],
+    yt: "drop+in+taps+recode+movement",
+    ytUrl: "https://youtu.be/rTjlUntP8Y4"
+  },
+  "Slides": {
+    desc: "A sliding lateral or multi-directional movement pattern, building frontal and transverse plane control to complement the mostly sagittal-plane work earlier in the program.",
+    cues: ["Stay low and controlled throughout the slide", "Keep the sliding foot light, don't dig in and stop abruptly", "Control both directions of the movement"],
+    yt: "slides+recode+movement",
+    ytUrl: "https://youtube.com/shorts/39AsPWL1ARw?feature=share"
+  }
+};
+const GP_ROUTINES = {
+  p1: [{
+    id: "ground",
+    label: "Ground Rest",
+    title: "Ground Rest",
+    type: "info",
+    goal: "Build tolerance for sitting on the ground in a variety of positions — a foundational input for hip and ankle mobility that most people have lost through a lifetime of chair sitting.",
+    progression: "Start with 5 minutes a day. Add 5 min/day every week until you can do about an hour.",
+    notes: ["Switch positions before your legs go numb.", "Add support under the butt or knees if a position is too challenging at first.", "Rotate through a variety of ground positions rather than sitting in just one the whole time."]
+  }, {
+    id: "walkstand",
+    label: "Walking/Standing",
+    title: "Walking / Standing",
+    type: "info",
+    goal: "Everyday standing and walking posture cues that reinforce good foot mechanics throughout the day, not just during dedicated training time.",
+    progression: "Apply these cues any time you're standing or walking — this isn't a timed drill, it's a constant awareness practice.",
+    notes: ["Second toe points straight ahead, not the whole foot splayed out.", "Narrow stance — feet closer together than most people default to.", "Majority of weight should sit on the three main pressure points of the foot (heel, base of the big toe, base of the pinky toe), not the outer edge."]
+  }, {
+    id: "r11",
+    label: "1.1",
+    title: "Routine 1.1",
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Hip Rocker",
+      reps: "20 reps a side"
+    }, {
+      name: "Hip Stretch",
+      reps: "45 sec a side"
+    }, {
+      name: "Child Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Toe Tuck Rocker",
+      reps: "20 reps"
+    }]
+  }, {
+    id: "r12",
+    label: "1.2",
+    title: "Routine 1.2",
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Hip Rocker",
+      reps: "20 reps a side"
+    }, {
+      name: "Hip Stretch",
+      reps: "45 sec a side"
+    }, {
+      name: "Child Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Good Morning Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Rocker Fly",
+      reps: "20 reps"
+    }, {
+      name: "Side to Side Rocker",
+      reps: "20 reps a side"
+    }, {
+      name: "Half Crawl",
+      reps: "10 reps a side"
+    }, {
+      name: "Toe Tuck Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Half Kneeling",
+      reps: "45 sec a side"
+    }]
+  }, {
+    id: "r13",
+    label: "1.3",
+    title: "Routine 1.3",
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Hip Rocker",
+      reps: "20 reps a side"
+    }, {
+      name: "Hip Stretch",
+      reps: "45 sec a side"
+    }, {
+      name: "Child Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Toe Tuck Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Rocker Fly",
+      reps: "20 reps"
+    }, {
+      name: "Half Kneeling Stretch",
+      reps: "45 sec a side",
+      optional: true
+    }, {
+      name: "Elbow Curls",
+      reps: "20 reps",
+      section: "Shoulder Series"
+    }, {
+      name: "Forward Circles",
+      reps: "20 reps",
+      section: "Shoulder Series"
+    }, {
+      name: "Reverse Circles",
+      reps: "20 reps",
+      section: "Shoulder Series"
+    }, {
+      name: "Band Over and Back",
+      reps: "20 reps",
+      section: "Band Work"
+    }, {
+      name: "Band Front Pull Apart",
+      reps: "20 reps",
+      section: "Band Work"
+    }, {
+      name: "Band Back Pull Apart",
+      reps: "20 reps",
+      section: "Band Work"
+    }]
+  }],
+  p2: [{
+    id: "r20",
+    label: "2.0",
+    title: "Routine 2.0 — Warm-Up",
+    warmup: true,
+    sets: "2-5 rounds a day",
+    progression: "Do this routine 2-5 rounds a day total, and at least 1 round as the warm-up for each of the Phase 2 routines below.",
+    exercises: [{
+      name: "Hip Rocker",
+      reps: "20 reps a side"
+    }, {
+      name: "Hip Stretch",
+      reps: "45 sec a side"
+    }, {
+      name: "Child Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Toe Tuck Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Rocker Fly",
+      reps: "20 reps"
+    }, {
+      name: "Side to Side Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Half Kneeling Stretch",
+      reps: "45 sec",
+      optional: true
+    }, {
+      name: "Elbow Curls",
+      reps: "20 reps",
+      section: "Shoulder Series"
+    }, {
+      name: "Forward Circles",
+      reps: "20 reps",
+      section: "Shoulder Series"
+    }, {
+      name: "Reverse Circles",
+      reps: "20 reps",
+      section: "Shoulder Series"
+    }, {
+      name: "Band Over and Back",
+      reps: "20 reps",
+      section: "Band Work"
+    }, {
+      name: "Band Front Pull Apart",
+      reps: "20 reps",
+      section: "Band Work"
+    }, {
+      name: "Band Back Pull Apart",
+      reps: "20 reps",
+      section: "Band Work"
+    }]
+  }, {
+    id: "r21",
+    label: "2.1",
+    title: "Routine 2.1 — Wall Assisted",
+    sets: "3x5 rounds daily",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Wall Assisted Squat",
+      reps: "20 reps"
+    }, {
+      name: "Wall Assisted Hinge",
+      reps: "20 reps"
+    }, {
+      name: "Wall Assisted Lunge",
+      reps: "20 reps a side"
+    }]
+  }, {
+    id: "r22",
+    label: "2.2",
+    title: "Routine 2.2 — Unassisted",
+    sets: "3x5 rounds daily",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Unassisted Squat",
+      reps: "20 reps"
+    }, {
+      name: "Unassisted Hinge",
+      reps: "20 reps"
+    }, {
+      name: "Unassisted Lunge",
+      reps: "20 reps a side"
+    }]
+  }, {
+    id: "r23",
+    label: "2.3",
+    title: "Routine 2.3 — Weighted",
+    sets: "3x5 rounds daily",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Weighted Squat",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Hinge",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Lunge",
+      reps: "20 reps a side"
+    }]
+  }],
+  p3: [{
+    id: "r30",
+    label: "3.0",
+    title: "Routine 3.0 — Warm-Up",
+    warmup: true,
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy. Do this warm-up 1-3 rounds before starting the Phase 3 routines below.",
+    exercises: [{
+      name: "Hip Rocker",
+      reps: "20 reps a side"
+    }, {
+      name: "Hip Stretch",
+      reps: "45 sec a side"
+    }, {
+      name: "Child Rocker",
+      reps: "20 reps"
+    }, {
+      name: "Toe Tuck Rocker",
+      reps: "20 reps"
+    }]
+  }, {
+    id: "r31",
+    label: "3.1",
+    title: "Routine 3.1",
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Weighted Squat",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Hinge",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Lunge",
+      reps: "10-20 reps a side"
+    }, {
+      name: "Bolt Squat Iso Hold",
+      reps: "45 secs"
+    }, {
+      name: "Bolt Flow",
+      reps: "20 reps"
+    }]
+  }, {
+    id: "r32",
+    label: "3.2",
+    title: "Routine 3.2",
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Weighted Squat",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Hinge",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Lunge",
+      reps: "10-20 reps a side"
+    }, {
+      name: "Bolt Squat Iso Hold",
+      reps: "45 secs"
+    }, {
+      name: "Bolt Flow",
+      reps: "20 reps"
+    }, {
+      name: "Drop In Lunge",
+      reps: "10-20 reps a side"
+    }, {
+      name: "Drop In",
+      reps: "45 secs a side"
+    }]
+  }, {
+    id: "r33",
+    label: "3.3",
+    title: "Routine 3.3",
+    sets: "3-5 rounds a day",
+    progression: "Spend 1-3 weeks here, move on when it becomes easy",
+    exercises: [{
+      name: "Weighted Squat",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Hinge",
+      reps: "20 reps"
+    }, {
+      name: "Weighted Lunge",
+      reps: "10-20 reps a side"
+    }, {
+      name: "Bolt Squat Iso Hold",
+      reps: "45 secs"
+    }, {
+      name: "Bolt Flow",
+      reps: "10-20 reps"
+    }, {
+      name: "Drop In Lunge",
+      reps: "10-20 reps a side"
+    }, {
+      name: "Drop In",
+      reps: "45 sec a side"
+    }, {
+      name: "Drop In Taps",
+      reps: "10-20 repetitions per side"
+    }, {
+      name: "Slides",
+      reps: "10-20 repetitions each direction"
+    }]
+  }]
+};
 function GpExCard({
   ex,
   color,
