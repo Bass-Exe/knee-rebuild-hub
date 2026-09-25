@@ -7010,7 +7010,8 @@ const FH_COLOR = {
   beginner: "#4ade80",
   intermediate: "#facc15",
   advanced: "#f97316",
-  day: "#60a5fa"
+  day: "#60a5fa",
+  agility: "#a855f7"
 };
 const FH_BEGINNER = [{
   id: "fh-b1",
@@ -7714,6 +7715,426 @@ const FH_ADVANCED = [{
 }];
 
 /* ─── FOOT & CALF DAY — standalone complete session, appropriately scoped ─── */
+const FH_AGILITY = [{
+  id: "fh-ag1",
+  group: "Balance & Proprioception",
+  name: "Single-Leg Balance, Eyes Closed",
+  time: "1-2 min",
+  reps: "20-30 sec hold x 3 per side",
+  freq: "Daily",
+  rest: "None needed — low load, pure nervous system work",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "Removing vision forces the foot and ankle to hold balance using proprioception alone — exactly the nervous system relearning this whole section is built around.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand on one leg, barefoot, near a wall for safety but not touching it."
+  }, {
+    n: 2,
+    t: "Find Stability With Eyes Open",
+    d: "Get settled and balanced first with eyes open — don't start this blind."
+  }, {
+    n: 3,
+    t: "Close the Eyes",
+    d: "Once stable, close your eyes and hold. Expect real wobble the first several tries."
+  }, {
+    n: 4,
+    t: "Reset if Needed",
+    d: "If you touch down, that's fine — open your eyes, reset, and continue the timer."
+  }, {
+    n: 5,
+    t: "Switch Sides",
+    d: "20-30 seconds per side, 3 rounds each."
+  }],
+  feel: ["A noticeable jump in difficulty the instant the eyes close", "Small, constant corrections happening through the foot and ankle — that's the system working", "Improvement session to session is usually fast and obvious with this one"],
+  cues: [{
+    t: "This Is Training, Not Testing",
+    d: "Wobbling and resetting isn't failure — it's the actual stimulus that builds the skill."
+  }, {
+    t: "Bare Feet Matter Here",
+    d: "Shoes dull the sensory feedback this drill depends on. Do it barefoot whenever safe."
+  }],
+  errors: [{
+    e: "Opening eyes immediately when wobbling starts",
+    w: "The instinct is to bail the moment it gets hard.",
+    f: "Try to ride out small wobbles with eyes still closed before resetting — that's where the adaptation happens."
+  }],
+  progression: ["Week 1: near a wall, reset often, just building tolerance", "Week 2: fewer resets, longer holds", "Week 3+: try on a slightly uneven surface once flat-ground eyes-closed feels easy"]
+}, {
+  id: "fh-ag2",
+  group: "Balance & Proprioception",
+  name: "Unstable Surface Balance",
+  time: "2 min",
+  reps: "20-30 sec hold x 3 per side",
+  freq: "Daily or every other day",
+  rest: "Minimal",
+  equip: "A pillow, folded towel, or cushion",
+  diff: "Intermediate",
+  desc: "Standing on an unstable surface forces constant micro-corrections through the foot — a different, ground-based version of the same proprioceptive retraining as the eyes-closed drill.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Place a pillow or folded towel on the ground, stand on it with one foot."
+  }, {
+    n: 2,
+    t: "Find Balance",
+    d: "Let the foot settle and find stability on the unstable surface, eyes open."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold 20-30 seconds, allowing the foot to make constant small adjustments."
+  }, {
+    n: 4,
+    t: "Add Difficulty",
+    d: "Once solid, try closing the eyes here too — combining both proprioceptive challenges."
+  }],
+  feel: ["Much more foot and ankle activity than balancing on flat ground", "A 'busy' feeling under the foot as it constantly adjusts"],
+  cues: [{
+    t: "Let the Foot Do the Work",
+    d: "Resist the urge to stiffen the whole leg — the foot and ankle should be doing the correcting, not the hip locking up."
+  }],
+  errors: [{
+    e: "Whole leg goes rigid",
+    w: "Locking the knee and hip to avoid falling defeats the point of the drill.",
+    f: "Consciously keep a soft knee and let the correction happen lower, at the foot and ankle."
+  }],
+  progression: ["Week 1: hold near a wall", "Week 2: no support", "Week 3+: add eyes closed, or a firmer/less stable surface"]
+}, {
+  id: "fh-ag3",
+  group: "Balance & Proprioception",
+  name: "Barefoot Varied-Surface Walking",
+  time: "5-10 min",
+  reps: "Continuous walking",
+  freq: "Daily if accessible",
+  rest: "None needed",
+  equip: "Grass, sand, or gravel if available",
+  diff: "Beginner",
+  desc: "Walking barefoot across different textures floods the foot with sensory input that shoes normally filter out entirely — one of the simplest and most direct ways to wake the system back up.",
+  steps: [{
+    n: 1,
+    t: "Find a Safe Surface",
+    d: "Grass, sand, or a safe gravel path — check for hazards first."
+  }, {
+    n: 2,
+    t: "Walk Normally",
+    d: "No need to change your gait consciously here — just walk and let the foot feel the surface."
+  }, {
+    n: 3,
+    t: "Notice the Feedback",
+    d: "Pay attention to how different the sensory input is compared to walking in shoes."
+  }, {
+    n: 4,
+    t: "Vary the Surface",
+    d: "If possible, move between a couple of different textures in the same walk."
+  }],
+  feel: ["An almost overwhelming amount of sensory information at first if you're not used to barefoot walking", "This usually feels good, not painful — sharp pain means stop and check the surface"],
+  cues: [{
+    t: "This Is Passive Input, Not a Drill",
+    d: "You don't need to overthink your steps here — the surface itself is doing the retraining."
+  }],
+  errors: [{
+    e: "Avoiding it because the ground feels 'too much'",
+    w: "That heightened sensation is unfamiliar, not harmful.",
+    f: "Start with short sessions on the gentlest surface (grass) and build tolerance."
+  }],
+  progression: ["Week 1: 5 minutes on grass", "Week 2: 10 minutes, try adding sand if available", "Week 3+: rougher surfaces like gravel, always checking for hazards first"]
+}, {
+  id: "fh-ag4",
+  group: "Fast & Precise Movement",
+  name: "Quick Step In-In-Out-Out",
+  time: "2-3 min",
+  reps: "30 sec x 4-5 sets",
+  freq: "3-4x per week",
+  rest: "1 rest day between higher-intensity sessions",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "A classic boxing footwork agility pattern — small, precise steps in a defined rhythm. Precision comes before speed here.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Light athletic stance, feet roughly shoulder-width, knees soft."
+  }, {
+    n: 2,
+    t: "The Pattern",
+    d: "Step one foot in, then the other foot in, then the first foot out, then the second foot out — a tight, controlled in-in-out-out rhythm."
+  }, {
+    n: 3,
+    t: "Stay Light",
+    d: "Small, quick steps — this isn't about covering distance, it's about foot speed and control."
+  }, {
+    n: 4,
+    t: "Sustain the Pattern",
+    d: "Keep the rhythm going for 30 seconds, then rest."
+  }],
+  feel: ["Quick, light contact with the ground — not heavy stomping", "A building rhythm once the pattern clicks", "Calves and feet working hard by the end of each set"],
+  cues: [{
+    t: "Precision First, Then Speed",
+    d: "Get the pattern clean and controlled before trying to speed it up — sloppy fast reps don't build the nervous system pattern you actually want."
+  }, {
+    t: "Stay on the Balls of the Feet",
+    d: "This should feel light and springy, not flat-footed."
+  }],
+  errors: [{
+    e: "Pattern breaks down as fatigue sets in",
+    w: "Normal early on — foot speed endurance takes time to build.",
+    f: "Shorten the work interval (15-20 sec) until the full 30 seconds can be sustained cleanly."
+  }],
+  progression: ["Week 1: 20 sec x 4 sets, focus purely on the pattern", "Week 2: 30 sec x 4 sets", "Week 3+: 30 sec x 5 sets, or increase speed once the pattern is automatic"]
+}, {
+  id: "fh-ag5",
+  group: "Fast & Precise Movement",
+  name: "Reactive Lateral Shuffle + Stick",
+  time: "2-3 min",
+  reps: "8-10 reps x 3 sets",
+  freq: "3-4x per week",
+  rest: "1 rest day between sessions",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "Shuffle laterally, then stop and 'stick' the landing with total control — trains the foot to decelerate precisely, a core demand of boxing footwork that pure speed work doesn't build on its own.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Athletic stance, ready to move laterally."
+  }, {
+    n: 2,
+    t: "Shuffle",
+    d: "Take 3-4 quick shuffle steps to one side."
+  }, {
+    n: 3,
+    t: "The Stick",
+    d: "Stop abruptly and hold the final position completely still for a full second — no drifting or wobbling."
+  }, {
+    n: 4,
+    t: "Reset and Repeat",
+    d: "Return to center, repeat to the other side."
+  }],
+  feel: ["A clear moment of deceleration control right at the stop", "Foot and ankle stabilizers working hard in that final held second"],
+  cues: [{
+    t: "The Stick Is the Whole Point",
+    d: "Anyone can shuffle fast. Stopping with zero drift is the actual skill being trained here."
+  }, {
+    t: "Stay Low",
+    d: "Keep the hips low and stance athletic throughout — don't rise up as you shuffle."
+  }],
+  errors: [{
+    e: "Drifting or taking an extra step after stopping",
+    w: "Deceleration control isn't there yet.",
+    f: "Slow the shuffle down and focus entirely on a clean, controlled stop before adding speed back in."
+  }],
+  progression: ["Week 1: slower shuffle, focus on the stick", "Week 2: faster shuffle, same clean stick", "Week 3+: add an unpredictable cue (self-called direction) to react to"]
+}, {
+  id: "fh-ag6",
+  group: "Fast & Precise Movement",
+  name: "Pivot Step Drill",
+  time: "2 min",
+  reps: "10 reps per side x 2-3 sets",
+  freq: "3x per week",
+  rest: "1 rest day between sessions",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "Pivoting off the lead or rear foot with control while staying balanced — a direct, specific transfer to boxing angle-creation footwork.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Boxing stance, weight balanced between both feet."
+  }, {
+    n: 2,
+    t: "The Pivot",
+    d: "Pivot on the ball of one foot, rotating the body a set amount (start with 45 degrees) while the other foot stays planted."
+  }, {
+    n: 3,
+    t: "Stay Balanced",
+    d: "The pivot should feel controlled, not like a stumble or overshoot."
+  }, {
+    n: 4,
+    t: "Return and Repeat",
+    d: "Pivot back to start, repeat, then switch which foot is pivoting."
+  }],
+  feel: ["Rotational control through the pivoting foot and ankle", "Core and hip engaging to keep the rotation controlled rather than sloppy"],
+  cues: [{
+    t: "Pivot on the Ball of the Foot",
+    d: "The heel should lift slightly as you rotate — pivoting flat-footed limits the range and control."
+  }, {
+    t: "Small Range First",
+    d: "Master a small, controlled pivot before trying to increase the rotation angle."
+  }],
+  errors: [{
+    e: "Losing balance mid-pivot",
+    w: "Trying to rotate too far, too fast before the pattern is grooved.",
+    f: "Reduce the pivot angle and slow down until it's clean, then build back up."
+  }],
+  progression: ["Week 1: 30-degree pivots, slow", "Week 2: 45-degree pivots", "Week 3+: full 90-degree pivots, or add speed once controlled"]
+}, {
+  id: "fh-ag7",
+  group: "Fast & Precise Movement",
+  name: "Bounce-and-React Split Step",
+  time: "2-3 min",
+  reps: "10-15 reps x 3 sets",
+  freq: "3-4x per week",
+  rest: "1 rest day between sessions",
+  equip: "None",
+  diff: "Advanced",
+  desc: "Light bouncing in a ready stance, then reacting explosively to a self-called or partner-called direction — trains the foot to go from relaxed readiness to a precise, fast reaction, exactly like reacting to an opponent's movement.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Light, relaxed bouncing on the balls of the feet in an athletic ready stance."
+  }, {
+    n: 2,
+    t: "The Cue",
+    d: "Call out a direction to yourself (or have a partner call it) — left, right, forward, back."
+  }, {
+    n: 3,
+    t: "React",
+    d: "Explosively step in that direction the instant the cue is given, staying balanced and ready to react again immediately."
+  }, {
+    n: 4,
+    t: "Reset to Bouncing",
+    d: "Return to the light bounce and wait for the next cue."
+  }],
+  feel: ["A real reaction-speed demand — the gap between hearing the cue and moving should shrink with practice", "Feet staying light and ready, not flat and static, even while bouncing"],
+  cues: [{
+    t: "Stay Light Between Reactions",
+    d: "The bounce keeps the feet primed — going flat-footed between reps slows the reaction."
+  }, {
+    t: "React, Don't Anticipate",
+    d: "Resist guessing the next direction — true reaction speed only builds when the cue is genuinely unpredictable."
+  }],
+  errors: [{
+    e: "Anticipating the call instead of reacting",
+    w: "Especially easy to do when calling your own cues out loud.",
+    f: "Have a partner call directions, or use a random sequence you haven't seen in advance."
+  }],
+  progression: ["Week 1: predictable pattern, focus on clean footwork", "Week 2: random self-called directions", "Week 3+: partner-called, unpredictable"]
+}, {
+  id: "fh-ag8",
+  group: "GOATA Walking Practice",
+  name: "Slow-Motion GOATA Walk",
+  time: "3-5 min",
+  reps: "Continuous walking practice",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "Walking at roughly a quarter of normal speed, consciously feeling the outer-edge-to-inner-edge loading progression from the GOATA Stride Map — turning the mechanics into a felt experience instead of just a visual or conceptual one.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand tall, ready to take a very slow, deliberate step forward."
+  }, {
+    n: 2,
+    t: "Initial Contact",
+    d: "Land on the outer edge of the heel, consciously noticing that first point of contact."
+  }, {
+    n: 3,
+    t: "Loading Through the Foot",
+    d: "Slowly roll weight from the outer heel, across the outer midfoot, toward the ball of the foot — feel each part of that path."
+  }, {
+    n: 4,
+    t: "Push-Off",
+    d: "Finish the step pressing through the big toe, feeling the push-off clearly before the next foot lands."
+  }, {
+    n: 5,
+    t: "Repeat Slowly",
+    d: "Continue at this deliberately slow pace for 3-5 minutes, staying focused on the sequence each step."
+  }],
+  feel: ["A much clearer sense of exactly where pressure moves through the foot than at normal walking speed", "Some awkwardness at first — moving this slowly is unfamiliar", "Increasing clarity on the pattern session to session"],
+  cues: [{
+    t: "Slow Is the Whole Point",
+    d: "This isn't about covering distance — it's about giving your brain time to actually register the sequence the GOATA Stride Map describes."
+  }, {
+    t: "Reference the Stride Map",
+    d: "If the sequence feels unclear, revisit the GOATA Stride Map phases before this drill — knowing what you're feeling for makes it click faster."
+  }],
+  errors: [{
+    e: "Walking too fast to actually notice anything",
+    w: "Reverting to normal walking speed defeats the purpose.",
+    f: "Go slower than feels necessary at first — you can speed up once the pattern is clear."
+  }],
+  progression: ["Week 1: very slow, short distance, indoors", "Week 2: slightly faster, longer distance", "Week 3+: move toward the next drill (barefoot version) once this feels natural"]
+}, {
+  id: "fh-ag9",
+  group: "GOATA Walking Practice",
+  name: "Barefoot GOATA Walk",
+  time: "5 min",
+  reps: "Continuous walking practice",
+  freq: "Daily if a safe surface is available",
+  rest: "None needed",
+  equip: "A safe barefoot-walkable surface",
+  diff: "Beginner",
+  desc: "The same slow, deliberate GOATA walk, now barefoot — removing shoe interference so the true foot mechanics and ground feedback come through unfiltered.",
+  steps: [{
+    n: 1,
+    t: "Find a Safe Surface",
+    d: "A clean, hazard-free floor, or grass outdoors."
+  }, {
+    n: 2,
+    t: "Same Sequence as the Slow-Motion Walk",
+    d: "Outer heel contact, roll across the outer midfoot, press through the big toe at push-off."
+  }, {
+    n: 3,
+    t: "Notice the Difference",
+    d: "Compare how much clearer the foot-ground feedback is without a shoe in the way."
+  }, {
+    n: 4,
+    t: "Normal-ish Pace",
+    d: "This version can be closer to normal walking speed once the slow-motion version feels automatic."
+  }],
+  feel: ["Sharper, clearer feedback about exactly where pressure lands compared to walking in shoes", "The GOATA sequence often feels easier to execute correctly barefoot"],
+  cues: [{
+    t: "This Bridges Toward Real Walking",
+    d: "Once this feels natural, you're close to the mechanics carrying over into normal, shod, everyday walking."
+  }],
+  errors: [{
+    e: "Doing this on an unsafe or hazardous surface",
+    w: "Barefoot walking outdoors carries real risk of stepping on something sharp.",
+    f: "Stick to a checked, safe surface — indoors on a clean floor is the safest starting point."
+  }],
+  progression: ["Week 1: indoors, slow", "Week 2: closer to normal pace", "Week 3+: outdoors on grass if available, still checking the surface first"]
+}, {
+  id: "fh-ag10",
+  group: "GOATA Walking Practice",
+  name: "GOATA Walk With Attention Split",
+  time: "5 min",
+  reps: "Continuous walking practice",
+  freq: "3-4x per week",
+  rest: "None needed",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "Walking with good GOATA mechanics while your attention is on something else entirely — counting backward, scanning the room, holding a conversation. This is the real test of whether the pattern has become an actual nervous-system habit rather than something you still have to consciously think about.",
+  steps: [{
+    n: 1,
+    t: "Establish the Pattern First",
+    d: "Start walking with full attention on the GOATA sequence for a few steps, the same as the other walking drills."
+  }, {
+    n: 2,
+    t: "Add a Second Task",
+    d: "While continuing to walk, start counting backward from 100 by sevens, or scan and name objects around you."
+  }, {
+    n: 3,
+    t: "Let Attention Shift",
+    d: "Allow your focus to genuinely move to the second task — don't secretly keep concentrating on your feet."
+  }, {
+    n: 4,
+    t: "Check In Periodically",
+    d: "Every 30 seconds or so, briefly check — is the mechanics pattern still holding up on its own?"
+  }],
+  feel: ["A real test of whether the pattern holds without conscious control", "It's common for mechanics to slip a little when attention first splits — that's useful information, not failure"],
+  cues: [{
+    t: "This Is the Actual Goal of the Whole Agility Section",
+    d: "Every other drill here is building toward this — a pattern that runs automatically, freeing your attention for everything a boxing match or athletic situation actually demands."
+  }, {
+    t: "If It Falls Apart, That's Useful Data",
+    d: "If the mechanics slip when attention splits, it means more reps of the slower, focused versions are still needed before this one — not a failure, just information."
+  }],
+  errors: [{
+    e: "Secretly still focusing on the feet the whole time",
+    w: "Defeats the purpose of testing whether the pattern is automatic.",
+    f: "Choose a second task demanding enough to genuinely pull attention away — counting backward by sevens works well for this."
+  }],
+  progression: ["Week 1: simple second task (counting by twos), short distance", "Week 2: harder second task (counting by sevens), longer distance", "Week 3+: try this in a genuinely distracting real-world environment"]
+}];
 const FH_DAY_SECTIONS = [{
   label: "Prep",
   items: [{
@@ -7779,6 +8200,9 @@ function RecoveryHubScreen() {
   }, {
     id: "advanced",
     label: "🔴 Advanced"
+  }, {
+    id: "agility",
+    label: "⚡ Agility"
   }, {
     id: "day",
     label: "📅 Foot & Calf Day"
@@ -8150,7 +8574,7 @@ function RecoveryHubScreen() {
       fontFamily: "'DM Mono',monospace",
       whiteSpace: "nowrap"
     }
-  }, t.label))), fhTab !== "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, t.label))), fhTab !== "day" && fhTab !== "agility" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10.5,
       color: C.muted,
@@ -8161,7 +8585,33 @@ function RecoveryHubScreen() {
       border: `1px solid ${tierColor}33`,
       borderRadius: 6
     }
-  }, fhTab === "beginner" && "Foundational activation and basic mobility — safe to do daily, no real load.", fhTab === "intermediate" && "Building real strength and control — most of these need a rest day or two per week.", fhTab === "advanced" && "Fascial integration, unilateral loading, and combined-pattern control — these ask more of the tissue and need genuine recovery between sessions."), tierData[fhTab].map(ex => exCard(ex, tierColor))), fhTab === "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, fhTab === "beginner" && "Foundational activation and basic mobility — safe to do daily, no real load.", fhTab === "intermediate" && "Building real strength and control — most of these need a rest day or two per week.", fhTab === "advanced" && "Fascial integration, unilateral loading, and combined-pattern control — these ask more of the tissue and need genuine recovery between sessions."), tierData[fhTab].map(ex => exCard(ex, tierColor))), fhTab === "agility" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.85,
+      marginBottom: 14,
+      padding: "9px 11px",
+      background: `${FH_COLOR.agility}10`,
+      border: `1px solid ${FH_COLOR.agility}33`,
+      borderRadius: 6
+    }
+  }, "Retraining the nervous system's foot and ankle cues for fast, precise movement, balance under boxing demands, and mechanics that hold up even without conscious attention. Everything here builds toward the last GOATA walking drill — a pattern that runs on its own."), ["Balance & Proprioception", "Fast & Precise Movement", "GOATA Walking Practice"].map(groupName => /*#__PURE__*/React.createElement("div", {
+    key: groupName,
+    style: {
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: FH_COLOR.agility,
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 8,
+      marginTop: 10
+    }
+  }, groupName), FH_AGILITY.filter(ex => ex.group === groupName).map(ex => exCard(ex, FH_COLOR.agility))))), fhTab === "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: C.muted,
@@ -11576,6 +12026,64 @@ const CALI_FULLWORKOUTS = [{
     }]
   }]
 }];
+const CALI_SCAP_INTRO = "Scapular winging usually comes down to the serratus anterior not doing its job of holding the shoulder blade flat against the rib cage — when it's weak or underactive, the inner border lifts away from the back. A high shoulder on one side often goes along with this, since the upper trapezius tends to overwork to compensate for the muscles that should be doing more of the job. This is genuinely trainable, especially with the asymmetric emphasis built into the drills below — worth confirming with a doctor or physical therapist that it's a muscular imbalance rather than anything nerve-related, but the exercises here are the standard starting point either way.";
+const CALI_SCAP = [{
+  id: "sc1",
+  name: "Serratus Wall Slides",
+  dose: "3 sets x 10-12",
+  freq: "Daily",
+  rest: "None needed",
+  execution: "Stand an arm's length from a wall, forearms against it. Slide the forearms up the wall while actively pressing the shoulder blades flat and wide against the rib cage — protracted, not pinched together. Slide back down with control."
+}, {
+  id: "sc2",
+  name: "Scapular Push-Up (Serratus Punch)",
+  dose: "3 sets x 12-15",
+  freq: "Daily",
+  rest: "None needed",
+  execution: "From a plank or push-up position, arms straight the whole time. Let the shoulder blades pinch together, lowering the chest slightly, then push the floor away hard, spreading the blades wide. The push at the top is the important part — think 'punch the ground away.'"
+}, {
+  id: "sc3",
+  name: "Standing Serratus Punch (Unilateral)",
+  dose: "3 sets x 10-12 each side, one extra set on the left",
+  freq: "Daily",
+  rest: "None needed",
+  execution: "Stand with one arm extended straight forward at shoulder height. Without bending the elbow, punch further forward from the shoulder blade itself — the arm doesn't move, the shoulder blade does. Since this is one-sided work, the extra set on the left directly targets the weaker side."
+}, {
+  id: "sc4",
+  name: "Prone Y-Raise",
+  dose: "3 sets x 10-12",
+  freq: "4-5x per week",
+  rest: "Light — muscular fatigue only",
+  execution: "Lie face down, arms extended overhead in a Y shape, thumbs up. Lift the arms slightly, squeezing through the lower traps, hold a beat, lower with control. Keep the movement small — this isn't about how high the arms go."
+}, {
+  id: "sc5",
+  name: "Prone T-Raise",
+  dose: "3 sets x 10-12",
+  freq: "4-5x per week",
+  rest: "Light",
+  execution: "Same setup as the Y-Raise, arms out to a T instead. Squeeze the shoulder blades together and slightly down as the arms lift. Targets the mid-traps and rhomboids more directly than the Y position does."
+}, {
+  id: "sc6",
+  name: "Wall Angels",
+  dose: "3 sets x 10-12",
+  freq: "Daily",
+  rest: "None needed",
+  execution: "Back against a wall, arms in a goalpost position (elbows and wrists touching the wall). Slide the arms up overhead and back down, keeping as much contact with the wall as possible the whole time. Full-range scapular control through flexion and abduction."
+}, {
+  id: "sc7",
+  name: "Side-Lying Scapular Retraction",
+  dose: "3 sets x 12-15 on the left, 2 sets x 12-15 on the right",
+  freq: "4-5x per week",
+  rest: "Light",
+  execution: "Lie on your side, top arm reaching straight down toward the floor in front of you. Pull the shoulder blade back and down toward the spine, hold a beat, release with control. The extra volume on the left directly addresses the asymmetry rather than training both sides identically."
+}, {
+  id: "sc8",
+  name: "Unilateral Suitcase Carry",
+  dose: "3 sets x 20-30 sec per side",
+  freq: "3x per week",
+  rest: "1 rest day between sessions — genuine loaded work",
+  execution: "Hold a weight in one hand, arm relaxed at your side, and walk for time or distance. The goal is resisting the pull — don't let the shoulder on the loaded side hike up toward the ear. This is one of the most direct, functional ways to teach the scapula to stay set under real load, which transfers well to fixing a habitual high shoulder."
+}];
 function CalisthenicsScreen() {
   const [caliTab, setCaliTab] = useState("warmup");
   const [expanded, setExpanded] = useState(null);
@@ -11596,6 +12104,9 @@ function CalisthenicsScreen() {
   }, {
     id: "skills",
     label: "🎯 Skills"
+  }, {
+    id: "scapula",
+    label: "🦴 Scapula"
   }, {
     id: "fullworkouts",
     label: "📅 Full Workouts"
@@ -11890,7 +12401,107 @@ function CalisthenicsScreen() {
       fontSize: 10.5,
       color: CALI_COLOR
     }
-  }, w.dose)))))), caliTab === "fullworkouts" && (() => {
+  }, w.dose)))))), caliTab === "scapula" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.85,
+      marginBottom: 14,
+      padding: "10px 12px",
+      background: "#a855f710",
+      border: "1px solid #a855f733",
+      borderRadius: 6
+    }
+  }, CALI_SCAP_INTRO), CALI_SCAP.map(ex => {
+    const open = expanded === ex.id;
+    return /*#__PURE__*/React.createElement("div", {
+      key: ex.id,
+      style: card(open)
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggle(ex.id),
+      style: {
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "12px 12px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        cursor: "pointer",
+        textAlign: "left"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#e8f4ff",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 3
+      }
+    }, ex.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: "#a855f7"
+      }
+    }, "🔄 ", ex.dose)), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#a855f7",
+        fontSize: 18,
+        flexShrink: 0
+      }
+    }, open ? "−" : "+")), open && /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: "0 12px 14px"
+      },
+      className: "fa"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: 8,
+        background: "#a855f710",
+        borderLeft: "2px solid #a855f7",
+        borderRadius: "0 4px 4px 0",
+        padding: "8px 10px"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        letterSpacing: 2,
+        color: "#a855f7",
+        textTransform: "uppercase",
+        marginBottom: 3
+      }
+    }, "How Often"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: "#c8d0e0",
+        lineHeight: 1.7,
+        marginBottom: 6
+      }
+    }, ex.freq), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        letterSpacing: 2,
+        color: "#a855f7",
+        textTransform: "uppercase",
+        marginBottom: 3
+      }
+    }, "Rest"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: "#c8d0e0",
+        lineHeight: 1.7
+      }
+    }, ex.rest)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: C.muted,
+        lineHeight: 1.8
+      }
+    }, ex.execution)));
+  })), caliTab === "fullworkouts" && (() => {
     const day = CALI_FULLWORKOUTS[dayIdx];
     const vIdx = varIdx[day.id] ?? 0;
     const setVIdx = i => setVarIdx(v => ({
