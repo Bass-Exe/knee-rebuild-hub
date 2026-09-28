@@ -7011,7 +7011,8 @@ const FH_COLOR = {
   intermediate: "#facc15",
   advanced: "#f97316",
   day: "#60a5fa",
-  agility: "#a855f7"
+  agility: "#a855f7",
+  flexibility: "#f472b6"
 };
 const FH_BEGINNER = [{
   id: "fh-b1",
@@ -8135,6 +8136,591 @@ const FH_AGILITY = [{
   }],
   progression: ["Week 1: simple second task (counting by twos), short distance", "Week 2: harder second task (counting by sevens), longer distance", "Week 3+: try this in a genuinely distracting real-world environment"]
 }];
+const FH_FLEX_INTRO = "Borrows some of the same foot-conditioning ideas ballet dancers use — controlled articulation through the ankle and toes, not just a static hold. The goal is moving through full range with control, the same way the rest of this hub builds strength through range rather than just holding a position.";
+const FH_FLEXIBILITY = [{
+  id: "fx-b1",
+  tier: "Beginner",
+  name: "Seated Foot Flex & Point",
+  time: "2 min",
+  reps: "15 reps per foot",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "The foundational ballet-style foot articulation drill — moving the foot through its full flex-to-point range with control, not just stretching passively.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Sit with the leg extended, foot relaxed."
+  }, {
+    n: 2,
+    t: "Flex",
+    d: "Pull the toes and foot back toward you, feeling a stretch through the calf and back of the ankle."
+  }, {
+    n: 3,
+    t: "Point",
+    d: "Reverse through neutral and point the foot away from you as far as comfortably possible, reaching through the toes."
+  }, {
+    n: 4,
+    t: "Full Range, Every Rep",
+    d: "Move all the way from flex to point and back each time — don't stop in the middle."
+  }],
+  feel: ["A stretch on the flex side, through the calf and Achilles", "A stretch on the top of the foot and ankle on the point side", "Increasing range and smoothness over the first few reps"],
+  cues: [{
+    t: "Move Through the Whole Range",
+    d: "This is an articulation drill, not just two stretches — the value is in controlling the full path between them."
+  }, {
+    t: "Lead With the Ankle, Not Just the Toes",
+    d: "The ankle joint should be doing most of the work, with the toes following."
+  }],
+  errors: [{
+    e: "Only moving the toes, ankle stays still",
+    w: "The easier, smaller-range default.",
+    f: "Slow down and consciously drive the movement from the ankle."
+  }],
+  progression: ["Week 1: 10 reps, slow and controlled", "Week 2: 15 reps", "Week 3+: add a 2-sec hold at both end ranges"]
+}, {
+  id: "fx-b2",
+  tier: "Beginner",
+  name: "Towel-Assisted Calf & Achilles Stretch",
+  time: "2 min",
+  reps: "20-30 sec x 2 per side",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "A towel or resistance band",
+  diff: "Beginner",
+  desc: "A passive, seated stretch using a towel around the ball of the foot — a standard dancer and PT stretch for the calf and Achilles that doesn't require any standing balance.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Sit with the leg extended, loop a towel around the ball of the foot, holding one end in each hand."
+  }, {
+    n: 2,
+    t: "Pull Gently",
+    d: "Pull the towel toward you, drawing the foot into flexion, keeping the knee straight."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold 20-30 seconds, breathing steadily, easing slightly deeper if the stretch allows."
+  }, {
+    n: 4,
+    t: "Release and Switch",
+    d: "Release slowly, repeat on the other side."
+  }],
+  feel: ["A steady stretch through the calf and Achilles", "No sharp pain — should feel like a stretch, not a strain"],
+  cues: [{
+    t: "Keep the Knee Straight",
+    d: "A bent knee shifts the stretch away from the calf — keep the leg extended throughout."
+  }, {
+    t: "Ease In, Don't Yank",
+    d: "Gentle, gradual pressure gets better results than forcing the stretch."
+  }],
+  errors: [{
+    e: "Bending the knee to get more range",
+    w: "Cheats the stretch away from the actual target.",
+    f: "Keep the knee locked straight and accept a smaller range if needed."
+  }],
+  progression: ["Ongoing: hold slightly longer or slightly deeper as flexibility improves — no real complexity to add here"]
+}, {
+  id: "fx-b3",
+  tier: "Beginner",
+  name: "Toe Spread & Stretch by Hand",
+  time: "2 min",
+  reps: "1 pass per toe, per foot",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "Manually spreading and stretching each toe individually with the hands — direct, simple mobility work for joints that almost never get moved through their full range in daily life.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Sit comfortably, bring one foot within reach of your hands."
+  }, {
+    n: 2,
+    t: "Interlace",
+    d: "Gently interlace your fingers between the toes, like lacing fingers of two hands together."
+  }, {
+    n: 3,
+    t: "Spread and Hold",
+    d: "Use the fingers to gently spread the toes wider than they'd go on their own, hold 10-15 seconds."
+  }, {
+    n: 4,
+    t: "Individual Toe Stretch",
+    d: "One at a time, gently flex and extend each toe through its own range with your hand."
+  }],
+  feel: ["An unfamiliar but generally pleasant stretch between the toes", "Individual toes may feel notably stiffer than others — worth noting which ones"],
+  cues: [{
+    t: "Gentle Pressure Only",
+    d: "This is a mobility drill, not a test of how far you can force the toes apart."
+  }],
+  errors: [{
+    e: "Forcing the spread too hard",
+    w: "Toe joints are small and don't need aggressive force to mobilize.",
+    f: "Back off to a gentle, sustained pressure instead."
+  }],
+  progression: ["Ongoing: simple maintenance mobility work — consistency matters more than intensity here"]
+}, {
+  id: "fx-b4",
+  tier: "Beginner",
+  name: "Ankle Alphabet",
+  time: "2 min",
+  reps: "Full alphabet, per foot",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "A classic mobility drill from both dance and physical therapy — tracing the alphabet in the air with the foot, moving the ankle through every direction it's capable of.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Sit or lie down with one leg lifted slightly, foot free to move in the air."
+  }, {
+    n: 2,
+    t: "Trace the Letters",
+    d: "Using the big toe as the 'pen,' trace each letter of the alphabet in the air, capital letters, one at a time."
+  }, {
+    n: 3,
+    t: "Full Letters",
+    d: "Make each letter as full and clear as you can — this naturally moves the ankle through flexion, extension, and rotation."
+  }, {
+    n: 4,
+    t: "Switch Feet",
+    d: "Complete the alphabet, then switch to the other foot."
+  }],
+  feel: ["The ankle moving through directions it doesn't normally get in daily walking", "Some letters (especially ones with sharp corners) feeling notably harder than others"],
+  cues: [{
+    t: "Move From the Ankle",
+    d: "The rest of the leg should stay relatively still — the ankle is doing the drawing."
+  }],
+  errors: [{
+    e: "Letters get small and lazy by the end",
+    w: "Fatigue creeping in over the alphabet.",
+    f: "Do half the alphabet per foot at first, building up to the full set."
+  }],
+  progression: ["Week 1: half the alphabet per foot", "Week 2: full alphabet", "Week 3+: try lowercase letters for a finer-control challenge"]
+}, {
+  id: "fx-b5",
+  tier: "Beginner",
+  name: "Plantar Fascia Stretch (Seated)",
+  time: "1-2 min",
+  reps: "20-30 sec x 2 per foot",
+  freq: "Daily",
+  rest: "None needed",
+  equip: "None",
+  diff: "Beginner",
+  desc: "A simple, direct stretch for the sole of the foot — pulling the toes back to lengthen the plantar fascia, complementing all the active foot-dome work elsewhere in this hub with some passive length work.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Sit with one ankle crossed over the opposite knee."
+  }, {
+    n: 2,
+    t: "Grab the Toes",
+    d: "With the hand, gently pull the toes back toward the shin."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold 20-30 seconds, feeling the stretch along the sole of the foot."
+  }, {
+    n: 4,
+    t: "Switch Feet",
+    d: "Release, repeat on the other side."
+  }],
+  feel: ["A stretch along the arch and sole, sometimes felt more toward the heel"],
+  cues: [{
+    t: "Pair It With Foot Dome Work",
+    d: "This passive stretch complements the active Foot Dome drills well — some people prefer doing this right before or after that work."
+  }],
+  errors: [{
+    e: "Pulling hard enough to cause sharp pain",
+    w: "The plantar fascia doesn't respond well to aggressive stretching.",
+    f: "Ease off to a gentle, sustained pull — mild discomfort is fine, sharp pain is not."
+  }],
+  progression: ["Ongoing: simple maintenance stretch, no real progression needed"]
+}, {
+  id: "fx-i1",
+  tier: "Intermediate",
+  name: "Theraband Point/Flex (Resisted)",
+  time: "3 min",
+  reps: "15 reps per foot",
+  freq: "4-5x per week",
+  rest: "Light — muscular fatigue only",
+  equip: "A resistance band",
+  diff: "Intermediate",
+  desc: "The classic dancer conditioning tool — pointing the foot against light band resistance through the full range, building strength alongside flexibility rather than just stretching passively.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Sit with the leg extended, loop a light resistance band around the ball of the foot, holding the ends."
+  }, {
+    n: 2,
+    t: "Point Against Resistance",
+    d: "Point the foot away from you, pushing through the band's resistance, reaching through the toes."
+  }, {
+    n: 3,
+    t: "Control the Return",
+    d: "Flex the foot back against the band's pull with control, not letting it snap back."
+  }, {
+    n: 4,
+    t: "Full Range",
+    d: "Move through the complete flex-to-point range each rep, resisted the whole way."
+  }],
+  feel: ["The foot and ankle working against resistance through the full range, not just at the end points", "Calf and foot muscles fatiguing after 10-12 reps"],
+  cues: [{
+    t: "Resist Both Directions",
+    d: "Unlike the unresisted version, the band adds load to BOTH the point and the flex — control matters on the way back too."
+  }, {
+    t: "Reach Through the Toes on the Point",
+    d: "Don't just move the ankle — let the articulation continue out through the toes for a fuller point."
+  }],
+  errors: [{
+    e: "Band is too heavy, form breaks down",
+    w: "Too much resistance shifts effort to compensating muscles.",
+    f: "Drop to a lighter band and rebuild the pattern cleanly first."
+  }],
+  progression: ["Week 1: light band, 10 reps", "Week 2: 15 reps", "Week 3+: slightly heavier band, or add a brief hold at full point"]
+}, {
+  id: "fx-i2",
+  tier: "Intermediate",
+  name: "Tendu Series (Standing)",
+  time: "3-4 min",
+  reps: "10 reps per direction, per foot",
+  freq: "3-4x per week",
+  rest: "Minimal",
+  equip: "A wall or chair for light support",
+  diff: "Intermediate",
+  desc: "Adapted from the ballet tendu — sliding the foot along the floor to full extension and back, working through the articulation sequence from a standing position.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand with light hand support on a wall or chair, feet together."
+  }, {
+    n: 2,
+    t: "Slide Out",
+    d: "Slide one foot forward along the floor, staying in contact with the ground, articulating through the toes as the heel lifts and the foot extends to a full point at the end."
+  }, {
+    n: 3,
+    t: "Slide Back",
+    d: "Reverse the sequence, returning the foot to the starting position with the same control."
+  }, {
+    n: 4,
+    t: "Multiple Directions",
+    d: "Repeat sliding the foot forward, then to the side, then behind you — three directions total."
+  }],
+  feel: ["A controlled articulation through the whole foot as it slides and points", "Standing leg working to stay stable and tall throughout"],
+  cues: [{
+    t: "Stay in Contact With the Floor",
+    d: "The foot should slide, not lift, until the very end of the extension."
+  }, {
+    t: "Full Articulation, Not Just a Slide",
+    d: "The ankle and toes should be visibly working through the sequence, not just the leg moving the foot passively."
+  }],
+  errors: [{
+    e: "Sickling — the ankle rolls outward at full extension",
+    w: "A common technical error, puts uneven stress on the ankle.",
+    f: "Slow down and consciously keep the ankle aligned, not rolled to the outside, even if it means a smaller range at first."
+  }],
+  progression: ["Week 1: forward direction only, slow", "Week 2: add side and back directions", "Week 3+: increase speed slightly while maintaining the same control"]
+}, {
+  id: "fx-i3",
+  tier: "Intermediate",
+  name: "Deep Ankle Plié Stretch",
+  time: "2-3 min",
+  reps: "20-30 sec hold x 3",
+  freq: "3-4x per week",
+  rest: "Minimal",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "A controlled deep dorsiflexion stretch — heel staying down while the knee bends forward over the toes, building the ankle range that supports a deeper squat and better shock absorption.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand facing a wall, close enough that the knee can touch it when bent forward."
+  }, {
+    n: 2,
+    t: "Bend the Knee Forward",
+    d: "Keeping the heel flat on the ground, bend the knee forward toward (or past) the wall."
+  }, {
+    n: 3,
+    t: "Find the Stretch",
+    d: "Adjust your distance from the wall until you feel a clear stretch in the front of the ankle, heel still down."
+  }, {
+    n: 4,
+    t: "Hold",
+    d: "Hold 20-30 seconds, then switch feet."
+  }],
+  feel: ["A stretch through the front of the ankle, different from the calf stretches elsewhere in the hub", "Some people also feel this in the Achilles depending on ankle structure"],
+  cues: [{
+    t: "Heel Stays Down, No Exceptions",
+    d: "The moment the heel lifts, the stretch target shifts away from the ankle joint itself."
+  }],
+  errors: [{
+    e: "Heel lifts off the ground to fake more range",
+    w: "Defeats the purpose — the ankle isn't actually being stretched.",
+    f: "Back off the distance to the wall until the heel can stay flat throughout."
+  }],
+  progression: ["Week 1: closer to the wall, smaller range", "Week 2: slightly further, deeper bend", "Week 3+: hold longer, or add a small pulse at end range"]
+}, {
+  id: "fx-i4",
+  tier: "Intermediate",
+  name: "Metatarsal Articulation Point",
+  time: "2 min",
+  reps: "10 slow reps per foot",
+  freq: "3-4x per week",
+  rest: "None needed",
+  equip: "None",
+  diff: "Intermediate",
+  desc: "A slower, more deliberate version of pointing the foot that consciously separates the movement into stages — ankle, then midfoot, then toes — rather than letting it happen all at once.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Seated, leg extended, foot relaxed and flexed."
+  }, {
+    n: 2,
+    t: "Stage 1 — Ankle",
+    d: "Point just from the ankle first, keeping the toes relaxed and not yet curling."
+  }, {
+    n: 3,
+    t: "Stage 2 — Midfoot",
+    d: "Continue the point by articulating through the arch and midfoot."
+  }, {
+    n: 4,
+    t: "Stage 3 — Toes",
+    d: "Finish by curling gently through the toes for the fullest point."
+  }, {
+    n: 5,
+    t: "Reverse Slowly",
+    d: "Unwind the sequence in reverse order back to flexed."
+  }],
+  feel: ["A much more segmented, deliberate sensation than a normal quick point", "Each 'stage' becoming clearer with practice — this is genuinely hard to separate at first"],
+  cues: [{
+    t: "This Builds Real Articulation, Not Just Range",
+    d: "Most people's feet move as one block. Separating the stages is what builds the fine control dancers rely on."
+  }],
+  errors: [{
+    e: "All three stages blur into one movement",
+    w: "Very common at first — the foot wants to move as a unit.",
+    f: "Slow down further, even pausing briefly between each stage until they're genuinely distinct."
+  }],
+  progression: ["Week 1: very slow, stages may still blend somewhat", "Week 2: clearer separation between stages", "Week 3+: try the same staged sequence under the resistance band from the Theraband drill"]
+}, {
+  id: "fx-i5",
+  tier: "Intermediate",
+  name: "Kneeling Top-of-Foot Stretch",
+  time: "1-2 min",
+  reps: "20-30 sec x 2 per foot",
+  freq: "3-4x per week",
+  rest: "None needed",
+  equip: "A cushion or mat for the knees",
+  diff: "Intermediate",
+  desc: "A deeper stretch for the top of the foot and ankle, common in dance warm-ups, that most general mobility routines skip entirely.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Kneel on a cushioned surface, tops of the feet flat against the ground."
+  }, {
+    n: 2,
+    t: "Sit Back",
+    d: "Slowly sit back toward the heels, feeling a stretch build across the top of the feet and ankles."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold at a comfortable depth for 20-30 seconds."
+  }, {
+    n: 4,
+    t: "Ease Out",
+    d: "Come forward off the stretch slowly, don't spring out of it."
+  }],
+  feel: ["A stretch across the top of the foot and front of the ankle — an area rarely stretched directly", "Possible mild pressure on the knees — use padding if needed"],
+  cues: [{
+    t: "Depth Is Optional",
+    d: "You don't need to sit fully onto the heels — find whatever depth gives a real stretch without knee discomfort."
+  }],
+  errors: [{
+    e: "Knee pain during the stretch",
+    w: "Too much weight through a sensitive knee position without padding.",
+    f: "Add a folded towel or mat under the knees, and reduce how far you sit back."
+  }],
+  progression: ["Ongoing: sit back further as tolerance builds, always respecting knee comfort first"]
+}, {
+  id: "fx-a1",
+  tier: "Advanced",
+  name: "Demi-Pointe Relevé Holds",
+  time: "2-3 min",
+  reps: "20-30 sec hold x 3-4",
+  freq: "3-4x per week",
+  rest: "Light",
+  equip: "None",
+  diff: "Advanced",
+  desc: "Rising onto the balls of the feet — demi-pointe — and holding with control. Builds the strength foundation that supports deeper foot flexibility work safely.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand tall, feet parallel or in a comfortable turned-out position, near a wall for balance if needed."
+  }, {
+    n: 2,
+    t: "Rise",
+    d: "Rise onto the balls of both feet, as high as control allows, weight centered over the toes and ball of the foot."
+  }, {
+    n: 3,
+    t: "Hold",
+    d: "Hold the top position, resisting any wobble, for 20-30 seconds."
+  }, {
+    n: 4,
+    t: "Lower With Control",
+    d: "Lower slowly back to flat, don't just drop down."
+  }],
+  feel: ["Calves and the intrinsic foot muscles working hard to hold the position", "A genuine balance demand at the top of the rise"],
+  cues: [{
+    t: "Weight Stays Centered",
+    d: "Don't let the weight roll to the outer or inner edge of the foot at the top — stay centered over the ball of the foot."
+  }, {
+    t: "This Is Strength Work, Not Just Flexibility",
+    d: "Holding demi-pointe well is what makes the deeper stretch work later actually safe to load."
+  }],
+  errors: [{
+    e: "Ankles roll or wobble excessively at the top",
+    w: "The stabilizing strength isn't there yet to support the position.",
+    f: "Hold near a wall for light support and reduce the hold time until control improves."
+  }],
+  progression: ["Week 1: near a wall, 15-20 sec", "Week 2: no support, 20-25 sec", "Week 3+: 30+ sec, or try single-leg demi-pointe holds"]
+}, {
+  id: "fx-a2",
+  tier: "Advanced",
+  name: "Assisted Deep Point Stretch",
+  time: "3 min",
+  reps: "30-45 sec hold x 2 per foot",
+  freq: "3x per week",
+  rest: "1 rest day between sessions — genuine end-range loading",
+  equip: "A resistance band",
+  diff: "Advanced",
+  desc: "A deeper, held point stretch using the band to gently increase range, with an explicit check for correct alignment — this is working toward your natural mobility ceiling, not forcing range a dancer in pointe shoes would train for over years.",
+  steps: [{
+    n: 1,
+    t: "Setup",
+    d: "Sit with the leg extended, band looped around the ball of the foot."
+  }, {
+    n: 2,
+    t: "Point Fully",
+    d: "Point the foot to its natural end range first, without the band's help."
+  }, {
+    n: 3,
+    t: "Add Gentle Assistance",
+    d: "Use the band to add a small amount of additional gentle pressure into further point."
+  }, {
+    n: 4,
+    t: "Check Alignment",
+    d: "Confirm the ankle isn't rolling outward (sickling) — the line from shin to foot should stay straight."
+  }, {
+    n: 5,
+    t: "Hold and Release",
+    d: "Hold 30-45 seconds, release slowly, switch feet."
+  }],
+  feel: ["A deeper stretch through the front of the ankle and top of the foot than the unassisted point", "Should still feel like a stretch, never sharp or pinching"],
+  cues: [{
+    t: "Small Increases Only",
+    d: "The band should add a small amount of extra range, not force a dramatic increase — this is the deepest stretch in the hub and deserves the most caution."
+  }, {
+    t: "Alignment Over Range",
+    d: "A smaller, correctly aligned point is more valuable than a deeper one with the ankle rolling out of line."
+  }],
+  errors: [{
+    e: "Ankle sickles (rolls outward) under the band's pull",
+    w: "Chasing range at the expense of alignment — the classic pointe-work technical fault.",
+    f: "Ease off the band tension until the ankle can stay aligned, and rebuild range from there."
+  }, {
+    e: "Any sharp or pinching sensation",
+    w: "This is a sign of pushing past a safe range for the current tissue.",
+    f: "Stop immediately, release the stretch, and use a lighter band or less assistance next session."
+  }],
+  progression: ["Week 1-2: very light band assistance, focus entirely on alignment", "Week 3-4: slightly more assistance if alignment holds", "Ongoing: this should progress slowly over months, not weeks — foot and ankle flexibility of this kind takes real time"]
+}, {
+  id: "fx-a3",
+  tier: "Advanced",
+  name: "Rolling Through the Foot (Plié to Relevé Flow)",
+  time: "3 min",
+  reps: "10 slow flows per foot",
+  freq: "3-4x per week",
+  rest: "Minimal",
+  equip: "None",
+  diff: "Advanced",
+  desc: "A continuous flow from a deep ankle bend through to full demi-pointe, articulating through every position along the way rather than treating flex and point as two separate end points.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand tall, feet parallel, near a wall for balance if needed."
+  }, {
+    n: 2,
+    t: "Deep Ankle Bend",
+    d: "Bend the ankles, dropping into a deep dorsiflexed position, heels staying down (like the Deep Ankle Plié Stretch)."
+  }, {
+    n: 3,
+    t: "Roll Through Neutral",
+    d: "Slowly straighten back up through a neutral standing position, without pausing."
+  }, {
+    n: 4,
+    t: "Continue to Demi-Pointe",
+    d: "Keep rolling forward through the feet, rising onto the balls of the feet at the top."
+  }, {
+    n: 5,
+    t: "Reverse the Flow",
+    d: "Roll back down through neutral to the deep ankle bend, completing one continuous cycle."
+  }],
+  feel: ["A long, connected sensation through the entire lower leg and foot as you roll through every position", "Genuinely challenging to keep smooth and continuous rather than three separate movements"],
+  cues: [{
+    t: "One Continuous Movement",
+    d: "The goal is a smooth roll, not three distinct stops. If it feels choppy, slow down further rather than trying to smooth it out at the same speed."
+  }, {
+    t: "This Is the Integration Drill",
+    d: "Everything else in this Flexibility tab feeds into being able to do this one well — it's the foot moving through its complete range under full control."
+  }],
+  errors: [{
+    e: "Movement happens in distinct chunks rather than flowing",
+    w: "The transition points (especially through neutral) are usually where control breaks down.",
+    f: "Slow way down through the transitions specifically, even if the end ranges feel fine."
+  }],
+  progression: ["Week 1: 5-6 slow flows, expect some choppiness", "Week 2: 8 flows, smoother transitions", "Week 3+: 10 flows, or try it single-leg once double-leg is smooth"]
+}, {
+  id: "fx-a4",
+  tier: "Advanced",
+  name: "Single-Leg Tendu With Balance",
+  time: "3 min",
+  reps: "8 reps per direction, per standing leg",
+  freq: "3x per week",
+  rest: "Minimal",
+  equip: "None",
+  diff: "Advanced",
+  desc: "Combines the tendu articulation with single-leg balance — tying the flexibility work in this tab directly back into the balance and boxing-footwork themes elsewhere in the hub.",
+  steps: [{
+    n: 1,
+    t: "Starting Position",
+    d: "Stand on one leg, the other foot ready to move, no wall support this time."
+  }, {
+    n: 2,
+    t: "Tendu Out",
+    d: "Slide the free foot out along the floor to a full point, exactly as in the standing Tendu Series, while the standing leg holds balance."
+  }, {
+    n: 3,
+    t: "Return With Control",
+    d: "Slide the foot back to center with the same articulation and control."
+  }, {
+    n: 4,
+    t: "Multiple Directions",
+    d: "Complete the sequence forward, to the side, and behind, then switch standing legs."
+  }],
+  feel: ["The standing leg's foot and hip working to hold balance while the moving foot articulates through its own full sequence", "A real coordination demand — two different jobs happening on two different legs at once"],
+  cues: [{
+    t: "Don't Sacrifice One for the Other",
+    d: "It's tempting to either rush the tendu to protect balance, or ignore balance to focus on the foot — both should stay a priority together."
+  }],
+  errors: [{
+    e: "Standing leg's hip drops or balance wavers significantly",
+    w: "The added coordination demand of the moving foot is pulling focus from the standing leg.",
+    f: "Slow the tendu down and prioritize the standing leg's stability first, letting the moving foot's articulation quality build back up from there."
+  }],
+  progression: ["Week 1: forward direction only, near a wall if needed", "Week 2: all three directions, no support", "Week 3+: try with eyes closed briefly on the standing leg for an added challenge"]
+}];
 const FH_DAY_SECTIONS = [{
   label: "Prep",
   items: [{
@@ -8203,6 +8789,9 @@ function RecoveryHubScreen() {
   }, {
     id: "agility",
     label: "⚡ Agility"
+  }, {
+    id: "flexibility",
+    label: "🩰 Flexibility"
   }, {
     id: "day",
     label: "📅 Foot & Calf Day"
@@ -8574,7 +9163,7 @@ function RecoveryHubScreen() {
       fontFamily: "'DM Mono',monospace",
       whiteSpace: "nowrap"
     }
-  }, t.label))), fhTab !== "day" && fhTab !== "agility" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, t.label))), fhTab !== "day" && fhTab !== "agility" && fhTab !== "flexibility" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10.5,
       color: C.muted,
@@ -8611,7 +9200,33 @@ function RecoveryHubScreen() {
       marginBottom: 8,
       marginTop: 10
     }
-  }, groupName), FH_AGILITY.filter(ex => ex.group === groupName).map(ex => exCard(ex, FH_COLOR.agility))))), fhTab === "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, groupName), FH_AGILITY.filter(ex => ex.group === groupName).map(ex => exCard(ex, FH_COLOR.agility))))), fhTab === "flexibility" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.85,
+      marginBottom: 14,
+      padding: "9px 11px",
+      background: `${FH_COLOR.flexibility}10`,
+      border: `1px solid ${FH_COLOR.flexibility}33`,
+      borderRadius: 6
+    }
+  }, FH_FLEX_INTRO), ["Beginner", "Intermediate", "Advanced"].map(tierName => /*#__PURE__*/React.createElement("div", {
+    key: tierName,
+    style: {
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: FH_COLOR.flexibility,
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 8,
+      marginTop: 10
+    }
+  }, tierName), FH_FLEXIBILITY.filter(ex => ex.tier === tierName).map(ex => exCard(ex, FH_COLOR.flexibility))))), fhTab === "day" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: C.muted,
