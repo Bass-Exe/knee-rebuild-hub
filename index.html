@@ -1261,6 +1261,13 @@ function HomeScreen({
     sub: "Rings + bar · skills, warm-up, maintenance",
     color: "#38bdf8",
     desc: "Upper body training for non-Animal-Flow days. Scapula-focused warm-up, skill goal progressions, and a daily maintenance session."
+  }, {
+    id: "fightcoach",
+    icon: "🥊",
+    title: "Fight Coach",
+    sub: "Steward-style · jab-first combos · 7-day week",
+    color: "#ef4444",
+    desc: "A full fight week with hard, daily and rest days, plus round-by-round heavy bag, shadow and pad plans and a combination library."
   }];
   return /*#__PURE__*/React.createElement("div", {
     className: "fa"
@@ -14147,6 +14154,1458 @@ function CalisthenicsScreen() {
   }, ex.execution)))));
 }
 
+/* ════════════════════════════════════════════════════════════════════════
+   FIGHT COACH — Steward-style, jab-first combination training
+   7-day fight week · heavy bag, shadow and pad rounds · combo library
+   ════════════════════════════════════════════════════════════════════════ */
+
+const FC_RED = "#ef4444";
+const FC_TAG = {
+  Hard: "#ef4444",
+  Daily: "#60a5fa",
+  Recovery: "#4ade80",
+  Rest: "#94a3b8"
+};
+const fcEffortColor = e => e <= 3 ? "#4ade80" : e <= 6 ? "#facc15" : e <= 8 ? "#fb923c" : "#ef4444";
+const FC_KEY = [{
+  k: "1",
+  v: "Jab (lead-hand straight)"
+}, {
+  k: "2",
+  v: "Cross (rear-hand straight)"
+}, {
+  k: "3",
+  v: "Lead hook"
+}, {
+  k: "4",
+  v: "Rear hook"
+}, {
+  k: "5",
+  v: "Lead uppercut"
+}, {
+  k: "6",
+  v: "Rear uppercut"
+}, {
+  k: "B",
+  v: "After a number = to the body (3B = lead hook to the body)"
+}];
+const FC_KEY_NOTE = "Written as lead and rear so it works for either stance. Southpaw: your lead hand and lead foot are on the right. Defense moves: slip, roll, pull (lean back), parry, block, pivot, step off the line.";
+const FC_METHOD_INTRO = "Emanuel Steward, the Kronk Gym trainer behind fighters like Thomas Hearns, Lennox Lewis and Wladimir Klitschko, was known for fundamentals: a dominant jab, balance, and power shots set up behind it. Everything in this section is built on that foundation. It's my arrangement of those principles into a training week, not a copy of his own programs.";
+const FC_PRINCIPLES = [{
+  t: "The Jab Is the Engine",
+  d: "It measures range, hides the power shot behind it, disrupts the other fighter's rhythm and scores on its own. Long-armed fighters in particular win rounds with it. Train it more than any other punch."
+}, {
+  t: "Balance Before Power",
+  d: "Power comes from the floor up: push through the legs, turn the hips, land on balanced feet. Reaching or lunging gives it away. If you're off balance after a punch, the punch was too big for the position."
+}, {
+  t: "Straight Punches Down the Pipe",
+  d: "The jab and cross travel the shortest line, so they land first and recover fastest. Hooks and uppercuts are set up by them, not thrown on their own."
+}, {
+  t: "Hide the Cross Behind the Jab",
+  d: "The cross follows the jab as one motion. The jab blocks the other fighter's vision and the cross arrives behind it."
+}, {
+  t: "Head, Body, Head",
+  d: "Changing levels with the knees makes the guard move and opens the other level. A hook to the body followed by a hook upstairs is the classic example."
+}, {
+  t: "Return to Guard",
+  d: "Every punch comes back to where it started: hands near the chin, elbows tucked, chin down. Offense that leaves the guard open is a gift."
+}, {
+  t: "Finish by Moving",
+  d: "End combinations with a pivot, a step off the line or a defensive move so you're never left square in front of a counter."
+}, {
+  t: "Relaxed Until Impact",
+  d: "Stay loose and let the punch snap. Tension in the shoulders slows the hands and burns the gas tank. Tighten the fist at the last moment."
+}];
+const FC_TIMING = "Standard rounds: 3:00 work, 1:00 rest. If conditioning isn't there yet, use 2:00 work / 1:00 rest, or fewer rounds. Every 4th week, halve the rounds and keep the effort at 6 or below.";
+const FC_SCALE = [{
+  t: "If the second toe is still sore",
+  d: "Work flat-footed or with a low, quiet bounce, skip rope and hopping drills, and pivot on the whole foot for now. Use the Return-to-Bounce Ladder in Foot Hub, Arch Fix tab, to climb back to full footwork."
+}, {
+  t: "Shoulder prep",
+  d: "Before every striking session do scapular push-ups and wall slides (Calisthenics, Scapula tab). Build jab volume gradually, and if the shoulder starts creeping toward the ear mid-round, drop to footwork-only until it settles."
+}, {
+  t: "Pain rule",
+  d: "A mild ache that's gone by morning is fine. Sharp pain, swelling, or anything that lingers means stop and get it checked."
+}];
+const FC_WEEK_RULES = ["Wednesday and Friday are the two hard days. They never touch: Thursday stays easy.", "Feeling beat up? Drop the effort 2 points on the day instead of skipping it. Still beat up the next day? Treat it as a rest day.", "Hard = high effort, needs the recovery day after. Daily = you could repeat it tomorrow.", "Sunday is non-negotiable."];
+const FC_WEEK = [{
+  day: "Mon",
+  name: "Jab Day",
+  tag: "Daily",
+  effort: 6,
+  total: "~75 min",
+  focus: "Make the jab the engine. Clean mechanics, moderate effort, no hero rounds.",
+  blocks: [{
+    label: "Prep",
+    time: "8 min",
+    detail: "Shoulder prep (Calisthenics, Scapula tab), foot prep (Foot Hub, Arch Fix: Tripod Stance and Short Foot), then 3 minutes of easy movement."
+  }, {
+    label: "Shadow A",
+    time: "4 rounds",
+    detail: "Footwork and jab",
+    go: ["shadow", "shadowA"]
+  }, {
+    label: "Pads A",
+    time: "6 rounds",
+    detail: "Foundations",
+    go: ["pads", "padsA"]
+  }, {
+    label: "Bag A",
+    time: "4 rounds",
+    detail: "Jab foundation",
+    go: ["bag", "bagA"]
+  }, {
+    label: "Finish",
+    time: "10 min",
+    detail: "Core, then neck and shoulder cool-down."
+  }]
+}, {
+  day: "Tue",
+  name: "Strength + Defense",
+  tag: "Daily",
+  effort: 5,
+  total: "~75 min",
+  focus: "Build the pulling strength and head movement that make Wednesday's power possible.",
+  blocks: [{
+    label: "Prep",
+    time: "8 min",
+    detail: "Same shoulder and foot prep as Monday."
+  }, {
+    label: "Strength",
+    time: "35 min",
+    detail: "Calisthenics, Full Workouts: Day 2 (Pull). Pulling strength balances all the punching and helps the shoulder."
+  }, {
+    label: "Shadow B",
+    time: "5 rounds",
+    detail: "Defense into offense",
+    go: ["shadow", "shadowB"]
+  }, {
+    label: "Finish",
+    time: "10 min",
+    detail: "Core, then neck and shoulder cool-down."
+  }]
+}, {
+  day: "Wed",
+  name: "Power Day",
+  tag: "Hard",
+  effort: 8,
+  total: "~65 min",
+  focus: "Fewer, heavier, better-balanced shots. Quality over volume: stop a round early if your balance goes.",
+  blocks: [{
+    label: "Prep",
+    time: "8 min",
+    detail: "Shoulder and foot prep, then 3 minutes of easy movement."
+  }, {
+    label: "Pads B",
+    time: "6 rounds",
+    detail: "Combinations",
+    go: ["pads", "padsB"]
+  }, {
+    label: "Bag B",
+    time: "6 rounds",
+    detail: "Power rounds",
+    go: ["bag", "bagB"]
+  }, {
+    label: "Finish",
+    time: "10 min",
+    detail: "Light stretching, neck and shoulder cool-down."
+  }]
+}, {
+  day: "Thu",
+  name: "Active Recovery",
+  tag: "Recovery",
+  effort: 2,
+  total: "~60 min easy",
+  focus: "Let the hard day sink in. Nothing here should leave you tired.",
+  blocks: [{
+    label: "Walk",
+    time: "25 min",
+    detail: "Easy pace. Use the Arch-Hold Walk cues from Foot Hub, Arch Fix tab."
+  }, {
+    label: "Mobility",
+    time: "15 min",
+    detail: "GOATA Protocol: Routine 1.1 or 1.2 (rockers, hip stretch)."
+  }, {
+    label: "Maintenance",
+    time: "10 min",
+    detail: "Arch Fix Stage 1 drills and the Scapula tab drills."
+  }, {
+    label: "Shadow C",
+    time: "4 rounds, optional",
+    detail: "Visualization at effort 2-3 only",
+    go: ["shadow", "shadowC"]
+  }]
+}, {
+  day: "Fri",
+  name: "Fight Rounds",
+  tag: "Hard",
+  effort: 9,
+  total: "~65 min",
+  focus: "Pressure-test everything under fatigue: pads as a fight simulation, then bag rounds at fight pace.",
+  blocks: [{
+    label: "Prep",
+    time: "8 min",
+    detail: "Shoulder and foot prep, then 3 minutes of easy movement."
+  }, {
+    label: "Pads C",
+    time: "6 rounds",
+    detail: "Fight simulation",
+    go: ["pads", "padsC"]
+  }, {
+    label: "Bag C",
+    time: "6 rounds",
+    detail: "Fight pace. Swap for technical sparring only if you have partners and Wednesday and Thursday went well. Never hard sparring on back-to-back days.",
+    go: ["bag", "bagC"]
+  }, {
+    label: "Finish",
+    time: "10 min",
+    detail: "Light stretching, neck and shoulder cool-down."
+  }]
+}, {
+  day: "Sat",
+  name: "Conditioning + Skills",
+  tag: "Daily",
+  effort: 6,
+  total: "~60 min",
+  focus: "Build the engine, then sharpen the skills while slightly tired.",
+  blocks: [{
+    label: "Prep",
+    time: "8 min",
+    detail: "Shoulder and foot prep."
+  }, {
+    label: "Conditioning",
+    time: "30 min",
+    detail: "8 rounds of 2:00 hard / 1:00 easy on a bike, rower or run. Skip rope only if the foot is calm."
+  }, {
+    label: "Shadow A",
+    time: "rounds 1-3",
+    detail: "Technical finish while a little tired",
+    go: ["shadow", "shadowA"]
+  }, {
+    label: "Finish",
+    time: "10 min",
+    detail: "Core and cool-down."
+  }]
+}, {
+  day: "Sun",
+  name: "Full Rest",
+  tag: "Rest",
+  effort: 0,
+  total: "0 min",
+  focus: "Sleep, eat, walk if you feel like it. The week's progress gets built today.",
+  blocks: [{
+    label: "Optional",
+    time: "10 min",
+    detail: "Foot and shoulder maintenance only (Arch Fix Stage 1, Scapula drills)."
+  }]
+}];
+const FC_SESSIONS = {
+  bag: [{
+    id: "bagA",
+    name: "Bag A — Jab Foundation",
+    used: "Mon",
+    goal: "Make the jab the engine. Every combination starts with it.",
+    items: [{
+      n: 1,
+      name: "Find the Range",
+      effort: 4,
+      focus: "Jab only, moving around the bag.",
+      work: ["Single jabs at three speeds: slow and sharp, medium, then fast snap", "Step off the line every 3-4 jabs", "Touch the bag with the glove, don't push it"],
+      cue: "Jab out and back along the same line. The rear hand stays at the chin.",
+      dont: "Don't drop the rear hand when the jab goes out."
+    }, {
+      n: 2,
+      name: "Jab and Cross",
+      effort: 5,
+      focus: "Add the cross behind the jab.",
+      work: ["1-2 with a full rear-foot pivot on the 2", "1-1-2", "1B-1 (jab to the body, then the head)"],
+      cue: "Sit into the cross: back heel turns, hip drives through, land balanced.",
+      dont: "Don't throw the cross from the shoulder alone."
+    }, {
+      n: 3,
+      name: "Add the Hook",
+      effort: 6,
+      focus: "Finish combinations with the lead hook.",
+      work: ["1-2-3", "1-2-3-2", "After the hook, pivot or step off the line"],
+      cue: "The hook is short and tight, elbow level, turned from the hips.",
+      dont: "Don't swing it wide or drop the hand to throw it."
+    }, {
+      n: 4,
+      name: "Jab Leads Everything",
+      effort: 6,
+      focus: "Free round with one rule: every combination starts with a jab.",
+      work: ["Mix 1, 1-2, 1-2-3 and 1-2-3-2 at will", "Finish each combination with a movement", "Last 30 seconds: pick up the pace"],
+      cue: "If you can't start with a jab, move until you can.",
+      dont: "Don't throw a combination you can't finish balanced."
+    }]
+  }, {
+    id: "bagB",
+    name: "Bag B — Power Rounds",
+    used: "Wed",
+    goal: "Fewer, heavier, better-balanced shots. Reset between combinations so every one has intent.",
+    items: [{
+      n: 1,
+      name: "Touch and Warm",
+      effort: 5,
+      focus: "Light combinations to build rhythm.",
+      work: ["1-2 and 1-2-3 at about 60% power", "Breathe out with every punch"],
+      cue: "Loose shoulders, relaxed hands.",
+      dont: "Don't start at full power with cold shoulders."
+    }, {
+      n: 2,
+      name: "Big One-Twos",
+      effort: 7,
+      focus: "The cross with full leg drive.",
+      work: ["Throw 1-2 with full commitment, then reset your stance completely", "Aim for 8-10 big combinations in the round, 10-15 seconds apart", "Return to guard after each"],
+      cue: "Back foot pushes, hips turn, weight lands through the front leg, then back to balance.",
+      dont: "Don't lunge. If your head ends up past your front foot, the punch was too long."
+    }, {
+      n: 3,
+      name: "Hook Round",
+      effort: 7,
+      focus: "Lead hook power, built behind the jab.",
+      work: ["1-3 and 1-2-3", "1-2-3B-3 (hook to the body, then to the head)", "Rest between sets on your feet, hands up"],
+      cue: "Hook from the hips with the elbow level.",
+      dont: "Don't arm-punch the hook or step out of range to throw it."
+    }, {
+      n: 4,
+      name: "Uppercut Round",
+      effort: 8,
+      focus: "Short uppercuts at close range.",
+      work: ["Step inside, then 6-3-2 (rear uppercut, lead hook, cross)", "5-2-3 (lead uppercut, cross, lead hook)", "Reset and re-enter the range between sets"],
+      cue: "Bend the knees to load, drive up through the legs. Keep it short.",
+      dont: "Don't wind the uppercut up from below the waist."
+    }, {
+      n: 5,
+      name: "Body Attack",
+      effort: 8,
+      focus: "Work the body to lower the guard.",
+      work: ["1-2-3B-2", "1-1B-2", "3B-3 (body hook, head hook)"],
+      cue: "Change levels with the knees, not the back.",
+      dont: "Don't fold at the waist: it takes your eyes off the target."
+    }, {
+      n: 6,
+      name: "Back Off",
+      effort: 5,
+      focus: "Cool down technically.",
+      work: ["Light 1-2-3 and 1-2-3-2", "Breathe and shake the arms out between combinations"],
+      cue: "End the session sharp, not wrecked.",
+      dont: "Don't let the form go loose just because the hard work is done."
+    }]
+  }, {
+    id: "bagC",
+    name: "Bag C — Fight Pace",
+    used: "Fri",
+    goal: "Build output and ring craft under fatigue, the way a real round feels.",
+    items: [{
+      n: 1,
+      name: "Feel-Out",
+      effort: 5,
+      focus: "Jab and move, like the first round of a fight.",
+      work: ["Jab at the head and body, circle the bag", "Throw a 1-2 once or twice a minute just to test"],
+      cue: "Win the range first.",
+      dont: "Don't rush into exchanges in the first minute."
+    }, {
+      n: 2,
+      name: "Add the Cross",
+      effort: 6,
+      focus: "Settle into 1-2 and 1-2-3 rhythm.",
+      work: ["1-2, 1-2-3 and 1-2-3-2 with a step or pivot after each", "Keep moving off the line"],
+      cue: "Never stand square after a combination.",
+      dont: "Don't plant your feet and trade with the bag."
+    }, {
+      n: 3,
+      name: "Kronk-Style Pressure",
+      effort: 8,
+      focus: "Cut off the ring and stay on the bag.",
+      work: ["Walk the bag down, three-punch minimum on every exchange", "1-2-3-2-3 closing combinations", "Body shots to slow it down"],
+      cue: "Controlled aggression: short steps, hands up while moving forward.",
+      dont: "Don't cross your feet or walk in with the hands low."
+    }, {
+      n: 4,
+      name: "Counter Round",
+      effort: 7,
+      focus: "Imagine the bag throwing back.",
+      work: ["Slip-2 and slip-2-3 (slip the jab, then counter)", "Roll-3-2 (roll under a hook, counter)", "Pull-1-2 (lean back from a jab, counter with 1-2)"],
+      cue: "Move the head first, then punch. Both happen in one motion.",
+      dont: "Don't slip with your eyes closed or dip your head below your chest."
+    }, {
+      n: 5,
+      name: "Output Bursts",
+      effort: 9,
+      focus: "15-second hard bursts, 15-second technical, six cycles.",
+      work: ["Hard 15 seconds: nonstop 1-2-3-2 and 1-2-3B-3", "Technical 15 seconds: light jabs and movement"],
+      cue: "The hard 15 seconds only count if the form holds.",
+      dont: "Don't let the rear hand drift away from the chin as you tire."
+    }, {
+      n: 6,
+      name: "Finish Strong",
+      effort: 8,
+      focus: "First 2:30 smart, last 30 seconds all-out.",
+      work: ["Smooth 1-2s and movement for 2:30", "Last 30 seconds: all-out combinations, hands back to guard after each"],
+      cue: "The gas tank gets built in the last rounds.",
+      dont: "Don't start the all-out burst early and fade."
+    }]
+  }],
+  shadow: [{
+    id: "shadowA",
+    name: "Shadow A — Footwork and Jab",
+    used: "Mon, Sat (rounds 1-3)",
+    goal: "Build the stance, the step and the jab at low effort, with perfect form.",
+    items: [{
+      n: 1,
+      name: "Slow-Motion Technique",
+      effort: 2,
+      focus: "Perfect form at quarter speed.",
+      work: ["Slow-motion jab, then 1-2, checking chin, shoulder and guard", "Pivot the rear foot on every cross", "Use a mirror if you have one"],
+      cue: "Slow lets you see the mistakes.",
+      dont: "Don't speed up just because it feels easy."
+    }, {
+      n: 2,
+      name: "Footwork Patterns",
+      effort: 3,
+      focus: "Step and drag in all four directions.",
+      work: ["Step forward, back, left and right, keeping the stance width", "Jab on every step", "Feet never cross or click together"],
+      cue: "Move the foot closest to the direction first.",
+      dont: "Don't let the stance get narrower as you move."
+    }, {
+      n: 3,
+      name: "Pivot Rounds",
+      effort: 4,
+      focus: "Add 1-2 with pivots.",
+      work: ["1-2, then pivot off the line", "1-2-3, then pivot the other way", "Reset the stance after every pivot"],
+      cue: "Pivot on the lead foot. If the second toe is sore, pivot from the whole foot instead.",
+      dont: "Don't turn the hips without the feet."
+    }, {
+      n: 4,
+      name: "Free Flow",
+      effort: 5,
+      focus: "Combine everything.",
+      work: ["Free shadow: 1, 1-2, 1-2-3, 1-2-3-2", "Change speed every 15-20 seconds", "Last 30 seconds: pick up the pace"],
+      cue: "Stay relaxed. Fast hands come from loose shoulders.",
+      dont: "Don't tense the neck and shoulders as the pace goes up."
+    }]
+  }, {
+    id: "shadowB",
+    name: "Shadow B — Defense into Offense",
+    used: "Tue",
+    goal: "Make head movement and counters automatic.",
+    items: [{
+      n: 1,
+      name: "Head Movement Only",
+      effort: 3,
+      focus: "Slips and rolls with no punches.",
+      work: ["Slip left and right, roll under imaginary hooks", "Bend at the knees, not the waist", "Eyes stay forward"],
+      cue: "Slip an inch or two. Just enough.",
+      dont: "Don't lunge the head out of position or look at the floor."
+    }, {
+      n: 2,
+      name: "Slip, Then Counter",
+      effort: 4,
+      focus: "Slip-2 and slip-2-3.",
+      work: ["Slip the imaginary jab, counter with the cross", "Add the lead hook: slip-2-3", "Return to guard each time"],
+      cue: "Slip and punch in the same breath.",
+      dont: "Don't pause between the slip and the counter."
+    }, {
+      n: 3,
+      name: "Roll and Counter",
+      effort: 4,
+      focus: "Roll-3-2 and roll-2.",
+      work: ["Roll under the imaginary hook, come up into the lead hook", "Finish with the cross", "Keep the knees bent through the roll"],
+      cue: "Come up on the punch, not before it.",
+      dont: "Don't stand straight up out of the roll."
+    }, {
+      n: 4,
+      name: "Pull and Parry",
+      effort: 5,
+      focus: "Pull-1-2, parry-2, block-3-2.",
+      work: ["Lean back from the jab, spring forward with 1-2", "Parry the jab, cross over the top", "Block the hook with the glove tight to the head, counter"],
+      cue: "Small, quick defensive moves. Save the energy for the counter.",
+      dont: "Don't reach with the parry."
+    }, {
+      n: 5,
+      name: "Free With a Plan",
+      effort: 5,
+      focus: "Imagine the other fighter and combine everything.",
+      work: ["Mix offense and defense, ending every combination with movement", "Change the imaginary opponent's style every 45 seconds"],
+      cue: "Fight someone, don't just move.",
+      dont: "Don't shadow without a target in your head."
+    }]
+  }, {
+    id: "shadowC",
+    name: "Shadow C — Visualization",
+    used: "Thu (optional)",
+    goal: "Rehearse ring craft against different styles, at very low effort.",
+    items: [{
+      n: 1,
+      name: "The Tall Jabber",
+      effort: 3,
+      focus: "Fight someone with a long jab.",
+      work: ["Close the distance behind your own jab", "Slip-2 against his jab, then step out", "Use feints to get inside"],
+      cue: "Make him lead, then answer.",
+      dont: "Don't walk straight in with your hands down."
+    }, {
+      n: 2,
+      name: "The Pressure Fighter",
+      effort: 3,
+      focus: "Fight someone who keeps walking you down.",
+      work: ["Pivot and angle off the line", "1-2-3 as he steps in, then move", "Keep the jab out as a barrier"],
+      cue: "Make him miss, then punch.",
+      dont: "Don't back up in a straight line."
+    }, {
+      n: 3,
+      name: "The Counter Puncher",
+      effort: 3,
+      focus: "Fight someone who waits for you to throw.",
+      work: ["Feint, then 1-2", "Never throw the same combination twice in a row", "Finish every combination moving"],
+      cue: "Be unpredictable and be balanced.",
+      dont: "Don't throw the same pattern twice."
+    }, {
+      n: 4,
+      name: "Your Fight Plan",
+      effort: 3,
+      focus: "Rehearse your own game plan, round by round.",
+      work: ["Round 1 feel-out, middle rounds the plan, last round the finish", "See the ring and the corners"],
+      cue: "Walk through it like it's real.",
+      dont: "Don't rush: this is rehearsal, not conditioning."
+    }]
+  }],
+  pads: [{
+    id: "padsA",
+    name: "Pads A — Foundations",
+    used: "Mon",
+    goal: "Clean basics on a moving target: jab, one-two, hook, body, then simple defense.",
+    items: [{
+      n: 1,
+      name: "Jab Only",
+      effort: 4,
+      focus: "Sharp, snapping jab to a steady target.",
+      work: ["Fighter: step in, jab, step out. About 20 jabs a minute", "Change the jab's speed: slow and sharp, medium, snap"],
+      holder: "Hold one pad at eye level, still, and move your feet so the fighter has to adjust the range.",
+      cue: "Return the hand to the chin every time.",
+      dont: "Don't reach or lean in. Step to the target."
+    }, {
+      n: 2,
+      name: "One-Two",
+      effort: 5,
+      focus: "Add the cross behind the jab.",
+      work: ["Calls: 1-2, 1-1-2, 2", "Pivot the rear foot on every cross"],
+      holder: "Call the numbers out loud. Hold both pads still until the punch lands, then reset.",
+      cue: "The one-two is one motion, not two punches.",
+      dont: "Don't pause between the jab and the cross."
+    }, {
+      n: 3,
+      name: "Add the Hook",
+      effort: 6,
+      focus: "Finish with the lead hook.",
+      work: ["Calls: 1-2-3, 1-2-3-2", "Turn from the hips for the hook"],
+      holder: "Show the hook pad at head height, palm facing the fighter, closer to the body than you'd think.",
+      cue: "Short and tight, elbow level.",
+      dont: "Don't wind up or step out of range to throw the hook."
+    }, {
+      n: 4,
+      name: "Head and Body",
+      effort: 6,
+      focus: "Change levels with the knees.",
+      work: ["Calls: 1-2-3B-3, 1-1B-2", "Reset to the guard between calls"],
+      holder: "Drop the body pad lower on the 3B call so the fighter has to bend the knees.",
+      cue: "Dip the knees, don't fold at the waist.",
+      dont: "Don't bend at the waist or drop the hands."
+    }, {
+      n: 5,
+      name: "Defense Gate",
+      effort: 6,
+      focus: "Slip, then counter.",
+      work: ["Holder throws slow, soft pad swipes", "Fighter: slip-2, slip-2-3, roll-3-2"],
+      holder: "Throw slowly and a little short. This is a drill, not a test.",
+      cue: "Move the head first, punch as you come back.",
+      dont: "Don't duck with your eyes down. Keep looking at the holder."
+    }, {
+      n: 6,
+      name: "Free Calls",
+      effort: 6,
+      focus: "Random combinations, finishing with movement.",
+      work: ["Holder calls 3-4 numbers at random", "Fighter finishes each combination with a pivot or step off the line"],
+      holder: "Mix the calls so the fighter can't anticipate, and vary the pad height.",
+      cue: "React to the call. Don't guess it.",
+      dont: "Don't end square in front of the holder."
+    }]
+  }, {
+    id: "padsB",
+    name: "Pads B — Combinations",
+    used: "Wed",
+    goal: "Longer, heavier combinations with a clean finish and a clean exit.",
+    items: [{
+      n: 1,
+      name: "Warm-Up Combinations",
+      effort: 5,
+      focus: "Build up: 1, 1-2, 1-2-3.",
+      work: ["Calls: 1, 1-2, 1-2-3 at about 60% power", "Find the rhythm"],
+      holder: "Start with slow, clear calls and speed up gradually.",
+      cue: "Loose and accurate.",
+      dont: "Don't go to full power yet."
+    }, {
+      n: 2,
+      name: "Hook Finish",
+      effort: 7,
+      focus: "1-2-3-2 with a pivot out.",
+      work: ["Calls: 1-2-3-2, then pivot to find the next target", "The hook comes off the hip turn of the cross"],
+      holder: "Move your feet after the last pad so the fighter has to pivot to follow.",
+      cue: "Punch, pivot, reset.",
+      dont: "Don't finish the combination flat-footed and square."
+    }, {
+      n: 3,
+      name: "Head to Body",
+      effort: 7,
+      focus: "Hooks downstairs and upstairs.",
+      work: ["Calls: 1-2-3B-3, 1-1B-2, 3B-3-2", "Bend the knees, don't fold"],
+      holder: "Alternate between head-height and body-height pads so the fighter changes levels with the knees.",
+      cue: "Dip, hook, rise.",
+      dont: "Don't telegraph the body shot by dropping the hands first."
+    }, {
+      n: 4,
+      name: "Uppercuts",
+      effort: 7,
+      focus: "Close-range uppercut combinations.",
+      work: ["Calls: 1-6-3-2, 5-2-3, 6-3-2", "Short and compact"],
+      holder: "Hold the uppercut pads low and close, palms up.",
+      cue: "Load the knees, drive up.",
+      dont: "Don't wind up below the waist."
+    }, {
+      n: 5,
+      name: "Counters",
+      effort: 7,
+      focus: "Answer the holder's punches.",
+      work: ["Holder throws a pad-jab: slip-2-3", "Holder throws a pad-cross: roll-3-2", "Return to guard between exchanges"],
+      holder: "Throw clearly and a little slow so the fighter can find the timing.",
+      cue: "Defense and offense in one motion.",
+      dont: "Don't slip then stop. Counter immediately."
+    }, {
+      n: 6,
+      name: "Long Combinations",
+      effort: 8,
+      focus: "Five- and six-punch sequences for rhythm.",
+      work: ["Calls: 1-2-3-2-3, 1-2-3B-3-2", "Holder stops and starts the sequence unpredictably"],
+      holder: "Start and stop the combination without warning so the fighter has to stay balanced between punches.",
+      cue: "Rhythm over power.",
+      dont: "Don't rush the middle of the combination."
+    }]
+  }, {
+    id: "padsC",
+    name: "Pads C — Fight Simulation",
+    used: "Fri",
+    goal: "The holder plays the opponent: moving, countering and forcing decisions.",
+    items: [{
+      n: 1,
+      name: "Feel-Out",
+      effort: 5,
+      focus: "Find the range and test.",
+      work: ["Jab and movement, an occasional 1-2", "Read the holder's feet"],
+      holder: "Move constantly and show pads at random, so the fighter has to find the range.",
+      cue: "Win the range first.",
+      dont: "Don't chase the pads."
+    }, {
+      n: 2,
+      name: "Pressure",
+      effort: 7,
+      focus: "The fighter walks the holder down.",
+      work: ["Short steps, hands up", "Three-punch minimum on every exchange"],
+      holder: "Back up in a circle, showing pads on the move.",
+      cue: "Controlled aggression. Cut off the ring.",
+      dont: "Don't cross your feet while pursuing."
+    }, {
+      n: 3,
+      name: "Counter",
+      effort: 7,
+      focus: "Make the holder miss, then punch.",
+      work: ["Holder throws a pad-jab or pad-cross every few seconds", "Fighter answers with slip-2, roll-3-2 or pull-1-2"],
+      holder: "Throw every few seconds, clearly, and vary the timing.",
+      cue: "Be patient, then explode.",
+      dont: "Don't counter before the holder has actually thrown."
+    }, {
+      n: 4,
+      name: "Inside",
+      effort: 8,
+      focus: "Short hooks and uppercuts at close range.",
+      work: ["3-2-3, 6-3-2, 5-2-3", "Keep elbows tight, hips turning"],
+      holder: "Stay close and hold the pads tight to your chest.",
+      cue: "Short punches, short steps.",
+      dont: "Don't hold or lean on the holder."
+    }, {
+      n: 5,
+      name: "Cut Off the Ring",
+      effort: 8,
+      focus: "Pressure with angles.",
+      work: ["Step off the line, then finish with 1-2-3", "Pivot to the open side and repeat"],
+      holder: "Move toward a corner and change direction.",
+      cue: "Take the angle, then punch.",
+      dont: "Don't walk straight into the pads."
+    }, {
+      n: 6,
+      name: "Closing Round",
+      effort: 9,
+      focus: "First 2:30 smart, last 30 seconds all-out.",
+      work: ["Long combinations with clean finishes", "Last 30 seconds: all-out"],
+      holder: "Call long combinations and keep a steady, challenging pace.",
+      cue: "Finish how you want to be remembered.",
+      dont: "Don't let the guard drop in the last 30 seconds."
+    }]
+  }]
+};
+const FC_COMBOS = [{
+  id: "cA",
+  name: "Jab Foundation",
+  blurb: "Everything is built off these.",
+  combos: [{
+    n: "1",
+    name: "Single jab",
+    cue: "Snap out, snap back. Vary the speed."
+  }, {
+    n: "1-1",
+    name: "Double jab",
+    cue: "The second jab is a half-step closer. Keep moving."
+  }, {
+    n: "1-1-2",
+    name: "Double jab, cross",
+    cue: "The first jab measures, the second hides the cross."
+  }, {
+    n: "1-2",
+    name: "The one-two",
+    cue: "One motion. Pivot the rear foot as the cross lands."
+  }, {
+    n: "1B-1",
+    name: "Jab to the body, jab to the head",
+    cue: "Bend the knees for the body jab, then rise to the head."
+  }]
+}, {
+  id: "cB",
+  name: "Straight + Hook",
+  blurb: "The power sequence, set up behind the jab.",
+  combos: [{
+    n: "1-2-3",
+    name: "Jab, cross, lead hook",
+    cue: "The hook comes off the cross's hip turn, short and tight."
+  }, {
+    n: "1-2-3-2",
+    name: "The finishing cross",
+    cue: "The hook moves the head, so the second cross has a clean path."
+  }, {
+    n: "1-1-2-3",
+    name: "Double jab into the hook",
+    cue: "Use the double jab to bring the guard forward."
+  }, {
+    n: "1-2-3-2 + pivot",
+    name: "Hook finish with an exit",
+    cue: "After the last cross, pivot off the line before the counter arrives."
+  }]
+}, {
+  id: "cC",
+  name: "Head to Body",
+  blurb: "Change levels with the knees to open the guard.",
+  combos: [{
+    n: "1-2-3B-3",
+    name: "Hook downstairs, hook upstairs",
+    cue: "Dip the knees, hook to the body, rise through the head hook."
+  }, {
+    n: "1-1B-2",
+    name: "Jab, body jab, cross",
+    cue: "The body jab pulls the guard down, then the cross goes upstairs."
+  }, {
+    n: "3B-3-2",
+    name: "Body hook, head hook, cross",
+    cue: "Start close, finish with the cross as you step out."
+  }, {
+    n: "1-2-3B-2",
+    name: "Body hook, straight cross",
+    cue: "Return to guard before the cross."
+  }]
+}, {
+  id: "cD",
+  name: "Inside Work",
+  blurb: "Short punches when the distance closes.",
+  combos: [{
+    n: "6-3-2",
+    name: "Rear uppercut, lead hook, cross",
+    cue: "Load the knees, drive up, keep every punch short."
+  }, {
+    n: "5-2-3",
+    name: "Lead uppercut, cross, lead hook",
+    cue: "The uppercut lifts the chin so the cross has a path."
+  }, {
+    n: "1-6-3-2",
+    name: "Jab, rear uppercut, hook, cross",
+    cue: "Step inside behind the jab."
+  }, {
+    n: "3-2-3",
+    name: "Hook, cross, hook",
+    cue: "Elbows tight, turn from the hips."
+  }]
+}, {
+  id: "cE",
+  name: "Defense → Counter",
+  blurb: "Move the head first, then punch. One motion.",
+  combos: [{
+    n: "Slip – 2",
+    name: "Slip the jab, counter with the cross",
+    cue: "Slip an inch to the outside, the rear hand fires as you come back."
+  }, {
+    n: "Slip – 2-3",
+    name: "Slip, cross, hook",
+    cue: "The hook comes off the cross's hip turn."
+  }, {
+    n: "Roll – 3-2",
+    name: "Roll under, hook, cross",
+    cue: "Roll with the knees, come up into the hook."
+  }, {
+    n: "Pull – 1-2",
+    name: "Pull back, then one-two",
+    cue: "Lean back from the jab, spring forward with the counter."
+  }, {
+    n: "Parry – 2",
+    name: "Parry the jab, cross over the top",
+    cue: "Small parry, no reaching."
+  }, {
+    n: "Block – 3-2",
+    name: "Block the hook, counter",
+    cue: "Glove tight to the head, counter immediately."
+  }]
+}, {
+  id: "cF",
+  name: "Long Range",
+  blurb: "For long-armed fighters, or whenever you want to stay outside.",
+  combos: [{
+    n: "1-1-1-2",
+    name: "Triple jab, cross",
+    cue: "Each jab at a different speed or height."
+  }, {
+    n: "1-2, step back",
+    name: "One-two and leave",
+    cue: "Punch, then step out of range before the counter."
+  }, {
+    n: "Step – 1-2",
+    name: "Step jab, then one-two",
+    cue: "The step covers the distance, the jab lands as the foot lands."
+  }, {
+    n: "1-1B-2-3",
+    name: "Jab, body jab, cross, hook",
+    cue: "Change levels with the knees, then finish upstairs."
+  }]
+}, {
+  id: "cG",
+  name: "Pressure",
+  blurb: "Closing the ring with controlled aggression.",
+  combos: [{
+    n: "1-2-3-2-3",
+    name: "Five-punch closer",
+    cue: "Walk forward in short steps behind it."
+  }, {
+    n: "1-2-3B-3-2",
+    name: "Head, body, head finish",
+    cue: "Rhythm over power."
+  }, {
+    n: "1-2-3-6-3-2",
+    name: "Six-punch sequence",
+    cue: "Use it when the other fighter is covering up."
+  }]
+}];
+function FightCoachScreen() {
+  const [fcTab, setFcTab] = useState("week");
+  const [dayIdx, setDayIdx] = useState(0);
+  const [open, setOpen] = useState(null);
+  const toggle = id => setOpen(o => o === id ? null : id);
+  const go = (tab, id) => {
+    setFcTab(tab);
+    setOpen(id || null);
+    try {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    } catch (e) {}
+  };
+  const TABS = [{
+    id: "week",
+    label: "📅 Week"
+  }, {
+    id: "bag",
+    label: "🥊 Heavy Bag"
+  }, {
+    id: "shadow",
+    label: "🪞 Shadow"
+  }, {
+    id: "pads",
+    label: "🎯 Pads"
+  }, {
+    id: "combos",
+    label: "🔢 Combos"
+  }, {
+    id: "method",
+    label: "📖 Method"
+  }];
+  const day = FC_WEEK[dayIdx];
+  const lbl = (txt, color) => /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9,
+      color: color || FC_RED,
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 8,
+      marginTop: 4
+    }
+  }, txt);
+  const note = txt => /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.85,
+      marginBottom: 14,
+      padding: "10px 12px",
+      background: `${FC_RED}10`,
+      border: `1px solid ${FC_RED}33`,
+      borderRadius: 6
+    }
+  }, txt);
+  const sessionCard = s => {
+    const isOpen = open === s.id;
+    return /*#__PURE__*/React.createElement("div", {
+      key: s.id,
+      style: {
+        border: `1px solid ${isOpen ? FC_RED : "#1e293b"}`,
+        borderRadius: 8,
+        overflow: "hidden",
+        marginBottom: 9,
+        background: isOpen ? `${FC_RED}0c` : "#0c111a"
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggle(s.id),
+      style: {
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "12px 12px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        cursor: "pointer",
+        textAlign: "left"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#e8f4ff",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 3
+      }
+    }, s.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: C.muted,
+        lineHeight: 1.6,
+        marginBottom: 5
+      }
+    }, s.goal), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 8,
+        fontSize: 9,
+        color: "#8a8fa0",
+        flexWrap: "wrap"
+      }
+    }, /*#__PURE__*/React.createElement("span", null, "🥊 ", s.items.length, " rounds"), /*#__PURE__*/React.createElement("span", null, "⏱ 3:00 on / 1:00 off"), /*#__PURE__*/React.createElement("span", null, "📅 ", s.used))), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: FC_RED,
+        fontSize: 18,
+        flexShrink: 0
+      }
+    }, isOpen ? "−" : "+")), isOpen && /*#__PURE__*/React.createElement("div", {
+      className: "fa",
+      style: {
+        padding: "0 12px 14px"
+      }
+    }, s.items.map(r => /*#__PURE__*/React.createElement("div", {
+      key: r.n,
+      style: {
+        display: "flex",
+        gap: 10,
+        marginBottom: 9,
+        background: "#080c14",
+        borderRadius: 6,
+        padding: "10px 11px",
+        border: "1px solid #1a2030"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 24,
+        height: 24,
+        borderRadius: "50%",
+        flexShrink: 0,
+        background: "#14080a",
+        border: `1px solid ${FC_RED}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: FC_RED,
+        fontFamily: "'Bebas Neue',sans-serif"
+      }
+    }, r.n)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        gap: 8,
+        marginBottom: 3
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11.5,
+        color: "#e8f4ff",
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, r.name), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 9,
+        color: fcEffortColor(r.effort),
+        flexShrink: 0
+      }
+    }, "Effort ", r.effort, "/10")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: C.muted,
+        lineHeight: 1.7,
+        marginBottom: 6,
+        fontStyle: "italic"
+      }
+    }, r.focus), r.work.map((w, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: "flex",
+        gap: 7,
+        marginBottom: 3
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: FC_RED,
+        fontSize: 10,
+        flexShrink: 0
+      }
+    }, "›"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10.5,
+        color: "#d8dce8",
+        lineHeight: 1.65
+      }
+    }, w))), r.holder && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: "#fbbf24",
+        lineHeight: 1.65,
+        marginTop: 5
+      }
+    }, "🧤 Holder: ", r.holder), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: "#67e8f9",
+        lineHeight: 1.65,
+        marginTop: 5
+      }
+    }, "⚡ ", r.cue), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: "#fb923c",
+        lineHeight: 1.65,
+        marginTop: 3
+      }
+    }, "❌ ", r.dont))))));
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fa"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "'Bebas Neue',sans-serif",
+      fontSize: 22,
+      letterSpacing: 2,
+      color: "#e0e0ec"
+    }
+  }, "FIGHT COACH"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: C.muted,
+      marginTop: 6,
+      lineHeight: 1.8
+    }
+  }, "A jab-first, Steward-style fight week: bag, shadow and pad rounds with round-by-round combinations, hard days, daily days and real rest.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 16,
+      overflowX: "auto"
+    }
+  }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    onClick: () => {
+      setFcTab(t.id);
+      setOpen(null);
+    },
+    style: {
+      flexShrink: 0,
+      background: fcTab === t.id ? `${FC_RED}18` : "transparent",
+      border: `1px solid ${fcTab === t.id ? FC_RED : C.border}`,
+      color: fcTab === t.id ? FC_RED : C.muted,
+      fontSize: 9,
+      letterSpacing: 0.5,
+      padding: "9px 10px",
+      borderRadius: 20,
+      cursor: "pointer",
+      fontFamily: "'DM Mono',monospace",
+      whiteSpace: "nowrap"
+    }
+  }, t.label))), fcTab === "week" && /*#__PURE__*/React.createElement(React.Fragment, null, note("Seven days, two hard days, one active recovery day and one full rest day. Tap a day, then tap any session to jump straight to its round-by-round plan."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 5,
+      marginBottom: 14
+    }
+  }, FC_WEEK.map((d, i) => {
+    const col = d.effort === 0 ? "#94a3b8" : fcEffortColor(d.effort);
+    const sel = dayIdx === i;
+    return /*#__PURE__*/React.createElement("button", {
+      key: d.day,
+      onClick: () => setDayIdx(i),
+      style: {
+        flex: 1,
+        background: sel ? `${col}22` : "transparent",
+        border: `1px solid ${sel ? col : C.border}`,
+        borderRadius: 8,
+        padding: "8px 2px",
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 3
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: sel ? col : C.muted,
+        fontFamily: "'DM Mono',monospace"
+      }
+    }, d.day), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 8.5,
+        color: col
+      }
+    }, d.effort === 0 ? "rest" : d.effort + "/10"));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...S.card(FC_TAG[day.tag]),
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "'Bebas Neue',sans-serif",
+      fontSize: 18,
+      letterSpacing: 1,
+      color: "#e0ddd8"
+    }
+  }, day.name), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 9,
+      letterSpacing: 1,
+      color: FC_TAG[day.tag],
+      border: `1px solid ${FC_TAG[day.tag]}66`,
+      borderRadius: 4,
+      padding: "2px 8px",
+      fontFamily: "'DM Mono',monospace"
+    }
+  }, day.tag.toUpperCase())), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.8,
+      marginBottom: 6
+    }
+  }, day.focus), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 9.5,
+      color: "#8a8fa0"
+    }
+  }, "⏱ ", day.total)), lbl("Today's Blocks"), day.blocks.map((b, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "11px 13px",
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: "#e0ddd8",
+      fontFamily: "'DM Mono',monospace"
+    }
+  }, b.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: FC_RED
+    }
+  }, b.time)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.7
+    }
+  }, b.detail), b.go && /*#__PURE__*/React.createElement("button", {
+    onClick: () => go(b.go[0], b.go[1]),
+    style: {
+      marginTop: 8,
+      background: `${FC_RED}15`,
+      border: `1px solid ${FC_RED}66`,
+      color: FC_RED,
+      fontSize: 9.5,
+      padding: "6px 12px",
+      borderRadius: 5,
+      cursor: "pointer",
+      fontFamily: "'DM Mono',monospace"
+    }
+  }, "Open round-by-round →"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14,
+      padding: "11px 13px",
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 6
+    }
+  }, lbl("Week Rules"), FC_WEEK_RULES.map((r, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: "flex",
+      gap: 8,
+      marginBottom: 5
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: FC_RED,
+      fontSize: 10,
+      flexShrink: 0
+    }
+  }, "›"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.7
+    }
+  }, r))))), fcTab === "bag" && /*#__PURE__*/React.createElement(React.Fragment, null, note("Heavy bag rounds: 3:00 on, 1:00 off. Effort is out of 10: stay at the number, don't chase it. The jab starts everything; power is built from balance, not from swinging harder."), FC_SESSIONS.bag.map(sessionCard)), fcTab === "shadow" && /*#__PURE__*/React.createElement(React.Fragment, null, note("Shadow rounds are where habits form. Use a mirror if you can, keep the effort low, and always shadow against someone in your head."), FC_SESSIONS.shadow.map(sessionCard)), fcTab === "pads" && /*#__PURE__*/React.createElement(React.Fragment, null, note("Pad work needs a holder. Holder notes are marked 🧤. Training solo? Use the bag or shadow instead and treat the holder lines as the rhythm to call to yourself. Holders: keep pads at head height, give a clean target, call numbers clearly, and only throw back when the round says to."), FC_SESSIONS.pads.map(sessionCard)), fcTab === "combos" && /*#__PURE__*/React.createElement(React.Fragment, null, note("Seven families of combinations, built jab-first. Use them as the call-outs for pads, the targets for bag rounds, and the patterns for shadow. Punch numbers are in the Method tab."), FC_COMBOS.map(cat => {
+    const isOpen = open === cat.id;
+    return /*#__PURE__*/React.createElement("div", {
+      key: cat.id,
+      style: {
+        border: `1px solid ${isOpen ? FC_RED : "#1e293b"}`,
+        borderRadius: 8,
+        overflow: "hidden",
+        marginBottom: 9,
+        background: isOpen ? `${FC_RED}0c` : "#0c111a"
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggle(cat.id),
+      style: {
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "12px 12px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        cursor: "pointer",
+        textAlign: "left"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#e8f4ff",
+        fontFamily: "'DM Mono',monospace",
+        marginBottom: 3
+      }
+    }, cat.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: C.muted,
+        lineHeight: 1.6
+      }
+    }, cat.blurb, " (", cat.combos.length, ")")), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: FC_RED,
+        fontSize: 18,
+        flexShrink: 0
+      }
+    }, isOpen ? "−" : "+")), isOpen && /*#__PURE__*/React.createElement("div", {
+      className: "fa",
+      style: {
+        padding: "0 12px 12px"
+      }
+    }, cat.combos.map((c, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: "#080c14",
+        border: "1px solid #1a2030",
+        borderRadius: 6,
+        padding: "9px 11px",
+        marginBottom: 7
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 10,
+        alignItems: "baseline",
+        marginBottom: 3
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 13,
+        color: FC_RED,
+        fontFamily: "'DM Mono',monospace",
+        fontWeight: 600
+      }
+    }, c.n), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10.5,
+        color: "#e8f4ff"
+      }
+    }, c.name)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10.5,
+        color: C.muted,
+        lineHeight: 1.7
+      }
+    }, c.cue)))));
+  })), fcTab === "method" && /*#__PURE__*/React.createElement(React.Fragment, null, note(FC_METHOD_INTRO), lbl("Punch Numbers"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "11px 13px",
+      marginBottom: 14
+    }
+  }, FC_KEY.map(k => /*#__PURE__*/React.createElement("div", {
+    key: k.k,
+    style: {
+      display: "flex",
+      gap: 12,
+      marginBottom: 5
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: FC_RED,
+      width: 18,
+      fontFamily: "'DM Mono',monospace",
+      fontWeight: 600
+    }
+  }, k.k), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.7
+    }
+  }, k.v))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: "#8a8fa0",
+      lineHeight: 1.7,
+      marginTop: 8,
+      fontStyle: "italic"
+    }
+  }, FC_KEY_NOTE)), lbl("The Eight Principles"), FC_PRINCIPLES.map((p, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "11px 13px",
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: "#e8f4ff",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 4
+    }
+  }, i + 1, ". ", p.t), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.75
+    }
+  }, p.d))), lbl("Round Timing"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "11px 13px",
+      marginBottom: 14,
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.75
+    }
+  }, FC_TIMING), lbl("Scaling For Your Body"), FC_SCALE.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      background: "#0c111a",
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "11px 13px",
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: "#e8f4ff",
+      fontFamily: "'DM Mono',monospace",
+      marginBottom: 4
+    }
+  }, s.t), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.muted,
+      lineHeight: 1.75
+    }
+  }, s.d)))));
+}
+
 // ── Global styles: font imports, fade-in animation, scrollbar ──
 function GlobalCSS() {
   return /*#__PURE__*/React.createElement("style", null, `
@@ -14195,6 +15654,10 @@ function App() {
     id: "calisthenics",
     icon: "💪",
     label: "Calisthenics"
+  }, {
+    id: "fightcoach",
+    icon: "🥊",
+    label: "Fight Coach"
   }];
   const titles = {
     atg: "ATG Program",
@@ -14203,7 +15666,8 @@ function App() {
     protocol: "GOATA Protocol",
     recovery: "Foot Hub",
     animalflow: "Animal Flow",
-    calisthenics: "Calisthenics"
+    calisthenics: "Calisthenics",
+    fightcoach: "Fight Coach"
   };
   const HEADER_H = "calc(env(safe-area-inset-top, 0px) + 64px)";
   return /*#__PURE__*/React.createElement("div", {
@@ -14338,7 +15802,7 @@ function App() {
     onNavigate: setScreen
   }), screen !== "home" && /*#__PURE__*/React.createElement("div", {
     style: S.body
-  }, screen === "atg" && /*#__PURE__*/React.createElement(ATGScreen, null), screen === "tendon" && /*#__PURE__*/React.createElement(TendonScreen, null), screen === "stride" && /*#__PURE__*/React.createElement(GoataStrideScreen, null), screen === "protocol" && /*#__PURE__*/React.createElement(GoataProtocolScreen, null), screen === "recovery" && /*#__PURE__*/React.createElement(RecoveryHubScreen, null), screen === "animalflow" && /*#__PURE__*/React.createElement(AnimalFlowScreen, null), screen === "calisthenics" && /*#__PURE__*/React.createElement(CalisthenicsScreen, null)));
+  }, screen === "atg" && /*#__PURE__*/React.createElement(ATGScreen, null), screen === "tendon" && /*#__PURE__*/React.createElement(TendonScreen, null), screen === "stride" && /*#__PURE__*/React.createElement(GoataStrideScreen, null), screen === "protocol" && /*#__PURE__*/React.createElement(GoataProtocolScreen, null), screen === "recovery" && /*#__PURE__*/React.createElement(RecoveryHubScreen, null), screen === "animalflow" && /*#__PURE__*/React.createElement(AnimalFlowScreen, null), screen === "calisthenics" && /*#__PURE__*/React.createElement(CalisthenicsScreen, null), screen === "fightcoach" && /*#__PURE__*/React.createElement(FightCoachScreen, null)));
 }
 
 try {
